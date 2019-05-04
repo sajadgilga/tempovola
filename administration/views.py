@@ -24,7 +24,7 @@ def check_access(user):
 
 @api_view(['GET'])
 def enter_admin_login(request):
-    return render(request, 'admin/login.html')
+    return render(request, 'admin/adminlogin.html')
 
 
 @api_view(['POST'])

@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import administration
 from customer.views import enter_home
 
 urlpatterns = [
     path('dev_admin/', admin.site.urls),
     path('', enter_home),
     path('customer/', include('customer.urls')),
-    # path('admin/', include('administration.urls'))
+    path('admin/', include('administration.urls'))
 ]
