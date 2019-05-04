@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+        Tempo Vola | صفحه کاربری
+    </title>
+    <link rel="stylesheet" href="{% static "pages/profile/profile.css" %}">
+{% endblock %}
+
+
+{% block content %}
+    <div id="app">
+    <!-- navbar component -->
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item-dropdown dropleft >
+                        <template slot="button-content">{{ name }}</template>
+                        <b-dropdown-item class="primary" @click="redirect_to_shop">بازگشت</b-dropdown-item>
+                        <b-dropdown-item @click="logout">خروج</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="درخواست ناموفق" variant="danger" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+              <b-col>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+              </b-col>
+            </b-row>
+        </b-container>
+
+    </div>
+
+<script src="{% static "pages/profile/profile.js" %}"></script>
+{% endblock %}

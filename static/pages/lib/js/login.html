@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<script type="text/x-template" id="login_page">
+<b-container fluid>
+    <b-row>
+      <b-col>
+        <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+      </b-col>
+    </b-row>
+
+    <b-row v-for="i in 2" :key="i" class="m-sm-2 m-lg-4"></b-row>
+
+    <b-row class="form-row m-3 mt-4">
+        <div class="col-md-4 col-lg-3 offset-md-7 offset-lg-8">
+          <b-input-group>
+            <b-input-group-prepend>
+              <b-input-group-text class="bg-white"><i class="fa fa-user"></i></b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-input :type="username_type"
+                          :formatter="login_state"
+                          :state="is_username_valid"
+                          v-model="username"
+                          aria-describedby="user_feedback"
+                          placeholder="email or phone number"
+                          lazy-formatter
+            ></b-form-input>
+
+    <b-form-invalid-feedback class="offset-3 offset-sm-3 offset-lg-0 pull-right" id="user_feedback">
+      <strong style="text-align: right!important; float: right">
+      [[ user_msg ]]
+      </strong>
+    </b-form-invalid-feedback>
+          </b-input-group>
+        </div>
+    </b-row>
+
+    <b-row class="form-row m-3 mt-4">
+        <div class="col-md-4 col-lg-3 offset-md-7 offset-lg-8 ">
+          <b-input-group>
+            <b-input-group-prepend>
+              <b-input-group-text class="bg-white"><i class="fa fa-lock "></i></b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-input type="password"
+                          v-model="password"
+                          :state="pass_state"
+                          placeholder="password"
+                          aria-describedby="pass_feedback"
+            ></b-form-input>
+            <b-form-invalid-feedback class="offset-3 offset-sm-3 offset-lg-0 pull-right" id="pass_feedback">
+              <strong style="text-align: right!important; float: right">
+              [[ pass_msg ]]
+              </strong>
+            </b-form-invalid-feedback>
+
+          </b-input-group>
+        </div>
+    </b-row>
+    <b-row class="m-3">
+      <div class="col-sm-6 offset-sm-3 col-md-2 offset-md-8 col-lg-1 offset-lg-9">
+        <b-button block :variant="isValid" class="rounded" @click="login">
+          <strong>ورود</strong>
+        </b-button>
+      </div>
+    </b-row>
+
+    <b-row class="align-items-end" style="bottom: 0px">
+      <b-alert show variant="danger" class="col-4 offset-4 float-right" v-if="login_failed" style="text-align: right">
+        <h4 class="alert-heading"> ورود ناموفقیت آمیز</h4>
+        <hr>
+        اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید
+      </b-alert>
+    </b-row>
+
+  </b-container>
+</script>

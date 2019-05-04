@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>Tempo Vola | ورود ادمین</title>
+    <link type="text/css" rel="stylesheet" href="{% static "pages/login/admin_login.css" %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+{% endblock %}
+
+{% block content %}
+<div id="app">
+
+        <b-toast id="req" :title="alert_header" variant="danger" auto-hide-delay="3000">
+             [[ alert_msg ]]
+        </b-toast>
+        <b-container fluid>
+            <b-row>
+              <b-col>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+              </b-col>
+            </b-row>
+
+            <b-row v-for="i in 2" :key="i" class="m-sm-2 m-lg-4"></b-row>
+
+            <b-row class="form-row m-3 mt-4">
+                <div class="col-md-4 col-lg-3 offset-md-7 offset-lg-8">
+                  <b-input-group>
+                    <b-input-group-prepend>
+                      <b-input-group-text class="bg-white"><i class="fa fa-user"></i></b-input-group-text>
+                    </b-input-group-prepend>
+                    <b-form-input type="input"
+                                  v-model="username"
+                                  placeholder="username"
+                    ></b-form-input>
+
+                  </b-input-group>
+                </div>
+            </b-row>
+
+            <b-row class="form-row m-3 mt-4">
+                <div class="col-md-4 col-lg-3 offset-md-7 offset-lg-8 ">
+                  <b-input-group>
+                    <b-input-group-prepend>
+                      <b-input-group-text class="bg-white"><i class="fa fa-lock "></i></b-input-group-text>
+                    </b-input-group-prepend>
+                    <b-form-input type="password"
+                                  v-model="password"
+                                  placeholder="password"
+                    ></b-form-input>
+
+                  </b-input-group>
+                </div>
+            </b-row>
+            <b-row class="m-3">
+              <div class="col-sm-6 offset-sm-3 col-md-2 offset-md-8 col-lg-1 offset-lg-9">
+                <b-button block variant="primary" class="rounded" @click="login">
+                  <strong>ورود</strong>
+                </b-button>
+              </div>
+            </b-row>
+
+            <b-row v-for="i in 4" :key="i" class="m-sm-1 m-lg-4"></b-row>
+
+          </b-container>
+    </div>
+
+<script src="{% static "pages/login/admin_login.js" %}"></script>
+{% endblock %}

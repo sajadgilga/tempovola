@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+        Tempo Vola | ثبت سفارش
+    </title>
+    <link rel="stylesheet" href="{% static "pages/checkout/checkout.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <b-toast id="req" title="درخواست ناموفق" variant="danger" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+         <b-container fluid>
+            <b-row>
+              <b-col>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+              </b-col>
+            </b-row>
+         </b-container>
+
+        <b-container class="mt-5" style="text-align: right; background-color: white; min-width: 90%">
+            <b-row class="p-2 pt-4">
+                <b-col>
+                     [[ seller ]]
+                    <strong>
+                        :فروشنده
+                    </strong>
+                </b-col>
+            </b-row>
+            <hr>
+            <b-row class="p-2">
+                <b-col>
+                    <strong>
+                        خریدار:
+                    </strong>
+                     [[ order_data.name ]]
+                </b-col>
+            </b-row>
+            <hr>
+            <div class="m-auto">
+        <b-table striped hover responsive :fields="fields" :items="items" style="text-align: left; background-color: white">
+
+            <template slot="شماره" slot-scope="data">
+                [[ data.index + 1 ]]
+            </template>
+
+            <template slot="سری" slot-scope="data">
+                [[ data.item.series ]]
+            </template>
+
+            <template slot="ملودی" slot-scope="data">
+                [[ data.item.melody_name ]]
+            </template>
+
+            <template slot="فی" slot-scope="data">
+                [[ data.item.price ]]
+            </template>
+
+            <template slot="تعداد" slot-scope="data">
+                [[ data.item.count ]]
+            </template>
+
+            <template slot="قیمت" slot-scope="data">
+                [[ data.item.count * data.item.price ]]
+            </template>
+        </b-table>
+            </div>
+            <hr>
+            <b-row class="p-3">
+                <b-col class="col-sm-3 ml-auto">
+                    <b-button variant="danger" block @click="edit">
+                        تصحیح
+                    </b-button>
+                </b-col>
+            </b-row>
+        </b-container>
+        <b-container>
+            <b-row class="mt-5" v-for="i in 2"></b-row>
+        </b-container>
+
+
+        <b-navbar variant="white" fixed="bottom" v-if="total_cost != 0">
+            <b-navbar-brand>
+                <b-button variant="success">
+                    ثبت سفارش
+                </b-button>
+            </b-navbar-brand>
+
+            <b-navbar-nav class="ml-auto">
+                <strong style="text-align: right;">
+                    فیمت کل: [[total_cost]]  ریال
+                </strong>
+            </b-navbar-nav>
+        </b-navbar>
+    </div>
+
+    <script src="{% static "pages/checkout/checkout.js" %}"></script>
+{% endblock %}

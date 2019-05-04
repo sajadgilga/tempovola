@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+        Tempo Vola
+    </title>
+    <link rel="stylesheet" href="{% static "pages/shop/shop.css" %}">
+{% endblock %}
+
+
+{% block content %}
+    <div id="app">
+    <!-- navbar component -->
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item-dropdown dropleft >
+                        <template slot="button-content">{{ name }}</template>
+                        <b-dropdown-item class="primary" @click="redirect_to_profile">صفحه کاربری</b-dropdown-item>
+                        <b-dropdown-item @click="logout">خروج</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="درخواست ناموفق" variant="danger" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+              <b-col>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+              </b-col>
+            </b-row>
+
+<!-- product collapse cards -->
+            <b-card text-variant="white" no-body
+                    class="ml-auto mr-auto mb-5 p-0" v-for="card in product_series"
+                    :key="'a'+card.name" style="max-width: 80%; background-color: rgba(15,17,17,0.8)">
+                <b-card-header v-b-toggle="card.name">
+                    <h2>
+                        [[card.name]]
+                    </h2>
+                    <h4>
+                        <small class="text-muted">
+                            [[card.description]]
+                        </small>
+                    </h4>
+                    <b-card-text class="m-1" style="text-align: right;" v-if="card.total_cost != 0">قیمت: [[card.total_cost]] ریال</b-card-text>
+                     <b-card-text>
+{#                    <b-button block variant="outline-dark" v-b-toggle="card.name">toggle</b-button>#}
+                    </b-card-text>
+                </b-card-header>
+
+                <b-collapse :id="card.name" accordion="acc" style="background-color: white; color: black; opacity: 1;">
+                    <b-card-body bg-variant="white">
+                        <b-card-text v-for="i in card.melodies">
+                            <b-container fluid>
+                                <b-row class="p-0">
+                                    <div class="col-sm-2 ml-0 mr-auto p-0" align="center">
+                                        [[ i.name ]]
+                                    </div>
+                                    <div class="col-xl-2 col-md-4 col-sm-4 ml-auto mr-0">
+                                        <b-input-group class="ml-auto mr-0">
+                                        <b-button @click="remove_item(i, card)">-</b-button>
+                                        <b-form-input type="input" size="small" v-model="i.count" @change="add_item(i, card, true)"></b-form-input>
+                                        <b-button @click="add_item(i, card)">+</b-button>
+                                        </b-input-group>
+                                    </div>
+                                </b-row>
+                            </b-container>
+                        </b-card-text>
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+
+            <b-row class="m-5"></b-row>
+
+        </b-container>
+
+        <b-navbar variant="white" fixed="bottom" v-if="total_cost != 0">
+            <b-navbar-brand>
+                <b-button variant="success" @click="confirm_buy">
+                    ثبت سفارش
+                </b-button>
+            </b-navbar-brand>
+
+            <b-navbar-nav class="ml-auto">
+                <strong style="text-align: right;">
+                    فیمت کل: [[total_cost]]  ریال
+                </strong>
+            </b-navbar-nav>
+        </b-navbar>
+
+    </div>
+
+<script src="{% static "pages/shop/shop.js" %}"></script>
+{% endblock %}

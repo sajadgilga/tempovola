@@ -1,0 +1,172 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+    Tempo Vola | ساخت پروفایل
+    </title>
+    <link rel="stylesheet" href="{% static "pages/admin/profile_maker.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="درخواست ناموفق" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+              <b-col>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+              </b-col>
+            </b-row>
+            <b-row>
+                <div class="col-md-6 m-auto p-5" id="signUp">
+                    <b-form>
+                        <b-form-group
+                                id="naming_group"
+                                label="نام شرکت"
+                        >
+                            <b-form-input
+                                    style="text-align: right; "
+                                    id="companyName"
+                                    placeholder="نام را وارد کنید"
+                                    v-model="form.company_name"
+                                    type="input"
+                                    required
+                            >
+                            </b-form-input>
+                        </b-form-group>
+
+                        <b-form-group
+                                id="email_group"
+                                label="ایمیل"
+                        >
+                            <b-form-input
+                                    style="text-align: right; "
+                                    id="email"
+                                    placeholder="ایمیل"
+                                    v-model="form.email"
+                                    type="email"
+                            >
+                            </b-form-input>
+                        </b-form-group>
+
+                        <b-form-group
+                                id="phone_group"
+                                label="شماره تماس"
+                        >
+                            <b-form-input
+                                    style="text-align: right;"
+                                    id="number"
+                                    placeholder="شماره تماس"
+                                    v-model="form.phone"
+                                    type="input"
+                            >
+                            </b-form-input>
+                        </b-form-group>
+
+                        <b-form-group
+                                id="account_group"
+                                label="رمز عبور"
+                        >
+                            <b-form-input
+                                    style="text-align: right;"
+                                    id="password"
+                                    placeholder="رمز عبور"
+                                    v-model="form.password"
+                                    type="password"
+                                    required
+                            >
+                            </b-form-input>
+                        </b-form-group>
+                        <b-form-group label="امکان ورود با">
+                            <b-form-checkbox-group
+                                    id="username_type"
+                                    v-model="form.username_type"
+                                    :options="options"
+                                    :state="state"
+                            >
+                            </b-form-checkbox-group>
+                        </b-form-group>
+
+                        <b-form-group
+                                id="address_group"
+                                label="آدرس"
+
+                        >
+                            <b-form-input
+                                    class="ml-auto mr-auto mb-3 col-sm-5"
+                                    style="text-align: right; display: inline"
+                                    id="state"
+                                    placeholder="استان"
+                                    v-model="form.state"
+                                    type="input"
+                                    required
+                            >
+                            </b-form-input>
+                            <b-form-input
+                                    class="ml-auto mr-auto mb-3 col-sm-5"
+                                    style="text-align: right; display: inline"
+                                    id="city"
+                                    placeholder="شهر"
+                                    v-model="form.city"
+                                    type="input"
+                                    required
+                            >
+                            </b-form-input>
+                            <b-form-textarea
+                                    style="text-align: right; display: inline"
+                                    id="address"
+                                    placeholder="آدرس را وارد کنید"
+                                    v-model="form.address"
+                                    rows="1"
+                                    max-rows="2"
+                                    required
+                            >
+                            </b-form-textarea>
+                        </b-form-group>
+
+                        <b-form-group
+                                id="series_group"
+                                label="محدودیت کالا"
+                        >
+                              <b-form-checkbox-group
+                                v-model="form.available_series"
+                                :options="series_options"
+                                switches
+                                stacked
+                              ></b-form-checkbox-group>
+                        </b-form-group>
+
+                      <b-button variant="success" @click="submit_data" block>ثبت مشتری</b-button>
+                    </b-form>
+                </div>
+            </b-row>
+
+            <b-row v-for="i in 3" class="m-4"></b-row>
+        </b-container>
+    </div>
+
+    <script src="{% static "pages/admin/profile_maker.js" %}"></script>
+{% endblock %}
+
