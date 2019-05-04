@@ -2,7 +2,8 @@ var vue = new Vue({
     delimiters: ['[[', ']]'],
     el: '#app',
     data: {
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        // BASE_URL: 'http://localhost:8000/',
         show: false,
         is_username_valid: null,
         is_pass_valid: null,
