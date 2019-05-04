@@ -55,6 +55,7 @@
           <entry key="js" value="11104" />
           <entry key="py" value="13231" />
           <entry key="py@TempoVola" value="284" />
+          <entry key="txt" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -63,7 +64,7 @@
           <entry key="CommandLine" value="212" />
           <entry key="HTML" value="10886" />
           <entry key="JavaScript" value="11104" />
-          <entry key="PLAIN_TEXT" value="126" />
+          <entry key="PLAIN_TEXT" value="140" />
           <entry key="Python" value="13231" />
         </counts>
       </usages-collector>
@@ -79,7 +80,7 @@
           <entry key="py" value="80" />
           <entry key="text" value="1" />
           <entry key="ts" value="1" />
-          <entry key="txt" value="2" />
+          <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -88,7 +89,7 @@
           <entry key="HTML" value="51" />
           <entry key="Image" value="2" />
           <entry key="JavaScript" value="65" />
-          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="PLAIN_TEXT" value="6" />
           <entry key="Python" value="80" />
           <entry key="TypeScript" value="1" />
         </counts>
@@ -111,11 +112,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="23">
               <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/runtime.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="12" selection-start-column="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -160,7 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/static/pages/lib/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/static/pages/lib/vue.min.js" />
         <option value="$PROJECT_DIR$/static/pages/lib/bootstrap-vue.min.js" />
         <option value="$PROJECT_DIR$/static/pages/lib/axios.min.js" />
@@ -211,6 +220,7 @@
         <option value="$PROJECT_DIR$/customer/urls.py" />
         <option value="$PROJECT_DIR$/TempoVola/settings.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/runtime.txt" />
       </list>
     </option>
   </component>
@@ -697,9 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runtime.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -714,6 +721,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runtime.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
