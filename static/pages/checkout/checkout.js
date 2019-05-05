@@ -28,9 +28,6 @@ const vue = new Vue({
         add_data: function (response) {
             this.order_data = response.data;
             this.items = this.order_data.items;
-
-            document.getElementsByClassName("component").style.visibility = "visible";
-            console.log('ok')
         },
 
         getCookie: function (name) {
