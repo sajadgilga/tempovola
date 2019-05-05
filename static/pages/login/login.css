@@ -1,12 +1,12 @@
 body, html {
-    height: 110%;
+    height: 100%;
     margin: 0;
 }
 body {
     height: 100%;
     width: 100%;
     background: url(/static/images/page_decoration/plainbg.png) no-repeat center fixed;
-    -webkit-background-size: cover; /* For WebKit*/
+    -webkit-background-size: auto; /* For WebKit*/
     -moz-background-size: cover; /* Mozilla*/
     -o-background-size: cover; /* Opera*/
     background-size: cover;
