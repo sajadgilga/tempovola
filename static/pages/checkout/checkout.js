@@ -1,6 +1,6 @@
 const vue = new Vue({
-   el: '#app',
-   delimiters: ['[[', ']]'],
+    el: '#app',
+    delimiters: ['[[', ']]'],
     data: {
         BASE_URL: ' https://tempovolaapp.herokuapp.com/',
         // BASE_URL: 'http://localhost:8000/',
@@ -18,16 +18,18 @@ const vue = new Vue({
         req_msg: '',
     },
     methods: {
-       fetch_data: function () {
+        fetch_data: function () {
             axios({
                 method: 'get',
                 url: this.BASE_URL + 'customer/checkout_data/'
             }).then(response => this.add_data(response))
         },
 
-        add_data: function(response) {
+        add_data: function (response) {
             this.order_data = response.data;
             this.items = this.order_data.items;
+
+            document.getElementsByClassName("component").style.visibility = "visible";
         },
 
         getCookie: function (name) {
@@ -46,18 +48,22 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        edit: function() {
+        edit: function () {
             window.location.replace(this.BASE_URL + 'customer/shop/')
-        }
+        },
+
+        checkout_order: function () {
+            //TODO
+        },
     },
     computed: {
-       total_cost: function () {
-           let sum = 0;
-           this.items.forEach(it => sum += it.count * it.price);
-           return sum;
-       }
+        total_cost: function () {
+            let sum = 0;
+            this.items.forEach(it => sum += it.count * it.price);
+            return sum;
+        }
     },
     created() {
-       this.fetch_data()
+        this.fetch_data()
     }
 });

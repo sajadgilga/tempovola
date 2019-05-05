@@ -24,7 +24,7 @@
             </b-row>
          </b-container>
 
-        <b-container class="mt-5" style="text-align: right; background-color: white; min-width: 90%">
+        <b-container class="mt-5 component" style="text-align: right; background-color: white; min-width: 90%">
             <b-row class="p-2 pt-4">
                 <b-col>
                      [[ seller ]]
@@ -87,7 +87,7 @@
 
         <b-navbar variant="white" fixed="bottom" v-if="total_cost != 0">
             <b-navbar-brand>
-                <b-button variant="success">
+                <b-button variant="success" @click="checkout_order">
                     ثبت سفارش
                 </b-button>
             </b-navbar-brand>

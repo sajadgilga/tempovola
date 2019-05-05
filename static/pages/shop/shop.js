@@ -9,7 +9,6 @@ const vue = new Vue({
         name: null,
         transaction_num: 0,
         req_msg: '',
-        isLoaded: false,
     },
     methods: {
         fetch_data: function () {

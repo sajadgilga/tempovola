@@ -13,6 +13,10 @@ body {
     /*margin-top: 60px;*/
 }
 
+.component {
+    visibility: hidden;
+}
+
 #app {
     padding-top: 0px;
 }
