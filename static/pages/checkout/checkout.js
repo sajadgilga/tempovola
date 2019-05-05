@@ -21,7 +21,7 @@ const vue = new Vue({
        fetch_data: function () {
             axios({
                 method: 'get',
-                url: this.BASE_URL + 'checkout_data/'
+                url: this.BASE_URL + 'customer/checkout_data/'
             }).then(response => this.add_data(response))
         },
 
