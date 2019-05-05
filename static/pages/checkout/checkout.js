@@ -30,6 +30,7 @@ const vue = new Vue({
             this.items = this.order_data.items;
 
             document.getElementsByClassName("component").style.visibility = "visible";
+            console.log('ok')
         },
 
         getCookie: function (name) {
