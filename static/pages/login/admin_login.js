@@ -57,7 +57,7 @@ var vue = new Vue({
                 this.login_result = 'success';
                 this.alert_header = 'ورود موفقیت آمیز';
                 this.show_alert();
-                window.location.replace(this.BASE_URL + "admin/dashboard")
+                setInterval(() => window.location.assign(this.BASE_URL + 'admin/dashboard/'), 1000)
             }
              else {
                  if (response.data != null) {

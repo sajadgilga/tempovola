@@ -82,7 +82,7 @@ var vue = new Vue({
                 this.login_result = 'success';
                 this.alert_header = 'ورود موفقیت آمیز';
                 this.show_alert();
-                window.location.replace(this.BASE_URL + 'customer/shop/')
+                setInterval(() => window.location.assign(this.BASE_URL + 'customer/shop/'), 1000)
             }
              else {
                  if (response.data != null) {
