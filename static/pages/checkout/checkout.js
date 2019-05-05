@@ -47,7 +47,7 @@ const vue = new Vue({
         },
 
         edit: function() {
-            window.location.replace(this.BASE_URL + 'shop/')
+            window.location.replace(this.BASE_URL + 'customer/shop/')
         }
     },
     computed: {
