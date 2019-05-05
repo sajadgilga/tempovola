@@ -6,6 +6,8 @@ const vue = new Vue({
         // BASE_URL: 'http://localhost:8000/',
         name: null,
         req_msg: '',
+        email: 'tempovola@gmail.com',
+        phone: '76983',
     },
     methods: {
         getCookie: function (name) {

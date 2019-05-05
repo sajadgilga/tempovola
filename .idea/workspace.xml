@@ -4,7 +4,21 @@
     <bookmark url="file://$PROJECT_DIR$/administration/views.py" line="54" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="" />
+    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/admin/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/admin/dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/admin/order_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/admin/order_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/admin/profile_maker.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/admin/profile_maker.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/checkout/checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/checkout/checkout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/login/admin_login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/login/admin_login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/login/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/login/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/profile/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/profile/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/profile/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/profile/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/shop/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/shop/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/shop/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/customer/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customer/profile.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +62,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="352" />
+          <entry key="css" value="407" />
           <entry key="dummy" value="49" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="10980" />
-          <entry key="js" value="11365" />
+          <entry key="html" value="11637" />
+          <entry key="js" value="11413" />
           <entry key="py" value="13268" />
           <entry key="py@TempoVola" value="284" />
           <entry key="txt" value="14" />
@@ -60,24 +74,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="352" />
+          <entry key="CSS" value="407" />
           <entry key="CommandLine" value="212" />
-          <entry key="HTML" value="10980" />
-          <entry key="JavaScript" value="11365" />
+          <entry key="HTML" value="11637" />
+          <entry key="JavaScript" value="11413" />
           <entry key="PLAIN_TEXT" value="140" />
           <entry key="Python" value="13268" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="40" />
+          <entry key="css" value="53" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="61" />
+          <entry key="html" value="67" />
           <entry key="jpg" value="1" />
-          <entry key="js" value="83" />
+          <entry key="js" value="92" />
           <entry key="mp3" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="96" />
+          <entry key="py" value="98" />
           <entry key="text" value="1" />
           <entry key="ts" value="1" />
           <entry key="txt" value="3" />
@@ -85,12 +99,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="40" />
-          <entry key="HTML" value="61" />
+          <entry key="CSS" value="53" />
+          <entry key="HTML" value="67" />
           <entry key="Image" value="2" />
-          <entry key="JavaScript" value="83" />
+          <entry key="JavaScript" value="92" />
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="96" />
+          <entry key="Python" value="98" />
           <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
@@ -99,40 +113,36 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TempoVola/settings.py">
+        <entry file="file://$PROJECT_DIR$/templates/customer/checkout.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="8" selection-start-line="8" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TempoVola/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+            <state relative-caret-position="178">
+              <caret line="28" column="23" lean-forward="true" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
               <folding>
-                <element signature="e#633#665#0" expanded="true" />
+                <element signature="e#698#764#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/pages/login/login.css">
+        <entry file="file://$PROJECT_DIR$/templates/customer/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+            <state relative-caret-position="244">
+              <caret line="63" column="39" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+              <folding>
+                <element signature="e#377#401#0#HTML" expanded="true" />
+                <element signature="e#724#753#0#HTML" expanded="true" />
+                <element signature="e#2603#2628#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/customer/checkout.html">
+        <entry file="file://$PROJECT_DIR$/static/pages/profile/profile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="26" column="101" lean-forward="true" selection-start-line="26" selection-start-column="101" selection-end-line="26" selection-end-column="101" />
+            <state relative-caret-position="207">
+              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -140,8 +150,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/customer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="36" column="79" lean-forward="true" selection-start-line="36" selection-start-column="79" selection-end-line="36" selection-end-column="79" />
+            <state relative-caret-position="338">
+              <caret line="102" column="108" lean-forward="true" selection-start-line="102" selection-start-column="108" selection-end-line="102" selection-end-column="108" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -172,6 +182,10 @@
       <find>profile_maker</find>
       <find>None</find>
       <find>login</find>
+      <find>inherit</find>
+      <find>cover</find>
+      <find>small</find>
+      <find>:</find>
     </findStrings>
     <replaceStrings>
       <replace>[[</replace>
@@ -182,6 +196,12 @@
       <replace>product</replace>
       <replace>order_list</replace>
       <replace>''</replace>
+      <replace>cover</replace>
+      <replace>auto</replace>
+      <replace>inherit</replace>
+      <replace>small class=&quot;text-muted&quot;</replace>
+      <replace />
+      <replace>&amp;nbsp</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -200,25 +220,18 @@
         <option value="$PROJECT_DIR$/templates/shop.html" />
         <option value="$PROJECT_DIR$/Customer/models.py" />
         <option value="$PROJECT_DIR$/Customer/views.py" />
-        <option value="$PROJECT_DIR$/static/pages/shop/shop.css" />
         <option value="$PROJECT_DIR$/templates/customer/base.html" />
         <option value="$PROJECT_DIR$/templates/login.html" />
-        <option value="$PROJECT_DIR$/static/pages/login/admin_login.css" />
         <option value="$PROJECT_DIR$/templates/admin/login.html" />
         <option value="$PROJECT_DIR$/admin/urls.py" />
         <option value="$PROJECT_DIR$/admin/views.py" />
-        <option value="$PROJECT_DIR$/static/pages/admin/dashboard.css" />
         <option value="$PROJECT_DIR$/templates/admin/admin_dashboard.html" />
         <option value="$PROJECT_DIR$/templates/admin/product_maker.html" />
-        <option value="$PROJECT_DIR$/static/pages/admin/profile_maker.css" />
         <option value="$PROJECT_DIR$/customer/admin.py" />
         <option value="$PROJECT_DIR$/customer/serializers.py" />
         <option value="$PROJECT_DIR$/customer/models.py" />
         <option value="$PROJECT_DIR$/templates/admin/profile_maker.html" />
         <option value="$PROJECT_DIR$/templates/admin/order_list.html" />
-        <option value="$PROJECT_DIR$/static/pages/admin/order_list.css" />
-        <option value="$PROJECT_DIR$/static/pages/profile/profile.css" />
-        <option value="$PROJECT_DIR$/templates/customer/profile.html" />
         <option value="$PROJECT_DIR$/customer/views.py" />
         <option value="$PROJECT_DIR$/customer/urls.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -226,21 +239,28 @@
         <option value="$PROJECT_DIR$/TempoVola/settings.py" />
         <option value="$PROJECT_DIR$/static/pages/admin/order_list.js" />
         <option value="$PROJECT_DIR$/static/pages/admin/profile_maker.js" />
-        <option value="$PROJECT_DIR$/static/pages/profile/profile.js" />
         <option value="$PROJECT_DIR$/administration/urls.py" />
         <option value="$PROJECT_DIR$/administration/views.py" />
         <option value="$PROJECT_DIR$/TempoVola/urls.py" />
         <option value="$PROJECT_DIR$/templates/customer/login.html" />
         <option value="$PROJECT_DIR$/static/pages/login/admin_login.js" />
         <option value="$PROJECT_DIR$/templates/admin/adminlogin.html" />
-        <option value="$PROJECT_DIR$/static/pages/login/login.js" />
         <option value="$PROJECT_DIR$/static/pages/admin/dashboard.js" />
-        <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
         <option value="$PROJECT_DIR$/templates/customer/shop.html" />
-        <option value="$PROJECT_DIR$/static/pages/checkout/checkout.css" />
         <option value="$PROJECT_DIR$/static/pages/checkout/checkout.js" />
         <option value="$PROJECT_DIR$/templates/customer/checkout.html" />
         <option value="$PROJECT_DIR$/static/pages/login/login.css" />
+        <option value="$PROJECT_DIR$/static/pages/login/admin_login.css" />
+        <option value="$PROJECT_DIR$/static/pages/admin/dashboard.css" />
+        <option value="$PROJECT_DIR$/static/pages/admin/order_list.css" />
+        <option value="$PROJECT_DIR$/static/pages/admin/profile_maker.css" />
+        <option value="$PROJECT_DIR$/static/pages/checkout/checkout.css" />
+        <option value="$PROJECT_DIR$/static/pages/login/login.js" />
+        <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
+        <option value="$PROJECT_DIR$/static/pages/shop/shop.css" />
+        <option value="$PROJECT_DIR$/static/pages/profile/profile.css" />
+        <option value="$PROJECT_DIR$/static/pages/profile/profile.js" />
+        <option value="$PROJECT_DIR$/templates/customer/profile.html" />
       </list>
     </option>
   </component>
@@ -314,12 +334,25 @@
               <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="shop" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
               <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
@@ -418,7 +451,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32893288" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32819384" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32819384" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39933994" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -428,7 +461,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@TempoVola" order="10" weight="0.32893288" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.32929516" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32929516" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="14" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32819384" />
@@ -436,7 +469,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32977587" />
-      <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.32977587" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,24 +522,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/login/admin_login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/product_maker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/admin/dashboard.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="25" lean-forward="true" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -527,27 +546,6 @@
     <entry file="file://$PROJECT_DIR$/administration/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/profile_maker.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="41" column="19" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="41" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/admin/profile_maker.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="25" column="8" lean-forward="true" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/admin/order_list.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/order_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-588">
@@ -567,27 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/customer/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" lean-forward="true" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/profile/profile.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/customer/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -595,13 +572,6 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/customer/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="29" column="79" lean-forward="true" selection-start-line="29" selection-start-column="79" selection-end-line="29" selection-end-column="79" />
         </state>
       </provider>
     </entry>
@@ -619,20 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="10" column="102" selection-start-line="10" selection-start-column="102" selection-end-line="10" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/profile/profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/admin/profile_maker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -701,13 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TempoVola/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="8" selection-start-line="8" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/customer/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -736,33 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TempoVola/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-          <folding>
-            <element signature="e#633#665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/customer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="36" column="79" lean-forward="true" selection-start-line="36" selection-start-column="79" selection-end-line="36" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -777,31 +699,150 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/login/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="16" column="22" lean-forward="true" selection-end-line="37" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/login/admin_login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/admin/order_list.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/admin/dashboard.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/pages/checkout/checkout.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="460">
+          <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TempoVola/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding>
+            <element signature="e#633#665#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TempoVola/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/admin/profile_maker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/admin/profile_maker.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="14" selection-end-line="23" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="102" column="108" lean-forward="true" selection-start-line="102" selection-start-column="108" selection-end-line="102" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/pages/login/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="92" column="64" lean-forward="true" selection-start-line="92" selection-start-column="64" selection-end-line="92" selection-end-column="64" />
+        <state relative-caret-position="113">
+          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/profile/profile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/customer/checkout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="26" column="101" lean-forward="true" selection-start-line="26" selection-start-column="101" selection-end-line="26" selection-end-column="101" />
+        <state relative-caret-position="178">
+          <caret line="28" column="23" lean-forward="true" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+          <folding>
+            <element signature="e#698#764#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/login/login.css">
+    <entry file="file://$PROJECT_DIR$/templates/admin/profile_maker.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+        <state relative-caret-position="204">
+          <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/profile/profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/customer/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="63" column="39" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+          <folding>
+            <element signature="e#377#401#0#HTML" expanded="true" />
+            <element signature="e#724#753#0#HTML" expanded="true" />
+            <element signature="e#2603#2628#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
