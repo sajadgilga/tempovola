@@ -27,7 +27,10 @@ const vue = new Vue({
             axios({
                 method: 'get',
                 url: this.BASE_URL + 'admin/logout/'
-            }).then(response => window.location.replace = this.BASE_URL + 'admin/')
+            }).then(response => {
+                this.show_alert('با موفقیت خارج شدید');
+                window.location.replace(this.BASE_URL + 'admin/')
+            })
                 .catch(response => this.show_alert('مشکل در خروج بوجود آمده. لطفا دوباره تلاش کنید'))
         },
 
