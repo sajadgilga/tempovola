@@ -8,8 +8,8 @@ body {
     background: url(/static/images/page_decoration/plainbg.png) no-repeat center fixed;
     -webkit-background-size: inherit; /* For WebKit*/
     -moz-background-size: inherit; /* Mozilla*/
-    -o-background-size: cover; /* Opera*/
-    background-size: cover;
+    -o-background-size: inherit; /* Opera*/
+    background-size: inherit;
     /*margin-top: 60px;*/
 }
 
@@ -24,10 +24,10 @@ body {
         width: 100%;
         /*background-color: #ddd777;*/
         background: url(/static/images/page_decoration/bg.png) no-repeat center fixed;
-        -webkit-background-size: cover; /* For WebKit*/
+        -webkit-background-size: inherit; /* For WebKit*/
         -moz-background-size: inherit; /* Mozilla*/
-        -o-background-size: cover; /* Opera*/
-        background-size: cover;
+        -o-background-size: inherit; /* Opera*/
+        background-size: inherit;
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
