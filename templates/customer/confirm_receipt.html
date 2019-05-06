@@ -1,0 +1,28 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+    Tempo Vola | رسید
+    </title>
+    <link rel="stylesheet" href="{% static "pages/confirm/confirm.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app">
+    <b-container fluid>
+        <b-row class="m-5" v-for="i in 3"></b-row>
+        <b-row>
+            <b-col class="ml-auto mr-auto col-sm-3">
+                <b-button variant="primary" @click="fetch_data" block>دریافت رسید</b-button>
+                <b-button variant="secondary" @click="return_shop" block>بازگشت به فروشگاه</b-button>
+                <b-button variant="danger" @click="exit" block>خروج</b-button>
+            </b-col>
+        </b-row>
+    </b-container>
+    </div>
+    
+    <script src="{% static "pages/confirm/confirm.js" %}"></script>
+{% endblock %}
+

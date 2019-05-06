@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>رسید سفارش</title>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black; text-align: right;}
+.tg .tg-xldj{border-color:inherit;text-align:right}
+.tg .tg-0lax{text-align:right;vertical-align:top}
+</style>
+</head>
+<body>
+<table class="tg" style="width: 90%; text-align: right;">
+  <tr>
+    <td class="tg-xldj" colspan="7"></td>
+  </tr>
+  <tr>
+    <td class="tg-xldj" colspan="7"></td>
+  </tr>
+  <tr>
+    <th class="tg-0lax">قیمت</th>
+    <th class="tg-0lax">تعداد</th>
+    <th class="tg-0lax">فی</th>
+    <th class="tg-0lax">کد ملودی</th>
+    <th class="tg-0lax">ملودی</th>
+    <th class="tg-xldj">سری</th>
+    <th class="tg-0lax">ردیف</th>
+  </tr>
+    {% for item in items %}
+  <tr>
+    <td class="tg-0lax">{% widthratio item.count 1 item.price %}</td>
+    <td class="tg-0lax">{{ item.count }}</td>
+    <td class="tg-0lax">{{ item.price }}</td>
+    <td class="tg-0lax">{{ item.code }}</td>
+    <td class="tg-0lax">{{ item.melody_name }}</td>
+    <td class="tg-xldj">{{ item.series }}</td>
+    <td class="tg-0lax">{{ forloop.counter }}</td>
+  </tr>
+   {% endfor %}
+
+</table>
+</body>
+</html>

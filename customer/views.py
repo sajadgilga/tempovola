@@ -1,17 +1,19 @@
+import io
 import json
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from reportlab.lib.units import cm
-from reportlab.platypus import SimpleDocTemplate, Table
+from django.template.loader import render_to_string
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
+from weasyprint import HTML
 
 from customer.models import CustomerProfile, Melody, Order, ShopItem
 from customer.serializers import CustomerSerializer, OrderSerializer, ItemSerializer
@@ -146,7 +148,7 @@ def enter_checkout(request):
 
 @api_view(['GET'])
 @login_required(login_url='/')
-def checkout_data(request):
+def get_checkout_data(request):
     try:
         user = request.user
         order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
@@ -166,21 +168,39 @@ def checkout_data(request):
 @api_view(['GET'])
 @login_required(login_url='/')
 def confirm_checkout(request):
-    response = HttpResponse(mimetype='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
-
-    elements = []
-
-    doc = SimpleDocTemplate(response, rightMargin=0, leftMargin=6.5 * cm, topMargin=0.3 * cm, bottomMargin=0)
-
-    data = [(1, 2), (3, 4)]
-    table = Table(data, colWidths=270, rowHeights=79)
-    elements.append(table)
-    doc.build(elements)
-    return response
+    try:
+        user = request.user
+        order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
+        order.is_checked_out = True
+        order.save()
+        return Response(status=status.HTTP_200_OK)
+    except:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
 @login_required(login_url='/')
 def enter_confirm_checkout(request):
-    return render(request, 'customer/')
+    return render(request, 'customer/confirm_receipt.html')
+
+
+@api_view(['GET'])
+@login_required(login_url='/')
+def get_receipt(request):
+    user = request.user
+    order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
+    items = ShopItem.objects.filter(order=order)
+    items = ItemSerializer(items, many=True)
+    items = JSONRenderer().render(items.data)
+    items = json.loads(items)
+    html_string = render_to_string('customer/receipt.html', {'items': items})
+
+    html = HTML(string=html_string)
+    html.write_pdf(target='/tmp/mypdf.pdf')
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open('mypdf.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        return response
+    return response

@@ -51,7 +51,16 @@ const vue = new Vue({
         },
 
         checkout_order: function () {
-            window.location.replace(this.BASE_URL + 'customer/confirm_checkout/')
+            axios({
+                method: 'get',
+                url: this.BASE_URL + 'customer/confirm_checkout'
+            }).then(response => {
+                if (response.status === 200)
+                    window.location.replace(this.BASE_URL + 'customer/confirmed_checkout/')
+                else{
+                    this.show_alert('درخواست شما به مشکل برخورد. لطفا دوباره تلاش کنید')
+                }
+            }).catch(response => this.show_alert('مشکلی در سرور بوجود آمده. لطفا بعدا تلاش کنید'))
         },
     },
     computed: {

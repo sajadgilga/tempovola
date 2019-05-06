@@ -11,12 +11,29 @@ const vue = new Vue({
         fetch_data: function () {
             axios({
                 method: 'get',
-                url: this.BASE_URL + 'customer/fetch_receipt/'
+                url: this.BASE_URL + 'customer/fetch_receipt/',
+                responseType: 'blob',
             }).then(response => this.add_data(response))
         },
 
         add_data: function (response) {
-            console.log(response.data)
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'receipt.pdf');
+            document.body.appendChild(link);
+            link.click();
+        },
+
+        return_shop: function() {
+            window.location.replace(this.BASE_URL + 'customer/shop/')
+        },
+
+        exit: function() {
+            axios({
+                method: 'get',
+                url: this.BASE_URL + 'customer/logout/',
+            }).then(response => window.location.replace(this.BASE_URL + 'customer/shop/'))
         },
 
         getCookie: function (name) {
@@ -37,7 +54,4 @@ const vue = new Vue({
 
 
     },
-    created() {
-        this.fetch_data()
-    }
 });
