@@ -124,13 +124,13 @@ def checkout(request):
     for p in data:
         for m in data[p]:
             price = Melody.objects.filter(name=m)[0].price
-            cost += data[p][m] * price
+            cost += int(data[p][m]) * int(price)
             melody = ShopItem.objects.filter(melody_name=m, order=order, series=p).all().first()
             if melody:
-                melody.count = data[p][m]
+                melody.count = int(data[p][m])
                 melody.save(force_update=True)
             else:
-                new_melody = ShopItem(melody_name=m, order=order, series=p, price=price, count=data[p][m])
+                new_melody = ShopItem(melody_name=m, order=order, series=p, price=int(price), count=int(data[p][m]))
                 new_melody.save(force_insert=True)
     order.cost = cost
     order.save()
