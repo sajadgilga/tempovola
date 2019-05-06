@@ -39,6 +39,35 @@
                 <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
               </b-col>
             </b-row>
+
+            <div class="m-auto">
+                <b-table striped hover responsive :fields="fields" :items="items" style="text-align: left; background-color: white">
+
+                    <template slot="ردیف" slot-scope="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template slot="سری" slot-scope="data">
+                        [[ data.item.series ]]
+                    </template>
+
+                    <template slot="ملودی" slot-scope="data">
+                        [[ data.item.melody_name ]]
+                    </template>
+
+                    <template slot="فی" slot-scope="data">
+                        [[ data.item.price ]]
+                    </template>
+
+                    <template slot="تعداد" slot-scope="data">
+                        [[ data.item.count ]]
+                    </template>
+
+                    <template slot="قیمت" slot-scope="data">
+                        [[ data.item.count * data.item.price ]]
+                    </template>
+                </b-table>
+            </div>
         </b-container>
     </div>
     

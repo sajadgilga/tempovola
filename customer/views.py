@@ -2,9 +2,12 @@ import json
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from reportlab.lib.units import cm
+from reportlab.platypus import SimpleDocTemplate, Table
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
@@ -158,3 +161,26 @@ def checkout_data(request):
         return Response(context, status=status.HTTP_200_OK)
     except:
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@login_required(login_url='/')
+def confirm_checkout(request):
+    response = HttpResponse(mimetype='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
+
+    elements = []
+
+    doc = SimpleDocTemplate(response, rightMargin=0, leftMargin=6.5 * cm, topMargin=0.3 * cm, bottomMargin=0)
+
+    data = [(1, 2), (3, 4)]
+    table = Table(data, colWidths=270, rowHeights=79)
+    elements.append(table)
+    doc.build(elements)
+    return response
+
+
+@api_view(['GET'])
+@login_required(login_url='/')
+def enter_confirm_checkout(request):
+    return render(request, 'customer/')

@@ -1,0 +1,38 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+body {
+    height: 100%;
+    width: 100%;
+    background: url(/static/images/page_decoration/plainbg.png) no-repeat center fixed;
+    -webkit-background-size: inherit; /* For WebKit*/
+    -moz-background-size: inherit; /* Mozilla*/
+    -o-background-size: inherit; /* Opera*/
+    background-size: inherit;
+    /*margin-top: 60px;*/
+}
+
+#app {
+    padding-top: 0px;
+}
+
+
+@media only screen and (min-width: 1100px) {
+    body {
+        height: 100%;
+        width: 100%;
+        /*background-color: #ddd777;*/
+        background: url(/static/images/page_decoration/bg.png) no-repeat center fixed;
+        -webkit-background-size: inherit; /* For WebKit*/
+        -moz-background-size: inherit; /* Mozilla*/
+        -o-background-size: inherit; /* Opera*/
+        background-size: inherit;
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        padding: 0;
+    }
+}
