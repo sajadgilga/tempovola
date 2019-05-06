@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'customer',
     'administration',
+    'reportlab'
 ]
 
 MIDDLEWARE = [
