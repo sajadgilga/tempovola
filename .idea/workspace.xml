@@ -4,7 +4,11 @@
     <bookmark url="file://$PROJECT_DIR$/administration/views.py" line="54" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="" />
+    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/static/pages/shop/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/shop/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/shop/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/customer/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customer/shop.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +53,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="407" />
+          <entry key="css" value="443" />
           <entry key="dummy" value="49" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="12306" />
-          <entry key="js" value="12188" />
+          <entry key="html" value="12335" />
+          <entry key="js" value="12224" />
           <entry key="py" value="13757" />
           <entry key="py@TempoVola" value="284" />
           <entry key="txt" value="14" />
@@ -61,19 +65,19 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="407" />
+          <entry key="CSS" value="443" />
           <entry key="CommandLine" value="212" />
-          <entry key="HTML" value="12306" />
-          <entry key="JavaScript" value="12188" />
+          <entry key="HTML" value="12335" />
+          <entry key="JavaScript" value="12224" />
           <entry key="PLAIN_TEXT" value="140" />
           <entry key="Python" value="13757" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="55" />
+          <entry key="css" value="56" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="76" />
+          <entry key="html" value="77" />
           <entry key="jpg" value="1" />
           <entry key="js" value="110" />
           <entry key="mp3" value="1" />
@@ -86,8 +90,8 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="55" />
-          <entry key="HTML" value="76" />
+          <entry key="CSS" value="56" />
+          <entry key="HTML" value="77" />
           <entry key="Image" value="2" />
           <entry key="JavaScript" value="110" />
           <entry key="PLAIN_TEXT" value="6" />
@@ -129,8 +133,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="50" column="15" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
+            <state relative-caret-position="226">
+              <caret line="52" column="69" selection-start-line="52" selection-start-column="69" selection-end-line="52" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="35" column="99" selection-start-line="35" selection-start-column="99" selection-end-line="35" selection-end-column="99" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -215,7 +237,6 @@
         <option value="$PROJECT_DIR$/static/pages/login/admin_login.js" />
         <option value="$PROJECT_DIR$/templates/admin/adminlogin.html" />
         <option value="$PROJECT_DIR$/static/pages/admin/dashboard.js" />
-        <option value="$PROJECT_DIR$/templates/customer/shop.html" />
         <option value="$PROJECT_DIR$/templates/customer/checkout.html" />
         <option value="$PROJECT_DIR$/static/pages/login/login.css" />
         <option value="$PROJECT_DIR$/static/pages/login/admin_login.css" />
@@ -223,7 +244,6 @@
         <option value="$PROJECT_DIR$/static/pages/admin/order_list.css" />
         <option value="$PROJECT_DIR$/static/pages/admin/profile_maker.css" />
         <option value="$PROJECT_DIR$/static/pages/checkout/checkout.css" />
-        <option value="$PROJECT_DIR$/static/pages/shop/shop.css" />
         <option value="$PROJECT_DIR$/static/pages/profile/profile.css" />
         <option value="$PROJECT_DIR$/templates/customer/profile.html" />
         <option value="$PROJECT_DIR$/static/pages/profile/profile.js" />
@@ -238,6 +258,8 @@
         <option value="$PROJECT_DIR$/customer/views.py" />
         <option value="$PROJECT_DIR$/templates/customer/login.html" />
         <option value="$PROJECT_DIR$/static/pages/login/login.js" />
+        <option value="$PROJECT_DIR$/static/pages/shop/shop.css" />
+        <option value="$PROJECT_DIR$/templates/customer/shop.html" />
         <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
       </list>
     </option>
@@ -248,7 +270,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="687" />
     <option name="width" value="679" />
     <option name="height" value="768" />
@@ -416,8 +438,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1034" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17022412" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17022412" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -432,7 +455,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@TempoVola" order="10" weight="0.32893288" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" visible="true" weight="0.32929516" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" visible="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Python Console" order="14" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32819384" />
@@ -543,6 +566,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1557001346149" expanded="true" signature="1556:1626" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -550,6 +577,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -557,13 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -599,6 +622,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding>
+            <element signature="e#633#665#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -613,13 +639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="23" column="1" lean-forward="true" selection-start-line="14" selection-end-line="23" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -739,6 +758,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -791,10 +813,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="35" column="99" selection-start-line="35" selection-start-column="99" selection-end-line="35" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="50" column="15" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
+        <state relative-caret-position="226">
+          <caret line="52" column="69" selection-start-line="52" selection-start-column="69" selection-end-line="52" selection-end-column="69" />
         </state>
       </provider>
     </entry>

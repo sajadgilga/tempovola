@@ -50,6 +50,7 @@ const vue = new Vue({
                 }
             });
             this.is_ready = true;
+            document.getElementsByClassName('hid').forEach(it=> it.style.visibility='visible')
         },
 
         add_item: function (item, series, isInput=false) {
