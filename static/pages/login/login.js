@@ -21,7 +21,6 @@ var vue = new Vue({
         alert_msg: 'اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید',
         login_result: 'danger',
         alert_header: ' ورود ناموفقیت آمیز',
-        is_ready: false
     },
     methods: {
         show_alert: function () {
@@ -106,7 +105,6 @@ var vue = new Vue({
     },
     computed: {
         pass_state: function () {
-            this.is_ready = true;
             if (this.is_pass_valid === null && this.password.length === 0)
                 return null;
             this.is_pass_valid = this.password.length > 0;

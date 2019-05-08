@@ -2,14 +2,13 @@ const vue = new Vue({
     el: '#app',
     delimiters: ['[[',']]'],
     data: {
-        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        // BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        BASE_URL: 'http://localhost:8000/',
         product_series: [],
         buy_list: {},
         name: null,
         transaction_num: 0,
         req_msg: '',
-        is_ready: false
     },
     methods: {
         fetch_data: function () {
@@ -49,8 +48,7 @@ const vue = new Vue({
                     })
                 }
             });
-            this.is_ready = true;
-            document.getElementsByClassName('hid').forEach(it=> it.style.visibility=visible)
+            document.querySelector('div').classList.remove('hid');
         },
 
         add_item: function (item, series, isInput=false) {

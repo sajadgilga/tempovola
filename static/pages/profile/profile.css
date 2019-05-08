@@ -17,6 +17,10 @@ body {
     padding-top: 0px;
 }
 
+.hid {
+    visibility: hidden;
+}
+
 
 #profile_info {
     text-align: right;

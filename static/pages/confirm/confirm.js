@@ -51,7 +51,8 @@ const vue = new Vue({
 
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
-
-
     },
+    created(){
+            document.querySelector('div').classList.remove('hid');
+    }
 });

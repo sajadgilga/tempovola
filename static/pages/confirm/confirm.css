@@ -17,6 +17,10 @@ body {
     padding-top: 0px;
 }
 
+.hid {
+    visibility: hidden;
+}
+
 
 @media only screen and (min-width: 1100px) {
     body {

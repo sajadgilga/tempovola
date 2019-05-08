@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/administration/views.py" line="54" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="" />
+    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/shop/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/shop/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/pages/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/shop/shop.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +54,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="443" />
+          <entry key="css" value="464" />
           <entry key="dummy" value="49" />
           <entry key="gitignore" value="5" />
           <entry key="html" value="12345" />
-          <entry key="js" value="12247" />
+          <entry key="js" value="12306" />
           <entry key="py" value="13757" />
           <entry key="py@TempoVola" value="284" />
           <entry key="txt" value="14" />
@@ -61,10 +66,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="443" />
+          <entry key="CSS" value="464" />
           <entry key="CommandLine" value="212" />
           <entry key="HTML" value="12345" />
-          <entry key="JavaScript" value="12247" />
+          <entry key="JavaScript" value="12306" />
           <entry key="PLAIN_TEXT" value="140" />
           <entry key="Python" value="13757" />
         </counts>
@@ -120,22 +125,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/pages/login/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="52" column="94" lean-forward="true" selection-start-line="52" selection-start-column="94" selection-end-line="52" selection-end-column="94" />
+            <state relative-caret-position="97">
+              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="148">
@@ -147,8 +152,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+            <state relative-caret-position="312">
+              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -253,10 +258,10 @@
         <option value="$PROJECT_DIR$/static/pages/confirm/confirm.js" />
         <option value="$PROJECT_DIR$/customer/views.py" />
         <option value="$PROJECT_DIR$/templates/customer/login.html" />
+        <option value="$PROJECT_DIR$/templates/customer/shop.html" />
         <option value="$PROJECT_DIR$/static/pages/login/login.js" />
         <option value="$PROJECT_DIR$/static/pages/shop/shop.css" />
         <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
-        <option value="$PROJECT_DIR$/templates/customer/shop.html" />
       </list>
     </option>
   </component>
@@ -434,13 +439,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1034" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17022412" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32819384" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994664" weight="0.32819384" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4994664" visible="true" weight="0.32819384" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39867842" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -450,7 +456,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@TempoVola" order="10" weight="0.32893288" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" visible="true" weight="0.32929516" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" weight="0.32929516" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Python Console" order="14" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32819384" />
@@ -803,22 +809,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/pages/login/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        <state relative-caret-position="97">
+          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="52" column="94" lean-forward="true" selection-start-line="52" selection-start-column="94" selection-end-line="52" selection-end-column="94" />
+        <state relative-caret-position="312">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -826,6 +825,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
         </state>
       </provider>
     </entry>

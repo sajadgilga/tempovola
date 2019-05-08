@@ -28,6 +28,8 @@ const vue = new Vue({
             }
         }).then(respond => {
 
+
+            document.querySelector('div').classList.remove('hid');
         }).catch(respond => {
 
         })

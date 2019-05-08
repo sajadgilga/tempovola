@@ -23,6 +23,10 @@ body {
     opacity: .8;
 }
 
+.hid {
+    visibility: hidden;
+}
+
 #signUp:hover {
     opacity: 1;
 }

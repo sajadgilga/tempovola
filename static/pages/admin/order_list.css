@@ -13,6 +13,11 @@ body {
     /*margin-top: 60px;*/
 }
 
+.hid {
+    visibility: hidden;
+}
+
+
 #app {
     padding-top: 0px;
 }

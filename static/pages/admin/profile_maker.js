@@ -94,6 +94,8 @@ const vue = new Vue({
             } else{
                 this.show_alert('صفحه به درستی بارگزاری نشد')
             }
+
+            document.querySelector('div').classList.remove('hid');
         }).catch(response => this.show_alert('صفحه به درستی بارگزاری نشد'))
     }
 });

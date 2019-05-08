@@ -49,6 +49,6 @@ const vue = new Vue({
         }
     },
     created(){
-
+        document.querySelector('div').classList.remove('hid');
     }
 });
