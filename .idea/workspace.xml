@@ -32,7 +32,7 @@
     <session id="2123481332">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.17" value="1" />
@@ -53,7 +53,7 @@
           <entry key="gitignore" value="5" />
           <entry key="html" value="12278" />
           <entry key="js" value="12102" />
-          <entry key="py" value="13730" />
+          <entry key="py" value="13757" />
           <entry key="py@TempoVola" value="284" />
           <entry key="txt" value="14" />
         </counts>
@@ -65,7 +65,7 @@
           <entry key="HTML" value="12278" />
           <entry key="JavaScript" value="12102" />
           <entry key="PLAIN_TEXT" value="140" />
-          <entry key="Python" value="13730" />
+          <entry key="Python" value="13757" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -77,7 +77,7 @@
           <entry key="js" value="108" />
           <entry key="mp3" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="102" />
+          <entry key="py" value="103" />
           <entry key="text" value="1" />
           <entry key="ts" value="1" />
           <entry key="txt" value="3" />
@@ -90,14 +90,24 @@
           <entry key="Image" value="2" />
           <entry key="JavaScript" value="108" />
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="102" />
+          <entry key="Python" value="103" />
           <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/customer/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3851">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -196,11 +206,11 @@
         <option value="$PROJECT_DIR$/templates/customer/receipt.html" />
         <option value="$PROJECT_DIR$/templates/customer/confirm_reciet.html" />
         <option value="$PROJECT_DIR$/customer/urls.py" />
-        <option value="$PROJECT_DIR$/customer/views.py" />
         <option value="$PROJECT_DIR$/static/pages/checkout/checkout.js" />
         <option value="$PROJECT_DIR$/static/pages/confirm/confirm.js" />
         <option value="$PROJECT_DIR$/static/pages/login/login.js" />
         <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
+        <option value="$PROJECT_DIR$/customer/views.py" />
       </list>
     </option>
   </component>
@@ -282,13 +292,6 @@
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="shop" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -390,7 +393,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@TempoVola" order="10" weight="0.32893288" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" visible="true" weight="0.32929516" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" weight="0.32929516" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Python Console" order="14" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32819384" />
@@ -727,16 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/customer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="181" column="30" lean-forward="true" selection-start-line="181" selection-start-column="30" selection-end-line="181" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/customer/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -786,6 +779,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
           <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3851">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>

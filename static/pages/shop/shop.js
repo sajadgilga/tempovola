@@ -9,6 +9,7 @@ const vue = new Vue({
         name: null,
         transaction_num: 0,
         req_msg: '',
+        is_ready: false
     },
     methods: {
         fetch_data: function () {
@@ -47,7 +48,8 @@ const vue = new Vue({
                         }
                     })
                 }
-            })
+            });
+            this.is_ready = true;
         },
 
         add_item: function (item, series, isInput=false) {
