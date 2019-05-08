@@ -4,7 +4,7 @@ const vue = new Vue({
     data: {
         BASE_URL: ' https://tempovolaapp.herokuapp.com/',
         // BASE_URL: 'http://localhost:8000/',
-        order_data: null,
+        order_data: {},
         fields: [
             'شماره',
             'سری',
