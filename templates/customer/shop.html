@@ -33,7 +33,7 @@
             </b-collapse>
         </b-navbar>
 
-        <b-toast id="req" title="درخواست ناموفق" variant="danger" auto-hide-delay="3000">
+        <b-toast id="req" title="درخواست ناموفق" variant="danger" auto-hide-delay="3000" v-if="is_ready">
             [[ req_msg ]]
         </b-toast>
 
