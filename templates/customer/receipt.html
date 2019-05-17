@@ -14,10 +14,19 @@
 <body>
 <table class="tg" style="width: 90%; text-align: right;">
   <tr>
-    <td class="tg-xldj" colspan="7"></td>
+    <td class="tg-xldj" colspan="7">
+        فروشنده: آریان گستر پرداز
+        کد سفارش:
+        {{ order-code }}
+        تاریخ:
+        {{ date }}
+    </td>
   </tr>
   <tr>
-    <td class="tg-xldj" colspan="7"></td>
+    <td class="tg-xldj" colspan="7">
+        خریدار:
+        {{ name }}
+    </td>
   </tr>
   <tr>
     <th class="tg-0lax">قیمت</th>
@@ -40,6 +49,14 @@
   </tr>
    {% endfor %}
 
+  <tr>
+    <td class="tg-0pky" colspan="6" style="text-align: right">قیمت بدون تخفیف</td>
+    <td class="tg-0pky" style="text-align: left"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" colspan="6" style="text-align: right;">قیمت نهایی</td>
+    <td class="tg-0pky" style="text-align: left">{{ total_price }}</td>
+  </tr>
 </table>
 </body>
 </html>
