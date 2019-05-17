@@ -21,6 +21,20 @@ body {
     visibility: hidden;
 }
 
+.shop-card {
+    max-width: 80%;
+    background-color: rgb(169, 171, 171);
+    border: #1b1e21 solid thick;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: .9;
+}
+
+.shop-card:hover {
+    opacity: 1;
+}
 
 @media only screen and (min-width: 1100px) {
     body {

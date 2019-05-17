@@ -45,9 +45,9 @@
             </b-row>
 
 <!-- product collapse cards -->
-            <b-card text-variant="white" no-body
-                    class="ml-auto mr-auto mb-5 p-0" v-for="card in product_series"
-                    :key="'a'+card.name" style="max-width: 80%; background-color: rgba(15,17,17,0.8)">
+            <b-card text-variant="dark" no-body
+                    class="ml-auto mr-auto mb-5 p-0 shop-card" v-for="card in product_series"
+                    :key="'a'+card.name">
                 <b-card-header v-b-toggle="card.name">
                     <h2>
                         [[card.name]]
