@@ -52,6 +52,13 @@ const vue = new Vue({
         },
 
         add_item: function (item, series, isInput=false) {
+            if (isInput){
+                if (isNaN(item.count)) {
+                    item.count = 0;
+                    this.remove_item(item, series);
+                    return
+                }
+            }
             if (item.count < 0){
                 item.count = 0;
                 this.remove_item(item, series);
@@ -70,15 +77,15 @@ const vue = new Vue({
 
             before_item_count = 0;
             if (Object.keys(product).includes(item.name)) {
-                before_item_count = product[item.name];
-                product[item.name] = isInput ? (item.count) : (item.count + 1);
+                before_item_count = parseInt(product[item.name]);
+                product[item.name] = isInput ? parseInt(item.count) : parseInt(item.count) + 1;
             }
             else {
-                product[item.name] = (item.count !== 0)? item.count: 1;
+                product[item.name] = (item.count !== 0)? parseInt(item.count): 1;
             }
             if (!isInput)
                 item.count++;
-            series.total_cost += (item.count - before_item_count) * item.price;
+            series.total_cost += (parseInt(item.count) - parseInt(before_item_count)) * item.price;
             this.transaction_num ++;
         },
 

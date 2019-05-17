@@ -24,15 +24,21 @@ body {
 .shop-card {
     max-width: 80%;
     background-color: rgb(169, 171, 171);
-    border: #1b1e21 solid thick;
     border-radius: 5px;
+    border: 3px solid #1b1e21;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    opacity: .9;
+    opacity: .85;
+    -webkit-transition: max-width 20ms ease-in;
+    -moz-transition: max-width 20ms ease-in;
+    -ms-transition: max-width 20ms ease-in;
+    -o-transition: max-width 20ms ease-in;
+    transition: max-width 20ms ease-in;
 }
 
 .shop-card:hover {
+    max-width: 80.5%;
     opacity: 1;
 }
 
