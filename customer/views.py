@@ -1,3 +1,4 @@
+import datetime
 import io
 import json
 
@@ -9,6 +10,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.template.loader import render_to_string
+from persiandate import jalali
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
@@ -17,6 +19,17 @@ from weasyprint import HTML
 
 from customer.models import CustomerProfile, Melody, Order, ShopItem
 from customer.serializers import CustomerSerializer, OrderSerializer, ItemSerializer
+
+
+def get_new_order_id():
+    last_order_made = Order.objects.all().last()
+    last_id = '000001'
+    if last_order_made.order_id:
+        last_id = str(int(last_order_made.order_id.split('W')[1]) + 1)
+        if len(last_id) < 5:
+            last_id = '0' * (5 - len(last_id)) + last_id
+    id = jalali.Gregorian(datetime.datetime.now()).persian_string().split('-')[0] + 'W' + last_id
+    return id
 
 
 @api_view(['GET'])
@@ -133,6 +146,7 @@ def checkout(request):
                 new_melody = ShopItem(melody_name=m, order=order, series=p, price=int(price), count=int(data[p][m]))
                 new_melody.save(force_insert=True)
     order.cost = cost
+    order.order_id = get_new_order_id()
     order.save()
     return Response(status=status.HTTP_200_OK)
 

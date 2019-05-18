@@ -30,7 +30,7 @@ def get_new_customer_id():
     last_customer_made = CustomerProfile.objects.all().last()
     id_num = '00001'
     if last_customer_made.customer_id:
-        id_num = str(int(last_customer_made.customer_id) + 1)
+        id_num = str(int(last_customer_made.customer_id.split('C')[1]) + 1)
         if len(id_num) < 5:
             id_num = '0' * (5 - len(id_num)) + id_num
     id = jalali.Gregorian(datetime.datetime.now()).persian_string().split('-')[0] + 'C' + id_num
