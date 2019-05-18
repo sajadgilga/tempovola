@@ -164,7 +164,7 @@ def get_order_list(request):
 def get_orders(request):
     try:
         user = request.user
-        orders = Order.objects.all().reverse()
+        orders = Order.objects.all().order_by('-created_date')
         orders = OrderSerializer(orders, many=True).data
         orders = json.loads(JSONRenderer().render(orders))
         for order in orders:
