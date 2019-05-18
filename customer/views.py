@@ -21,6 +21,10 @@ from customer.models import CustomerProfile, Melody, Order, ShopItem
 from customer.serializers import CustomerSerializer, OrderSerializer, ItemSerializer
 
 
+def get_persian_date(date):
+    return jalali.Gregorian(date).persian_string()
+
+
 def get_new_order_id():
     last_order_made = Order.objects.filter(is_checked_out=True).last()
     last_id = '000001'
@@ -203,20 +207,31 @@ def enter_confirm_checkout(request):
 @api_view(['GET'])
 @login_required(login_url='/')
 def get_receipt(request):
-    user = request.user
-    order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
-    items = ShopItem.objects.filter(order=order)
-    items = ItemSerializer(items, many=True)
-    items = JSONRenderer().render(items.data)
-    items = json.loads(items)
-    html_string = render_to_string('customer/receipt.html', {'items': items})
+    try:
+        user = request.user
+        order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
+        items = ShopItem.objects.filter(order=order)
+        items = ItemSerializer(items, many=True)
+        items = JSONRenderer().render(items.data)
+        items = json.loads(items)
+        html_string = render_to_string('customer/receipt.html',
+                                       {
+                                           'items': items,
+                                           'ordercode': order.order_id,
+                                           'date': get_persian_date(order.created_date.strftime('%Y-%m-%d')),
+                                           'name': order.customer.company_name,
+                                           'discount': 0,
+                                           'total_price': order.cost,
+                                       })
 
-    html = HTML(string=html_string)
-    html.write_pdf(target='/tmp/mypdf.pdf')
+        html = HTML(string=html_string)
+        html.write_pdf(target='/tmp/mypdf.pdf')
 
-    fs = FileSystemStorage('/tmp')
-    with fs.open('mypdf.pdf') as pdf:
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        fs = FileSystemStorage('/tmp')
+        with fs.open('mypdf.pdf') as pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+            return response
         return response
-    return response
+    except:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
