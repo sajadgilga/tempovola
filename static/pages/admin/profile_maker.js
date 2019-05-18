@@ -2,8 +2,8 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     el: '#app',
     data: {
-        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        // BASE_URL: 'http://localhost:8000/',
         form: {
             company_name: '',
             email: '',
