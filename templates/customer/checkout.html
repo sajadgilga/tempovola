@@ -24,32 +24,39 @@
             </b-row>
          </b-container>
 
-        <b-container class="mt-5" style="text-align: right; background-color: white; min-width: 90%">
+        <b-container class="mt-5 col-sm-10" style="text-align: right; background-color: white;">
             <b-row class="p-2 pt-4">
-                <b-col>
+                <b-col class="ml-auto col-sm-3">
                      [[ seller ]]
+                </b-col>
+                <b-col  style="max-width: 100px">
                     <strong>
                         :فروشنده
                     </strong>
-
-                    <br>
-                    <br>
+                </b-col>
+            </b-row>
+            <b-row class="p-2 pt-4">
+                <b-col  class="ml-auto col-sm-3 ">
+                    [[ order_data.order_id ]]
+                </b-col>
+                <b-col style="max-width: 115px">
                     <strong>
-                        کد سفارش:
-                        [[ order_data.order_id ]]
+                        :کدسفارش
                     </strong>
                 </b-col>
             </b-row>
-            <hr>
+            <hr style="height:3px;border:none;color:#555;background-color:#555;">
             <b-row class="p-2">
-                <b-col>
+                <b-col  class="ml-auto col-sm-3">
+                    [[ order_data.name ]]
+                </b-col>
+                <b-col style="max-width: 95px">
                     <strong>
-                        خریدار:
+                        :خریدار
                     </strong>
-                     [[ order_data.name ]]
                 </b-col>
             </b-row>
-            <hr>
+            <hr style="height:3px;border:none;color:#555;background-color:#555;">
             <div class="m-auto">
         <b-table striped hover responsive :fields="fields" :items="items" style="text-align: left; background-color: white">
 
@@ -78,7 +85,7 @@
             </template>
         </b-table>
             </div>
-            <hr>
+            <hr style="height:3px;border:none;color:#555;background-color:#555;">
             <b-row class="p-3">
                 <b-col class="col-sm-2">
                     <b-button variant="success" block @click="checkout_order">

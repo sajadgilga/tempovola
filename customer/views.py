@@ -22,13 +22,15 @@ from customer.serializers import CustomerSerializer, OrderSerializer, ItemSerial
 
 
 def get_new_order_id():
-    last_order_made = Order.objects.all().last()
+    last_order_made = Order.objects.filter(is_checked_out=True).last()
     last_id = '000001'
     if last_order_made.order_id:
         last_id = str(int(last_order_made.order_id.split('W')[1]) + 1)
-        if len(last_id) < 5:
-            last_id = '0' * (5 - len(last_id)) + last_id
-    id = jalali.Gregorian(datetime.datetime.now()).persian_string().split('-')[0] + 'W' + last_id
+        if len(last_id) < 6:
+            last_id = '0' * (6 - len(last_id)) + last_id
+    date = datetime.datetime.now().strftime('%Y-%m-%d')
+    currentDate = jalali.Gregorian(date).persian_string().split('-')[0]
+    id = str(currentDate) + 'W' + last_id
     return id
 
 
