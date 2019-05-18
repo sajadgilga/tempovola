@@ -16,8 +16,12 @@
   <tr>
     <td class="tg-xldj" colspan="7">
         فروشنده: آریان گستر پرداز
+        <br>
+        <br>
         کد سفارش:
-        {{ order-code }}
+        {{ ordercode }}
+        <br>
+        <br>
         تاریخ:
         {{ date }}
     </td>
@@ -50,12 +54,16 @@
    {% endfor %}
 
   <tr>
-    <td class="tg-0pky" colspan="6" style="text-align: right">قیمت بدون تخفیف</td>
-    <td class="tg-0pky" style="text-align: left"></td>
+    <td class="tg-0pky" colspan="6" style="text-align: left"></td>
+    <td class="tg-0pky" style="text-align: right">تخفیف</td>
+  </tr>
+    <tr>
+    <td class="tg-0pky" colspan="6" style="text-align: left"></td>
+    <td class="tg-0pky" style="text-align: right">قیمت بدون تخفیف</td>
   </tr>
   <tr>
-    <td class="tg-0pky" colspan="6" style="text-align: right;">قیمت نهایی</td>
-    <td class="tg-0pky" style="text-align: left">{{ total_price }}</td>
+    <td class="tg-0pky" colspan="6" style="text-align: left">{{ total_price }}</td>
+    <td class="tg-0pky" style="text-align: right">قیمت نهایی</td>
   </tr>
 </table>
 </body>

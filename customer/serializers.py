@@ -27,6 +27,14 @@ class CustomerSerializer(serializers.ModelSerializer):
                   'available_series', 'city', 'customer_id')
 
 
+class CustomerOrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomerProfile
+        fields = ('company_name', 'email', 'phone', 'address',
+                  'city',)
+
+
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShopItem
@@ -37,11 +45,11 @@ class ItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     # items = ItemSerializer(many=True)
-    # customer = serializers.CharField(source='customer.company_name')
+    customer = CustomerOrderSerializer()
 
     class Meta:
         model = Order
-        fields = (
+        fields = ('customer',
                   'is_confirmed', 'is_received',
                   'created_date', 'last_change_date',
                   'confirmed_date', 'sent_date',

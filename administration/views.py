@@ -8,11 +8,14 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from persiandate import jalali
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from customer.models import Order, ShopItem, ProductSeries, CustomerProfile
+from customer.serializers import OrderSerializer
 
 
 def check_access(user):
@@ -141,11 +144,16 @@ def get_order_list(request):
 @api_view(['GET'])
 @login_required(login_url='/admin/')
 def get_orders(request):
-    try:
-        user = request.user
-        return Response()
-    except:
-        return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    # try:
+    user = request.user
+    orders = Order.objects.all().reverse()
+    orders = OrderSerializer(orders, many=True).data
+    orders = json.loads(JSONRenderer().render(orders))
+    for order in orders:
+        order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
+    return Response({'orders': orders})
+    # except:
+    #     return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
@@ -161,7 +169,20 @@ def get_order_excel(request):
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
 
-        columns = ['قیمت']
+        columns = [
+            'نام خریدار',
+            'کد سفارش',
+            'استان',
+            'شهر',
+            'آدرس خریدار',
+            'قیمت',
+            'تاریخ سفارش',
+            'تاریخ تغییر',
+            'تاریخ تایید',
+            'تاریخ ارسال',
+            'تاریخ تحویل',
+            'وضعیت',
+        ]
 
         row_name = 0
 
@@ -170,11 +191,11 @@ def get_order_excel(request):
 
         font_style = xlwt.XFStyle()
 
-        orders = Order.objects.all().values_list('cost')
+        orders = Order.objects.all()
         for order in orders:
             row_name += 1
-            for col in range(len(columns)):
-                ws.write(row_name, col, order[col], font_style)
+            ws.write(row_name, columns[0], order.customer.company_name, font_style)
+            ws.write(row_name, columns[0], order.customer.company_name, font_style)
 
         wb.save(response)
         return response

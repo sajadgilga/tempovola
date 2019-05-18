@@ -19,7 +19,7 @@
 
             <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
 
-            <b-collapse id="navbar-collapse" is-nav style="text-align: right">
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right">
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
                     <b-nav-item>
@@ -41,30 +41,46 @@
             </b-row>
 
             <div class="m-auto">
-                <b-table striped hover responsive :fields="fields" :items="items" style="text-align: left; background-color: white">
+                <b-table striped hover responsive :fields="fields" :items="orders" style="text-align: left; background-color: white">
 
                     <template slot="ردیف" slot-scope="data">
                         [[ data.index + 1 ]]
                     </template>
 
-                    <template slot="سری" slot-scope="data">
-                        [[ data.item.series ]]
+                    <template slot="کد سفارش" slot-scope="data">
+                        [[ data.item.order_id ]]
                     </template>
 
-                    <template slot="ملودی" slot-scope="data">
-                        [[ data.item.melody_name ]]
+                    <template slot="هزینه سفارش" slot-scope="data">
+                        [[ data.item.cost ]]
                     </template>
 
-                    <template slot="فی" slot-scope="data">
-                        [[ data.item.price ]]
+                    <template slot="نام خریدار" slot-scope="data">
+                        [[ data.item.customer.company_name ]]
                     </template>
 
-                    <template slot="تعداد" slot-scope="data">
-                        [[ data.item.count ]]
+                    <template slot="آدرس ارسال" slot-scope="data">
+                        [[ data.item.customer.address ]]
                     </template>
 
-                    <template slot="قیمت" slot-scope="data">
-                        [[ data.item.count * data.item.price ]]
+                    <template slot="تاریخ سفارش" slot-scope="data">
+                        [[ data.item.created_date ]]
+                    </template>
+
+                    <template slot="تاریخ تغییر" slot-scope="data">
+                        [[ data.item.last_change_date ]]
+                    </template>
+
+                    <template slot="تاریخ تایید" slot-scope="data">
+                        [[ data.item.confirmed_date ]]
+                    </template>
+
+                    <template slot="تاریخ ارسال" slot-scope="data">
+                        [[ data.item.sent_date ]]
+                    </template>
+
+                    <template slot="وضعیت" slot-scope="data">
+                        [[ boolean_converter(data.item.is_confirmed) ]]
                     </template>
                 </b-table>
             </div>
