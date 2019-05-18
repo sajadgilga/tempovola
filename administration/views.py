@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import xlwt
@@ -23,6 +24,17 @@ def check_access(user):
         return True
     else:
         return False
+
+
+def get_new_customer_id():
+    last_customer_made = CustomerProfile.objects.all().last()
+    id_num = '00001'
+    if last_customer_made.customer_id:
+        id_num = str(int(last_customer_made.customer_id) + 1)
+        if len(id_num) < 5:
+            id_num = '0' * (5 - len(id_num)) + id_num
+    id = jalali.Gregorian(datetime.datetime.now()).persian_string().split('-')[0] + 'C' + id_num
+    return id
 
 
 @api_view(['GET'])
@@ -111,6 +123,7 @@ def signup_customer(request):
         customer.company_name = form['company_name']
         customer.city = form['city']
         customer.address = form['address']
+        customer.customer_id = get_new_customer_id()
         customer.save()
 
         for product in form['available_series']:
@@ -144,16 +157,16 @@ def get_order_list(request):
 @api_view(['GET'])
 @login_required(login_url='/admin/')
 def get_orders(request):
-    # try:
-    user = request.user
-    orders = Order.objects.all().reverse()
-    orders = OrderSerializer(orders, many=True).data
-    orders = json.loads(JSONRenderer().render(orders))
-    for order in orders:
-        order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
-    return Response({'orders': orders})
-    # except:
-    #     return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    try:
+        user = request.user
+        orders = Order.objects.all().reverse()
+        orders = OrderSerializer(orders, many=True).data
+        orders = json.loads(JSONRenderer().render(orders))
+        for order in orders:
+            order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
+        return Response({'orders': orders})
+    except:
+        return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
