@@ -23,7 +23,7 @@ from customer.serializers import CustomerSerializer, OrderSerializer, ItemSerial
 
 def get_persian_date(date):
     date = jalali.Gregorian(date).persian_string().split('-')
-    date = date[2] + date[1] + date[0]
+    date = date[2] + '-' + date[1] + '-' + date[0]
     return date
 
 
