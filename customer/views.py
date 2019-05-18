@@ -22,7 +22,9 @@ from customer.serializers import CustomerSerializer, OrderSerializer, ItemSerial
 
 
 def get_persian_date(date):
-    return jalali.Gregorian(date).persian_string()
+    date = jalali.Gregorian(date).persian_string().split('-')
+    date = date[2] + date[1] + date[0]
+    return date
 
 
 def get_new_order_id():
