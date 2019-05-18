@@ -80,10 +80,20 @@
             </div>
             <hr>
             <b-row class="p-3">
-                <b-col class="col-sm-3 ml-auto">
+                <b-col class="col-sm-2">
+                    <b-button variant="success" block @click="checkout_order">
+                        ثبت نهایی
+                    </b-button>
+                </b-col>
+                <b-col class="col-sm-2 mr-auto">
                     <b-button variant="danger" block @click="edit">
                         تصحیح
                     </b-button>
+                </b-col>
+                <b-col class="col-sm-2 ml-auto">
+                    <strong style="text-align: right;">
+                        فیمت کل: [[total_cost]]  ریال
+                    </strong>
                 </b-col>
             </b-row>
         </b-container>
@@ -92,19 +102,6 @@
         </b-container>
 
 
-        <b-navbar variant="white" fixed="bottom" v-if="total_cost != 0">
-            <b-navbar-brand>
-                <b-button variant="success" @click="checkout_order">
-                    ثبت سفارش
-                </b-button>
-            </b-navbar-brand>
-
-            <b-navbar-nav class="ml-auto">
-                <strong style="text-align: right;">
-                    فیمت کل: [[total_cost]]  ریال
-                </strong>
-            </b-navbar-nav>
-        </b-navbar>
     </div>
 
     <script src="{% static "pages/checkout/checkout.js" %}"></script>
