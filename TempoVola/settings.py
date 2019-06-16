@@ -25,6 +25,7 @@ SECRET_KEY = '%m5!f7i6f13-=4dl)t5w$z3#=fceq=(41w$4km4sx9lf^d03r+'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
@@ -44,9 +45,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_brotli.middleware.BrotliMiddleware',
+
+    # 'django.middleware.gzip.GZipMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django_brotli.middleware.BrotliMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
