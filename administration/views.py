@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from kavenegar import *
 from persiandate import jalali
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -46,20 +47,23 @@ def enter_admin_login(request):
 
 @api_view(['POST'])
 def login_(request):
-    try:
-        body = request.body
-        user_data = json.loads(body)
-        user = authenticate(request, username=user_data['username'], password=user_data['password'])
-        if user is None:
-            return Response({'msg': 'اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید'},
-                            status=status.HTTP_401_UNAUTHORIZED)
-        if not user.groups.filter(name__in=['admin']).exists():
-            return Response({'msg': 'سطح دسترسی لازم را ندارید'}, status=status.HTTP_401_UNAUTHORIZED)
+    # try:
+    body = request.body
+    user_data = json.loads(body)
+    # api = KavenegarAPI('6652373751486A6D5A34584B476A466F346E616F7A313768553441726330554E')
+    # params = {'sender': '1000596446', 'receptor': '09366637984', 'message': "با موفقیت تست شد".encode('utf-8')}
+    # response = api.sms_send(params)
+    user = authenticate(request, username=user_data['username'], password=user_data['password'])
+    if user is None:
+        return Response({'msg': 'اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید'},
+                        status=status.HTTP_401_UNAUTHORIZED)
+    if not user.groups.filter(name__in=['admin']).exists():
+        return Response({'msg': 'سطح دسترسی لازم را ندارید'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        login(request, user)
-        return Response({'msg': 'login successful'}, status=status.HTTP_200_OK)
-    except:
-        return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    login(request, user)
+    return Response({'msg': 'login successful'}, status=status.HTTP_200_OK)
+    # except:
+    #     return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
