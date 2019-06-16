@@ -3,7 +3,9 @@ var vue = new Vue({
     el: '#app',
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: 'http://localhost:8000/',
+                BASE_URL: 'http://86.104.32.238:8000/',
+
         username: '',
         password: '',
         user_msg: 'نام کاربری اشتباه وارد شده',
