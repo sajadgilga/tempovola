@@ -82,6 +82,10 @@
                     <template slot="وضعیت" slot-scope="data">
                         [[ boolean_converter(data.item.is_confirmed) ]]
                     </template>
+
+                    <template slot="مشاهده" slot-scope="data">
+                        <b-button variant="primary" @click="see_order">مشاهده</b-button>
+                    </template>
                 </b-table>
             </div>
         </b-container>

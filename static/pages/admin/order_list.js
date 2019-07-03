@@ -2,12 +2,13 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     el: '#app',
     data: {
-        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        // BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        BASE_URL: 'http://localhost:8000/',
         req_msg: '',
         alert_header: ' ورود ناموفقیت آمیز',
         data: {},
         fields: [
+            'مشاهده',
             'وضعیت',
             'تاریخ ارسال',
             'تاریخ تایید',
@@ -34,6 +35,10 @@ const vue = new Vue({
         show_alert(msg){
             this.req_msg = msg;
             this.$bvToast.show('req');
+        },
+
+        see_order() {
+            window.location.assign(this.BASE_URL + 'admin/order_page')
         },
 
         boolean_converter(value){

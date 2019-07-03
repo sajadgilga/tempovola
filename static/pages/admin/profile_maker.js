@@ -2,8 +2,8 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     el: '#app',
     data: {
-        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        // BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        BASE_URL: 'http://localhost:8000/',
         form: {
             company_name: '',
             email: '',
@@ -14,12 +14,14 @@ const vue = new Vue({
             address: '',
             username_type: ['email'],
             available_series: [],
+            melodies: {}
         },
         options: [
             {text: 'ایمیل', value: 'email'},
             {text: 'شماره تماس', value: 'phone'}
         ],
         series_options: [],
+        melody_options: {},
         req_msg: 'اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید',
         alert_header: ' ورود ناموفقیت آمیز',
     },
@@ -59,6 +61,7 @@ const vue = new Vue({
 
         submit_data() {
             if (!this.check_form_validation()) {
+                this.show_alert("فیلد های لازم را پر کنید");
                 return
             }
             axios({
@@ -74,8 +77,8 @@ const vue = new Vue({
                 }
             }).then(response => {
                 if (response.status === 200) this.show_alert('ثبت نام با موفقیت انجام شد');
-                else this.show_alert('ثبت نام به مشکل بر خورد')
-            }).catch(response => this.show_alert('مشکلی در سرور بوجود آمد'))
+                else this.show_alert(response.data.msg)
+            }).catch(response => this.show_alert("ایمیل یا شماره تلفن تکراری است"))
         }
     },
     computed: {
@@ -89,8 +92,16 @@ const vue = new Vue({
             url: this.BASE_URL + 'admin/product_series/'
         }).then(response => {
             if (response.status === 200){
-                this.series_options = response.data.products;
-                this.form.available_series = response.data.products;
+                response.data.products.forEach(item => {
+                    if(Object.keys(this.melody_options).includes(item[0])){
+                        this.melody_options[item[0]].push(item[1]);
+                    }else {
+                        this.melody_options[item[0]] = [item[1]];
+                    }
+                });
+                this.series_options = Object.keys(this.melody_options);
+                this.form.available_series = this.series_options;
+                this.form.melodies = Object.assign({}, this.melody_options);
             } else{
                 this.show_alert('صفحه به درستی بارگزاری نشد')
             }

@@ -1,6 +1,8 @@
 from django.urls import path
 
-from administration.views import *
+from administration.views.authentication import *
+from administration.views.customer_managing import *
+from administration.views.order_managing import *
 
 urlpatterns = [
     path('', enter_admin_login),

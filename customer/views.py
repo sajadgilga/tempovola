@@ -95,27 +95,27 @@ def find_melody(melodies, product, melody):
 @login_required(login_url='/')
 def fetch_data(request):
     user = request.user
-    try:
-        customer = CustomerProfile.objects.get(user=user)
-        context = CustomerSerializer(customer)
-        context = context.data
-        context = json.loads(JSONRenderer().render(context))
+    # try:
+    customer = CustomerProfile.objects.get(user=user)
+    context = CustomerSerializer(customer)
+    context = context.data
+    context = json.loads(JSONRenderer().render(context))
 
-        order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
-        if order and not order.is_checked_out:
-            items = ShopItem.objects.filter(order=order)
-            for product in context['available_series']:
-                cost = 0
-                for melody in product['melodies']:
-                    m = find_melody(items, product, melody)
-                    if m:
-                        melody['count'] = m.count
-                        cost += melody['price'] * melody['count']
-                product['total_cost'] = cost
+    order = Order.objects.filter(customer=CustomerProfile.objects.get(user=user)).all().last()
+    if order and not order.is_checked_out:
+        items = ShopItem.objects.filter(order=order)
+        for product in context['available_series']:
+            cost = 0
+            for melody in product['melodies']:
+                m = find_melody(items, product, melody)
+                if m:
+                    melody['count'] = m.count
+                    cost += melody['price'] * melody['count']
+            product['total_cost'] = cost
 
-        return Response(context)
-    except:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(context)
+    # except:
+    #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from customer.models import CustomerProfile, ProductSeries, Melody, Order, ShopItem
+from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series
 
 
 @admin.register(CustomerProfile)
@@ -17,9 +17,14 @@ class CustomerAdmin(admin.ModelAdmin):
                    'address', 'city')
 
 
-@admin.register(ProductSeries)
+@admin.register(SchemaSeries)
 class ProductSeriesAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'product_code')
+    list_display = ('name', 'description', 'product_code', 'picture')
+
+
+@admin.register(Series)
+class ProductSeriesAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'product_code', 'picture')
 
 
 @admin.register(Melody)

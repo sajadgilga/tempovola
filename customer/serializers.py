@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from customer.models import CustomerProfile, ProductSeries, Melody, Order, ShopItem
+from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series
 
 
 class MelodySerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class ProductSerializer(serializers.ModelSerializer):
     melodies = MelodySerializer(many=True)
 
     class Meta:
-        model = ProductSeries
+        model = Series
         fields = ('name', 'description', 'melodies',
                   'total_cost', 'product_code')
 

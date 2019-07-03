@@ -20,15 +20,25 @@ class CustomerProfile(models.Model):
     city = models.CharField(max_length=128, default='')
     address = models.CharField(max_length=256, default='')
     # TODO: set default available series
-    available_series = models.ManyToManyField('ProductSeries')
+    available_series = models.ManyToManyField('Series')
 
 
-class ProductSeries(models.Model):
+class SchemaSeries(models.Model):
+    name = models.CharField(max_length=24, db_index=True)
+    product_code = models.CharField(db_index=True, max_length=32, default='')
+    description = models.CharField(max_length=128, blank=True)
+    melodies = models.ManyToManyField('Melody')
+    picture = models.FileField(storage=fs, null=True)
+
+
+class Series(models.Model):
     name = models.CharField(max_length=24, db_index=True)
     product_code = models.CharField(db_index=True, max_length=32, default='')
     description = models.CharField(max_length=128, blank=True)
     total_cost = models.IntegerField(default=0)
+    discount = models.IntegerField(default=0)
     melodies = models.ManyToManyField('Melody')
+    picture = models.FileField(storage=fs, null=True)
 
 
 class Melody(models.Model):
@@ -36,6 +46,7 @@ class Melody(models.Model):
     melody_code = models.CharField(max_length=32, db_index=True, default='')
     price = models.IntegerField(default=3000)
     count = models.IntegerField(default=0)
+    discount = models.IntegerField(default=0)
     # TODO: (*Phase_2) handle music properly
     music = models.FileField(storage=fs, null=True)
 
@@ -44,9 +55,13 @@ class Order(models.Model):
     customer = models.ForeignKey(to='CustomerProfile', on_delete=models.CASCADE, related_name='customer')
     order_id = models.CharField(max_length=32, db_index=True, default='')
     is_checked_out = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True, blank=True)
     is_confirmed = models.BooleanField(default=False)
     is_received = models.BooleanField(default=False)
-    created_date = models.DateTimeField(auto_now_add=True, blank=True)
+    orderAdmin_confirmed = models.BooleanField(default=False)
+    sellAdmin_confirmed = models.BooleanField(default=False)
+    warehouseAdmin_confirmed = models.BooleanField(default=False)
+    financeAdmin_confirmed = models.BooleanField(default=False)
     last_change_date = models.DateTimeField(blank=True, null=True)
     confirmed_date = models.DateTimeField(blank=True, null=True)
     sent_date = models.DateTimeField(blank=True, null=True)
