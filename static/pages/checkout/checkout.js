@@ -12,6 +12,7 @@ const vue = new Vue({
             'فی',
             'تعداد',
             'قیمت',
+            'تصحیح'
         ],
         items: [],
         seller: 'Tempo Vola',
@@ -47,7 +48,11 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        edit: function () {
+        edit: function (series = null) {
+            if (series) {
+                window.location.replace(this.BASE_URL + 'customer/shop/' + series + '/')
+                return
+            }
             window.location.replace(this.BASE_URL + 'customer/shop/')
         },
 

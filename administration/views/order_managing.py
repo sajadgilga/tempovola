@@ -12,10 +12,9 @@ from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
+from TempoVola.settings import admins
 from customer.models import Order
 from customer.serializers import OrderSerializer
-
-admins = ['admin', 'orderAdmin', 'sellAdmin', 'warehouseAdmin']
 
 
 def check_access(user):
@@ -41,13 +40,13 @@ def get_orders(request):
     try:
         user = request.user
         if user.groups.filter(name__in=[admins[1], ]).exists():
-            orders = Order.objects.filter(orderAdmin_confirmed=False, is_confirmed=True)\
+            orders = Order.objects.filter(orderAdmin_confirmed=False, is_checked_out=True) \
                 .all().order_by('created_date')
         elif user.groups.filter(name__in=[admins[2], ]):
-            orders = Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False)\
+            orders = Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False) \
                 .all().order_by('created_date')
         elif user.groups.filter(name__in=[admins[3], ]):
-            orders = Order.objects.filter(sellAdmin_confirmed=True, orderAdmin_confirmed=False)\
+            orders = Order.objects.filter(sellAdmin_confirmed=True, orderAdmin_confirmed=False) \
                 .all().order_by('created_date')
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)

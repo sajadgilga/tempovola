@@ -53,7 +53,9 @@ const vue = new Vue({
 
         check_form_validation() {
             if (this.form.company_name !== '' && this.form.password.length >= 8
-                && this.form.address !== '' && (this.form.phone !== '' || this.form.email !== '')){
+                && this.form.address !== '' && (this.form.phone !== '' || this.form.email !== '')
+                && this.form.username_type.length >= 1 && this.form.available_series.length >= 1
+                && Object.keys(this.form.melodies).length >= 1){
                 return true
             }
             return false

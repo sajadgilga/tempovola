@@ -83,6 +83,10 @@
             <template slot="قیمت" slot-scope="data">
                 [[ data.item.count * data.item.price ]]
             </template>
+
+            <template slot="تصحیح" slot-scope="data">
+                <b-button variant="danger" @click="edit(data.item.series)">تصحیح</b-button>
+            </template>
         </b-table>
             </div>
             <hr style="height:3px;border:none;color:#555;background-color:#555;">
@@ -99,7 +103,7 @@
                 </b-col>
                 <b-col class="col-sm-2 ml-auto">
                     <strong style="text-align: right;">
-                        فیمت کل: [[total_cost]]  ریال
+                        قیمت کل: [[total_cost]]  ریال
                     </strong>
                 </b-col>
             </b-row>

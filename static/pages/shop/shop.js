@@ -10,6 +10,9 @@ const vue = new Vue({
         transaction_num: 0,
         req_msg: '',
         melody_color: {},
+        audio: null,
+        is_visible: {},
+        promotions: {}
     },
     methods: {
         fetch_data: function () {
@@ -36,15 +39,24 @@ const vue = new Vue({
         },
 
         add_data: function (response) {
+            this.promotions = response.data.promotions;
+
+
             this.product_series = response.data.available_series;
             this.product_series.forEach(product => {
                 // if (product.total_cost !== 0){
+                var vis = document.getElementById("vis_series").value
+                if (vis === product.name)
+                this.is_visible[product.name] = true
+                else
+                this.is_visible[product.name] = false
                     product.melodies.forEach(melody => {
                         Vue.set(this.melody_color, product.name + melody.name, "white");
                         if (melody.count !== 0) {
                             if (!Object.keys(this.buy_list).includes(product.name))
                                 this.buy_list[product.name] = {};
                             this.buy_list[product.name][melody.name] = melody.count;
+                            Vue.set(this.melody_color, product.name + melody.name, "#fe444134");
                             product.hasBeenBought = true
                         }
                     })
@@ -57,6 +69,7 @@ const vue = new Vue({
             console.log(this.melody_color)
             if (isInput){
                 if (item.count === "") {
+                    item.count = 0;
                     this.remove_item(item, series);
                     return
                 }
@@ -104,20 +117,20 @@ const vue = new Vue({
             if (!Object.keys(product).includes(item.name))
                 return;
             if (product[item.name] <= 0) {
-                Vue.set(this.melody_color, series.name + item.name, "white")
+                Vue.set(this.melody_color, series.name + item.name, "white");
                 delete product[item.name];
             } else {
                 if (item.count === 0) {
                     series.total_cost -= item.price * (product[item.name]);
                     product[item.name] = 0;
-                    Vue.set(this.melody_color, series.name + item.name, "white")
+                    Vue.set(this.melody_color, series.name + item.name, "white");
                     delete product[item.name];
                 }else {
                     product[item.name]--;
                     item.count--;
                     series.total_cost -= item.price;
                     if (item.count === 0) {
-                        Vue.set(this.melody_color, series.name + item.name, "white")
+                        Vue.set(this.melody_color, series.name + item.name, "white");
                     delete product[item.name];
                     }
                 }
@@ -125,6 +138,25 @@ const vue = new Vue({
             if (product === {})
                 delete this.buy_list[series.name];
             this.transaction_num ++;
+        },
+
+
+        play_audio: function(item) {
+            if (this.audio)
+                this.audio.pause();
+            axios({
+                method: 'post',
+                url: this.BASE_URL + 'customer/music/',
+                headers: {
+                    "X-CSRFToken": this.getCookie('csrftoken'),
+                },
+                data: {
+                    'melody': item.name
+                }
+            }).then(response => {
+                this.audio = new Audio(this.BASE_URL + response.data + '/');
+                this.audio.play();
+            })
         },
 
         confirm_buy: function() {

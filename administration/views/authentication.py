@@ -8,6 +8,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from TempoVola.settings import admins
+
 
 @api_view(['GET'])
 def enter_admin_login(request):
@@ -23,7 +25,7 @@ def login_(request):
         if user is None:
             return Response({'msg': 'اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید'},
                             status=status.HTTP_401_UNAUTHORIZED)
-        if not user.groups.filter(name__in=['admin']).exists():
+        if not user.groups.filter(name__in=admins).exists():
             return Response({'msg': 'سطح دسترسی لازم را ندارید'}, status=status.HTTP_401_UNAUTHORIZED)
 
         login(request, user)

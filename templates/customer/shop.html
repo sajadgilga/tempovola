@@ -13,6 +13,7 @@
 
 {% block content %}
     <div id="app" class="hid">
+    <b-form-input id="vis_series" value="{{ vis_series }}" style="display: none"></b-form-input>
     <!-- navbar component -->
         <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
             <b-navbar-brand href="#">
@@ -63,11 +64,12 @@
                     </b-card-text>
                 </b-card-header>
 
-                <b-collapse :id="card.name" accordion="acc" style="background-color: white; color: black; opacity: 1;">
+                <b-collapse :id="card.name" :visible="is_visible[card.name]" accordion="acc" style="background-color: white; color: black; opacity: 1;">
                     <b-card-body bg-variant="white">
                         <b-card-text v-for="i in card.melodies">
                             <b-container fluid>
                                 <b-row class="p-0">
+                                    <img src="{% static "images/page_decoration/play.png" %}" @click="play_audio(i)"/>
                                     <div class="col-sm-2 ml-0 mr-auto p-0" align="center" :style="{background: melody_color[card.name + i.name] }">
                                         [[ i.name ]]
                                     </div>
@@ -84,6 +86,25 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
+
+            <b-row class="m-2"></b-row>
+            <div>
+              <b-carousel
+                      class="mr-auto ml-auto"
+                      id="carousel-fade"
+                      style="text-shadow: 0px 0px 2px #000; max-width: 60%"
+                      interval="3000"
+                      fade
+                      indicators
+                      label-prev="promotions"
+              >
+                <b-carousel-slide
+                        v-for="promotion in promotions"
+                        :caption="promotion.description"
+                        :img-src="BASE_URL + promotion.url"
+                ></b-carousel-slide>
+              </b-carousel>
+            </div>
 
             <b-row class="m-5"></b-row>
 
@@ -106,4 +127,5 @@
     </div>
 
 <script src="{% static "pages/shop/shop.js" %}"></script>
+{#    <script src="{% static "howler.js/dist/howler.js" %}"></script>#}
 {% endblock %}

@@ -1,12 +1,14 @@
 from django.urls import path
 
-from customer.views import login_, enter_shop, logout_, fetch_data, profile, checkout, enter_checkout, \
-    get_checkout_data, get_receipt, enter_confirm_checkout, confirm_checkout
+from customer.views.authentication import *
+from customer.views.order_making import *
+from customer.views.checkout import *
 
 urlpatterns = [
     path('login/', login_),
     path('logout/', logout_),
     path('shop/', enter_shop),
+    path('shop/<str:series>/', enter_shop),
     path('get_shop_data/', fetch_data),
     path('profile/', profile),
     path('checkout/', checkout),
@@ -15,4 +17,5 @@ urlpatterns = [
     path('confirm_checkout/', confirm_checkout),
     path('confirmed_checkout/', enter_confirm_checkout),
     path('fetch_receipt/', get_receipt),
+    path('music/', get_music)
 ]
