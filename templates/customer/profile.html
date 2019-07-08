@@ -22,12 +22,12 @@
 
             <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
 
-            <b-collapse id="navbar-collapse" is-nav style="text-align&nbsp right">
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right">
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item-dropdown dropleft >
                         <template slot="button-content">{{ name }}</template>
-                        <b-dropdown-item class="primary" @click="redirect_to_shop">بازگشت</b-dropdown-item>
-                        <b-dropdown-item @click="logout">خروج</b-dropdown-item>
+                        <b-dropdown-item class="primary" @click="redirect_to_shop" style="text-align: right;">بازگشت</b-dropdown-item>
+                        <b-dropdown-item @click="logout" style="text-align: right;">خروج</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -74,7 +74,7 @@
                         placeholder="...مشکل خود را بنویسید"
                         rows="3"></b-form-textarea>
                     <b-button class="col-sm-2 mr-1 ml-1" variant="primary" @click="show_reports">گزارشات</b-button>
-                    <b-button class="col-sm-2" variant="success" @click="send_report">ارسال</b-button>
+                    <b-button class="col-sm-2 mr-1 ml-1" variant="success" @click="send_report">ارسال</b-button>
 
                     <hr style="height:3px;border:none;color:#555;background-color:#555;">
                     <p class="text-muted" style="font-size: medium"> اطلاعات تماس با شرکت </p>
