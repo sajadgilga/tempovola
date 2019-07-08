@@ -4,38 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/customer/models.py" line="89" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="fixed bugs&#10;added melody">
-      <change afterPath="$PROJECT_DIR$/customer/migrations/0006_report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customer/migrations/0007_auto_20190706_0941.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customer/migrations/0008_auto_20190708_0830.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customer/migrations/0009_auto_20190708_1213.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customer/migrations/0010_remove_shopitem_warehouse_admin_verified_count.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/page_decoration/cancel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/page_decoration/check.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/page_decoration/reject.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/pages/admin/order_manage/sellAdmin_list.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/pages/admin/order_manage/warehouseAdmin_list.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/sellAdmin_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/administration/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/administration/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/administration/views/customer_managing.py" beforeDir="false" afterPath="$PROJECT_DIR$/administration/views/customer_managing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/administration/views/order_managing.py" beforeDir="false" afterPath="$PROJECT_DIR$/administration/views/order_managing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/views/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/views/authentication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/views/order_making.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/views/order_making.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/pages/admin/order_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/admin/order_manage/order_list.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/pages/admin/order_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/admin/order_manage/order_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/pages/profile/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pages/profile/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/order_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/order_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/customer/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customer/checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/customer/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customer/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/customer/receipt.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customer/receipt.html" afterDir="false" />
-    </list>
+    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="added administrative components" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,20 +56,20 @@
           <entry key="css" value="743" />
           <entry key="dummy" value="87" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="17306" />
-          <entry key="js" value="17869" />
+          <entry key="html" value="17312" />
+          <entry key="js" value="17870" />
           <entry key="py" value="24387" />
           <entry key="py@TempoVola" value="454" />
-          <entry key="txt" value="249" />
+          <entry key="txt" value="286" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="743" />
           <entry key="CommandLine" value="327" />
-          <entry key="HTML" value="17306" />
-          <entry key="JavaScript" value="17869" />
-          <entry key="PLAIN_TEXT" value="468" />
+          <entry key="HTML" value="17312" />
+          <entry key="JavaScript" value="17870" />
+          <entry key="PLAIN_TEXT" value="505" />
           <entry key="Python" value="24387" />
         </counts>
       </usages-collector>
@@ -181,7 +150,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/customer/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="395">
@@ -204,11 +173,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="114" column="51" selection-start-line="114" selection-start-column="51" selection-end-line="114" selection-end-column="51" />
+            <state relative-caret-position="1163">
+              <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#template#7;n#b-table#0;n#div#0;n#b-container#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#1;n#template#7;n#b-table#0;n#div#0;n#b-container#0;n#div#0;n#!!top" expanded="true" />
@@ -220,8 +189,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/pages/admin/order_manage/warehouseAdmin_list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="69" column="10" lean-forward="true" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
+            <state relative-caret-position="267">
+              <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -341,11 +310,11 @@
         <option value="$PROJECT_DIR$/administration/urls.py" />
         <option value="$PROJECT_DIR$/templates/admin/sellAdmin_list.html" />
         <option value="$PROJECT_DIR$/customer/models.py" />
-        <option value="$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html" />
-        <option value="$PROJECT_DIR$/static/pages/admin/order_manage/warehouseAdmin_list.js" />
         <option value="$PROJECT_DIR$/administration/views/order_managing.py" />
         <option value="$PROJECT_DIR$/customer/admin.py" />
         <option value="$PROJECT_DIR$/customer/serializers.py" />
+        <option value="$PROJECT_DIR$/static/pages/admin/order_manage/warehouseAdmin_list.js" />
+        <option value="$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html" />
       </list>
     </option>
   </component>
@@ -595,9 +564,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="manage.py@TempoVola" order="10" visible="true" weight="0.32819384" />
+      <window_info anchor="bottom" id="manage.py@TempoVola" order="10" weight="0.32819384" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" weight="0.32819384" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4994664" visible="true" weight="0.32819384" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Python Console" order="14" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32819384" />
@@ -644,7 +613,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="fixed bugs&#10;added melody management to profile maker&#10;changed shop a bit&#10;added colored melody item in shop" />
     <MESSAGE value="added promotions&#10;added sms center&#10;added carousel&#10;progress in profile making&#10;organized files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added promotions&#10;added sms center&#10;added carousel&#10;progress in profile making&#10;organized files" />
+    <MESSAGE value="added administrative components" />
+    <option name="LAST_COMMIT_MESSAGE" value="added administrative components" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -949,24 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/admin/order_manage/warehouseAdmin_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="69" column="10" lean-forward="true" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="114" column="51" selection-start-line="114" selection-start-column="51" selection-end-line="114" selection-end-column="51" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#template#7;n#b-table#0;n#div#0;n#b-container#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#template#7;n#b-table#0;n#div#0;n#b-container#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administration/views/customer_managing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1022,6 +974,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
           <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/admin/order_manage/warehouseAdmin_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1163">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#template#7;n#b-table#0;n#div#0;n#b-container#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#1;n#template#7;n#b-table#0;n#div#0;n#b-container#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
