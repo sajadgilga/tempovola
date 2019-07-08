@@ -1,0 +1,138 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+    Tempo Vola | سفارشات
+    </title>
+    <link rel="stylesheet" href="{% static "pages/admin/order_manage/order_list.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app" class="hid">
+    <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="نتیجه" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+              <b-col>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+              </b-col>
+            </b-row>
+
+            <div class="m-auto">
+                <b-table striped hover responsive :fields="fields" :items="orders" style="text-align: left; background-color: white">
+
+                    <template slot="ردیف" slot-scope="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template slot="کد سفارش" slot-scope="data">
+                        [[ data.item.order_id ]]
+                    </template>
+
+                    <template slot="هزینه سفارش" slot-scope="data">
+                        [[ data.item.cost ]]
+                    </template>
+
+                    <template slot="نام خریدار" slot-scope="data">
+                        [[ data.item.customer.company_name ]]
+                    </template>
+
+                    <template slot="آدرس ارسال" slot-scope="data">
+                        [[ data.item.customer.address ]]
+                    </template>
+
+                    <template slot="تاریخ سفارش" slot-scope="data">
+                        [[ data.item.created_date ]]
+                    </template>
+
+                    <template slot="تاریخ تایید" slot-scope="data">
+                        [[ data.item.last_change_date ]]
+                    </template>
+
+                    <template slot="وضعیت" slot-scope="data">
+                        <img v-if="(!data.item.sellAdmin_confirmed && !data.item.administration_process)"
+                             src="{% static "images/page_decoration/cancel.svg" %}"
+                             style="max-width: 50px; max-height: 50px;"
+                        />
+                        <img v-if="data.item.sellAdmin_confirmed && !data.item.administration_process"
+                             src="{% static "images/page_decoration/check.svg" %}"
+                             style="max-width: 50px; max-height: 50px;"
+                        />
+                        <img v-if="data.item.administration_process"
+                             src="{% static "images/page_decoration/reject.svg" %}"
+                             style="max-width: 50px; max-height: 50px;"
+                        />
+{#                        [[ boolean_converter(data.item.orderAdmin_confirmed) ]]#}
+                    </template>
+
+                    <template slot="مشاهده" slot-scope="data">
+                        <b-button variant="primary" @click="see_order(data.index)">مشاهده</b-button>
+                    </template>
+                </b-table>
+            </div>
+
+            <b-modal id="order_manager" size="xl" scrollable hide-footer title="order" style="text-align: right">
+                <b-table striped hover responsive :fields="order_fields" :items="order_items" style="text-align: left; background-color: white">
+
+                    <template slot="ردیف" slot-scope="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template slot="ملودی" slot-scope="data">
+                        [[ data.item.melody_name ]]
+                    </template>
+
+                    <template slot="کد ملودی" slot-scope="data">
+                        [[ data.item.order_id ]]
+                    </template>
+
+                    <template slot="هزینه" slot-scope="data">
+                        [[ data.item.price ]]
+                    </template>
+
+                    <template slot="تعداد سفارش شده" slot-scope="data">
+                        [[ data.item.ordered_count ]]
+                    </template>
+
+                    <template slot="تعداد تایید شده مسئول سفارش" slot-scope="data">
+                        [[ data.item.order_admin_verified_count ]]
+                    </template>
+
+                    <template slot="تعداد مورد تایید" slot-scope="data">
+                        <b-form-input type="number" class="col-2" style="min-width: 100px" v-model:value="data.item.sell_admin_verified_count"></b-form-input>
+{#                        [[ data.item.order_admin_verified_count ]]#}
+                    </template>
+
+                </b-table>
+                <b-button class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="success" @click="verify_order">تایید و ثبت سفارش</b-button>
+                <b-button class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="danger" @click="reject_order">رد سفارش</b-button>
+                <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('order_manager')">بستن</b-button>
+            </b-modal>
+        </b-container>
+    </div>
+
+    <script src="{% static "pages/admin/order_manage/sellAdmin_list.js" %}"></script>
+{% endblock %}
+

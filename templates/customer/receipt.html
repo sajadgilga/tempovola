@@ -43,8 +43,8 @@
   </tr>
     {% for item in items %}
   <tr>
-    <td class="tg-0lax">{% widthratio item.count 1 item.price %}</td>
-    <td class="tg-0lax">{{ item.count }}</td>
+    <td class="tg-0lax">{% widthratio item.ordered_count 1 item.price %}</td>
+    <td class="tg-0lax">{{ item.ordered_count }}</td>
     <td class="tg-0lax">{{ item.price }}</td>
     <td class="tg-0lax">{{ item.code }}</td>
     <td class="tg-0lax">{{ item.melody_name }}</td>

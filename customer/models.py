@@ -63,23 +63,41 @@ class Order(models.Model):
     sellAdmin_confirmed = models.BooleanField(default=False)
     warehouseAdmin_confirmed = models.BooleanField(default=False)
     financeAdmin_confirmed = models.BooleanField(default=False)
+    administration_process = models.BooleanField(default=False)
     last_change_date = models.DateTimeField(blank=True, null=True)
     confirmed_date = models.DateTimeField(blank=True, null=True)
     sent_date = models.DateTimeField(blank=True, null=True)
     received_date = models.DateTimeField(blank=True, null=True)
     cost = models.IntegerField(default=0)
+    discount = models.IntegerField(default=0)
 
 
 class ShopItem(models.Model):
     item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     series = models.CharField(max_length=25, db_index=True)
-    order = models.ForeignKey(to='Order', on_delete=models.CASCADE, related_name='order')
+    order = models.ForeignKey(to='Order', on_delete=models.CASCADE, related_name='items')
     melody_name = models.CharField(max_length=32, db_index=True)
     price = models.IntegerField(default=0)
-    count = models.IntegerField(default=0)
+    ordered_count = models.IntegerField(default=0)
+    order_admin_verified_count = models.IntegerField(default=0)
+    sell_admin_verified_count = models.IntegerField(default=0)
 
 
 class Promotions(models.Model):
     description = models.CharField(max_length=256, db_index=True)
+    scenarios = models.ManyToManyField(to='PromotionScenario')
     img = models.FileField(storage=imageFS)
     active = models.BooleanField(default=True)
+
+
+class PromotionScenario(models.Model):
+    total_count = models.IntegerField(default=0)
+    items = models.CharField(max_length=2048, blank=True)
+    series_items = models.CharField(max_length=1024, blank=True)
+    melody_items = models.CharField(max_length=2048, blank=True)
+
+
+class Report(models.Model):
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+    description = models.CharField(max_length=512)

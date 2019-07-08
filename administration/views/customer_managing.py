@@ -92,11 +92,17 @@ def enter_dashboard(request):
         user = request.user
         if not check_access(user):
             return Response({'msg': 'سطح دسترسی لازم را ندارید'}, status=status.HTTP_401_UNAUTHORIZED)
-        new_orders = len(Order.objects.filter(is_confirmed=False).all())
-        access = 'admin'
-        for admin_type in admins:
-            if user.groups.filter(name__in=[admin_type, ]).exists():
-                access = admin_type
+        new_orders = 0
+        if user.groups.filter(name__in=[admins[1], ]).exists():
+            new_orders = len(Order.objects.filter(orderAdmin_confirmed=False, is_checked_out=True,
+                                                  administration_process=False).all())
+        elif user.groups.filter(name__in=[admins[2], ]).exists():
+            new_orders = len(Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False,
+                                                  administration_process=False).all())
+        elif user.groups.filter(name__in=[admins[3], ]).exists():
+            new_orders = len(Order.objects.filter(sellAdmin_confirmed=True, warehouseAdmin_confirmed=False,
+                                                  administration_process=False).all())
+        access = user.groups.all()
         return render(request, 'admin/admin_dashboard.html',
                       {
                           'newOrders': new_orders,

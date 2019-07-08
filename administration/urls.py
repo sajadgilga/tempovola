@@ -16,4 +16,6 @@ urlpatterns = [
     path('product_series/', get_products),
     path('submit_customer/', signup_customer),
     path('fetch_orders/', get_orders),
+    path('verify_order/', verify_order),
+    path('reject_order/', reject_order),
 ]

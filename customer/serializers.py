@@ -40,18 +40,23 @@ class ItemSerializer(serializers.ModelSerializer):
         model = ShopItem
         fields = ('series',
                   'melody_name', 'price',
-                  'count', )
+                  'ordered_count', 'order_admin_verified_count',
+                  'sell_admin_verified_count',)
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    # items = ItemSerializer(many=True)
+    items = ItemSerializer(many=True, read_only=True)
     customer = CustomerOrderSerializer()
 
     class Meta:
         model = Order
-        fields = ('customer',
+        fields = ('customer', 'discount', 'items',
                   'is_confirmed', 'is_received',
                   'created_date', 'last_change_date',
                   'confirmed_date', 'sent_date',
-                  'received_date', 'cost', 'order_id')
+                  'received_date', 'cost', 'order_id',
+                  'orderAdmin_confirmed', 'sellAdmin_confirmed',
+                  'warehouseAdmin_confirmed', 'financeAdmin_confirmed',
+                  'administration_process'
+                  )
 

@@ -17,5 +17,7 @@ urlpatterns = [
     path('confirm_checkout/', confirm_checkout),
     path('confirmed_checkout/', enter_confirm_checkout),
     path('fetch_receipt/', get_receipt),
-    path('music/', get_music)
+    path('music/', get_music),
+    path('send_report/', send_report),
+    path('get_orders_report/', get_orders_report)
 ]

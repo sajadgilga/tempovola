@@ -66,7 +66,7 @@ def fetch_data(request):
             for melody in product['melodies']:
                 m = find_melody(items, product, melody)
                 if m:
-                    melody['count'] = m.count
+                    melody['count'] = m.ordered_count
                     cost += melody['price'] * melody['count']
             product['total_cost'] = cost
 
@@ -103,10 +103,15 @@ def checkout(request):
             cost += int(data[p][m]) * int(price)
             melody = ShopItem.objects.filter(melody_name=m, order=order, series=p).all().first()
             if melody:
-                melody.count = int(data[p][m])
+                melody.ordered_count = int(data[p][m])
+                melody.order_admin_verified_count = int(data[p][m])
                 melody.save(force_update=True)
             else:
-                new_melody = ShopItem(melody_name=m, order=order, series=p, price=int(price), count=int(data[p][m]))
+                new_melody = ShopItem(melody_name=m, order=order,
+                                      series=p, price=int(price),
+                                      ordered_count=int(data[p][m]),
+                                      order_admin_verified_count=int(data[p][m])
+                                      )
                 new_melody.save(force_insert=True)
     order.cost = cost
     order.order_id = get_new_order_id()

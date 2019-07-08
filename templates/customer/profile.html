@@ -33,7 +33,7 @@
             </b-collapse>
         </b-navbar>
 
-        <b-toast id="req" title="درخواست ناموفق" variant="danger" auto-hide-delay="3000">
+        <b-toast id="req" title="نتیجه"auto-hide-delay="3000">
             [[ req_msg ]]
         </b-toast>
 
@@ -45,21 +45,36 @@
             </b-row>
             <b-row>
                 <div class="col-md-6 m-auto p-5" id="profile_info">
-                    <small class="text-muted">نام شرکت&nbsp</small> {{ context.company_name }}
+                    <small class="text-muted">نام شرکت&nbsp</small> <br>{{ context.company_name }}
                     <hr>
-                    <small class="text-muted">کد شرکت&nbsp</small> {{ context.customer_id }}
+                    <small class="text-muted">کد شرکت&nbsp</small>
+                    <br>{{ context.customer_id }}
                     <hr>
-                     {{ context.email }}<small class="text-muted"> &nbspایمیل</small>
+                     <small class="text-muted"> &nbspایمیل</small>
+                    <br>{{ context.email }}
                     <hr>
-                    <small class="text-muted">شماره تلفن&nbsp</small> {{ context.phone }}
+                    <small class="text-muted">شماره تلفن&nbsp</small><br> {{ context.phone }}
                     <hr>
-                    <small class="text-muted">آدرس&nbsp</small> {{ context.address }}
+                    <small class="text-muted">آدرس&nbsp</small><br> {{ context.address }}
 {#                    <hr>#}
 {#                    <small class="text-muted">مسئول سفارش &nbsp</small> {{ context.orderer }}#}
                     <hr>
                     <small class="text-muted">وسایل امانی</small>
                     <br>
                     {{ context.lent_products }}
+                    <hr>
+                    <small class="text-muted">گزارشات</small>
+                    <br>
+                    <br>
+                    <b-form-textarea
+                        id="report"
+                        style="text-align: right"
+                        v-model="report"
+                        class="mb-1"
+                        placeholder="...مشکل خود را بنویسید"
+                        rows="3"></b-form-textarea>
+                    <b-button class="col-sm-2 mr-1 ml-1" variant="primary" @click="show_reports">گزارشات</b-button>
+                    <b-button class="col-sm-2" variant="success" @click="send_report">ارسال</b-button>
 
                     <hr style="height:3px;border:none;color:#555;background-color:#555;">
                     <p class="text-muted" style="font-size: medium"> اطلاعات تماس با شرکت </p>
@@ -73,6 +88,36 @@
             </b-row>
 
             <b-row class="m-4" v-for="i in 2">  </b-row>
+
+            <b-modal id="reports" size="xl" scrollable hide-footer title="reports" style="text-align: right">
+                <b-table striped hover responsive :fields="fields" :items="orders" style="text-align: left; background-color: white">
+
+                    <template slot="ردیف" slot-scope="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template slot="کد سفارش" slot-scope="data">
+                        [[ data.item.order_id ]]
+                    </template>
+
+                    <template slot="هزینه سفارش" slot-scope="data">
+                        [[ data.item.cost ]]
+                    </template>
+
+                    <template slot="آدرس ارسال" slot-scope="data">
+                        [[ data.item.customer.address ]]
+                    </template>
+
+                    <template slot="تاریخ سفارش" slot-scope="data">
+                        [[ data.item.created_date ]]
+                    </template>
+
+                    <template slot="وضعیت" slot-scope="data">
+                        [[ boolean_converter(data.item.is_confirmed) ]]
+                    </template>
+                </b-table>
+                <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('reports')">بستن</b-button>
+            </b-modal>
         </b-container>
 
     </div>

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series, Promotions
+from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series, Promotions, Report
 
 
 @admin.register(CustomerProfile)
@@ -37,15 +37,25 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('customer', 'cost', 'is_checked_out',
                     'is_confirmed', 'is_received', 'order_id',
                     'created_date', 'last_change_date',
-                    'confirmed_date', 'sent_date', 'received_date')
+                    'confirmed_date', 'sent_date', 'received_date',
+                    'administration_process')
 
 
 @admin.register(ShopItem)
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('series', 'order',
-                    'melody_name', 'price', 'count')
+                    'melody_name', 'price',
+                    'ordered_count', 'order_admin_verified_count',
+                    'sell_admin_verified_count',)
 
 
 @admin.register(Promotions)
 class PromotionAdmin(admin.ModelAdmin):
     list_display = ('description', )
+
+
+@admin.register(Report)
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ('owner', 'date', 'description',)
+    search_fields = ('owner',)
+    list_filter = ('owner',)

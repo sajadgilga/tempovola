@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import xlwt
@@ -6,6 +7,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils import timezone
+from kavenegar import KavenegarAPI
 from persiandate import jalali
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -13,7 +16,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from TempoVola.settings import admins
-from customer.models import Order
+from customer.models import Order, ShopItem
 from customer.serializers import OrderSerializer
 
 
@@ -29,7 +32,14 @@ def check_access(user):
 def get_order_list(request):
     try:
         user = request.user
-        return render(request, 'admin/order_list.html', {'name': user.username})
+        if user.groups.filter(name__in=[admins[1], ]).exists():
+            return render(request, 'admin/order_list.html', {'name': user.username})
+        elif user.groups.filter(name__in=[admins[2], ]).exists():
+            return render(request, 'admin/sellAdmin_list.html', {'name': user.username})
+        elif user.groups.filter(name__in=[admins[3], ]).exists():
+            return render(request, 'admin/warehouseAdmin_list.html', {'name': user.username})
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
     except:
         return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -37,26 +47,106 @@ def get_order_list(request):
 @api_view(['GET'])
 @login_required(login_url='/admin/')
 def get_orders(request):
+    # try:
+    user = request.user
+    if user.groups.filter(name__in=[admins[1], ]).exists():
+        orders = Order.objects.filter(orderAdmin_confirmed=False, is_checked_out=True,
+                                      administration_process=False) \
+            .all().order_by('-created_date')
+    elif user.groups.filter(name__in=[admins[2], ]).exists():
+        orders = Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False,
+                                      administration_process=False) \
+            .all().order_by('-created_date')
+    elif user.groups.filter(name__in=[admins[3], ]).exists():
+        orders = Order.objects.filter(sellAdmin_confirmed=True, warehouseAdmin_confirmed=False,
+                                      administration_process=False) \
+            .all().order_by('-created_date')
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    orders = OrderSerializer(orders, many=True)
+    orders = json.loads(JSONRenderer().render(orders.data))
+    for order in orders:
+        order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
+    return Response({'orders': orders})
+    # except:
+    #     return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def send_verification_sms(phone, message):
+    api = KavenegarAPI('6652373751486A6D5A34584B476A466F346E616F7A313768553441726330554E')
+    params = {
+        'sender': '1000596446',
+        'receptor': phone,
+        'message': message.encode('utf-8')
+    }
     try:
-        user = request.user
-        if user.groups.filter(name__in=[admins[1], ]).exists():
-            orders = Order.objects.filter(orderAdmin_confirmed=False, is_checked_out=True) \
-                .all().order_by('created_date')
-        elif user.groups.filter(name__in=[admins[2], ]):
-            orders = Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False) \
-                .all().order_by('created_date')
-        elif user.groups.filter(name__in=[admins[3], ]):
-            orders = Order.objects.filter(sellAdmin_confirmed=True, orderAdmin_confirmed=False) \
-                .all().order_by('created_date')
-        else:
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
-        orders = OrderSerializer(orders, many=True).data
-        orders = json.loads(JSONRenderer().render(orders))
-        for order in orders:
-            order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
-        return Response({'orders': orders})
+        response = api.sms_send(params)
     except:
-        return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        print("شماره کاربر مشکل دارد")
+
+
+@api_view(['POST'])
+@login_required(login_url='/admin/')
+def verify_order(request):
+    user = request.user
+    if user.groups.filter(name__in=[admins[1], ]).exists():
+        admin_verified_order = request.data['order']
+        order = Order.objects.filter(order_id=admin_verified_order['order_id'],
+                                     orderAdmin_confirmed=False).all().first()
+        order.last_change_date = timezone.now()
+        order.orderAdmin_confirmed = True
+        order.cost = admin_verified_order['cost']
+        saved_items = ShopItem.objects.filter(order=order).all()
+        if len(saved_items) != len(admin_verified_order['items']):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        for index, item in enumerate(admin_verified_order['items']):
+            saved_items[index].order_admin_verified_count = item['order_admin_verified_count']
+            saved_items[index].sell_admin_verified_count = item['order_admin_verified_count']
+            saved_items[index].save()
+        order.save()
+        send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از مرحله سفارش با موفقیت عبور کرد")
+    elif user.groups.filter(name__in=[admins[2], ]).exists():
+        admin_verified_order = request.data['order']
+        order = Order.objects.filter(order_id=admin_verified_order['order_id'],
+                                     sellAdmin_confirmed=False).all().first()
+        order.last_change_date = timezone.now()
+        order.sellAdmin_confirmed = True
+        order.cost = admin_verified_order['cost']
+        saved_items = ShopItem.objects.filter(order=order).all()
+        if len(saved_items) != len(admin_verified_order['items']):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        for index, item in enumerate(admin_verified_order['items']):
+            saved_items[index].sell_admin_verified_count = item['sell_admin_verified_count']
+            saved_items[index].warehouse_admin_verified_count = item['sell_admin_verified_count']
+            saved_items[index].save()
+        order.save()
+        send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از مرحله فروش با موفقیت عبور کرد")
+    elif user.groups.filter(name__in=[admins[3], ]).exists():
+        admin_verified_order = request.data['order']
+        order = Order.objects.filter(order_id=admin_verified_order['order_id'], administration_process=False,
+                                     warehouseAdmin_confirmed=False).all().first()
+        order.sent_date = timezone.now()
+        order.warehouseAdmin_confirmed = True
+        order.save()
+        send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از از انبار خارج شد")
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@login_required(login_url='/admin/')
+def reject_order(request):
+    user = request.user
+    if user.groups.filter(name__in=[admins[2], ]).exists():
+        admin_verified_order = request.data['order']
+        order = Order.objects.filter(order_id=admin_verified_order['order_id'],
+                                     sellAdmin_confirmed=False).all().first()
+        order.administration_process = True
+        order.save()
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

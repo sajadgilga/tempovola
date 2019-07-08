@@ -5,13 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
+from persiandate import jalali
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from customer.models import CustomerProfile
-from customer.serializers import CustomerSerializer
+from customer.models import CustomerProfile, Report, Order
+from customer.serializers import CustomerSerializer, OrderSerializer
 
 
 @api_view(['GET'])
@@ -56,4 +57,35 @@ def profile(request):
         return render(request, 'customer/profile.html', {'name': customer.company_name, 'context': context})
     except:
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+@login_required(login_url='/')
+def send_report(request):
+    try:
+        user = request.user
+        report = Report()
+        report.description = request.data['report']
+        report.owner = user
+        report.save()
+        return Response(status=status.HTTP_200_OK)
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def get_orders_report(request):
+    try:
+        user = request.user
+        customer = CustomerProfile.objects.filter(user=user).all().first()
+        orders = Order.objects.filter(customer=customer) \
+            .all().order_by('-created_date')
+        orders = OrderSerializer(orders, many=True).data
+        orders = json.loads(JSONRenderer().render(orders))
+        for order in orders:
+            order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
+        return Response({'orders': orders})
+    except:
+        return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
