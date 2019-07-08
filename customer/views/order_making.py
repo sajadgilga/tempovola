@@ -18,7 +18,7 @@ from customer.serializers import CustomerSerializer
 def get_new_order_id():
     last_order_made = Order.objects.filter(is_checked_out=True).last()
     last_id = '000001'
-    if last_order_made.order_id:
+    if last_order_made and last_order_made.order_id:
         last_id = str(int(last_order_made.order_id.split('W')[1]) + 1)
         if len(last_id) < 6:
             last_id = '0' * (6 - len(last_id)) + last_id

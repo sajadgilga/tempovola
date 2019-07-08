@@ -28,7 +28,7 @@ def check_access(user):
 def get_new_customer_id():
     last_customer_made = CustomerProfile.objects.all().last()
     id_num = '00001'
-    if last_customer_made.customer_id:
+    if last_customer_made and last_customer_made.customer_id:
         id_num = str(int(last_customer_made.customer_id.split('C')[1]) + 1)
         if len(id_num) < 6:
             id_num = '0' * (6 - len(id_num)) + id_num
