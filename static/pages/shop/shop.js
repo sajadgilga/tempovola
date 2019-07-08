@@ -142,8 +142,10 @@ const vue = new Vue({
 
 
         play_audio: function(item) {
-            if (this.audio)
+            if (this.audio !== null) {
                 this.audio.pause();
+                this.audio = null
+            }
             axios({
                 method: 'post',
                 url: this.BASE_URL + 'customer/music/',
