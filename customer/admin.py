@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series, Promotions, Report
+from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series, Promotions, Report, \
+    PromotionScenario
 
 
 @admin.register(CustomerProfile)
@@ -53,6 +54,10 @@ class ItemAdmin(admin.ModelAdmin):
 class PromotionAdmin(admin.ModelAdmin):
     list_display = ('description', )
 
+
+@admin.register(PromotionScenario)
+class ScenarioAdmin(admin.ModelAdmin):
+    list_display = ('total_count', 'items', 'series_items', 'melody_items')
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
