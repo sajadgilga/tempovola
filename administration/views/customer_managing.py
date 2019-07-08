@@ -149,7 +149,7 @@ def signup_customer(request):
                             status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
     create_new_user(form)
-    if form['phone'] is not None:
+    if form['phone'] is not None and form['phone'] != '':
         api = KavenegarAPI('6652373751486A6D5A34584B476A466F346E616F7A313768553441726330554E')
         params = {
             'sender': '1000596446',

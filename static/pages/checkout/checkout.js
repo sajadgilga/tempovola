@@ -72,7 +72,7 @@ const vue = new Vue({
     computed: {
         total_cost: function () {
             let sum = 0;
-            this.items.forEach(it => sum += it.count * it.price);
+            this.items.forEach(it => sum += it.ordered_count * it.price);
             return sum;
         }
     },
