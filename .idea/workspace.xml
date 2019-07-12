@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/customer/models.py" line="89" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="added administrative components" />
+    <list default="true" id="e4a39632-0c9a-4bbb-b929-dcf19614ac83" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/customer/migrations/0011_promotions_discount_percent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/views/order_making.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/views/order_making.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +37,7 @@
     <session id="2123481332">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.17" value="1" />
@@ -56,33 +61,33 @@
           <entry key="css" value="743" />
           <entry key="dummy" value="87" />
           <entry key="gitignore" value="5" />
-          <entry key="html" value="17312" />
-          <entry key="js" value="17878" />
-          <entry key="py" value="24549" />
-          <entry key="py@TempoVola" value="456" />
-          <entry key="txt" value="286" />
+          <entry key="html" value="17327" />
+          <entry key="js" value="17926" />
+          <entry key="py" value="25740" />
+          <entry key="py@TempoVola" value="473" />
+          <entry key="txt" value="295" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="743" />
-          <entry key="CommandLine" value="329" />
-          <entry key="HTML" value="17312" />
-          <entry key="JavaScript" value="17878" />
-          <entry key="PLAIN_TEXT" value="505" />
-          <entry key="Python" value="24549" />
+          <entry key="CommandLine" value="346" />
+          <entry key="HTML" value="17327" />
+          <entry key="JavaScript" value="17926" />
+          <entry key="PLAIN_TEXT" value="514" />
+          <entry key="Python" value="25740" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="64" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="116" />
+          <entry key="html" value="118" />
           <entry key="jpg" value="6" />
           <entry key="js" value="209" />
           <entry key="mp3" value="2" />
           <entry key="png" value="1" />
-          <entry key="py" value="187" />
+          <entry key="py" value="188" />
           <entry key="svg" value="1" />
           <entry key="text" value="1" />
           <entry key="ts" value="1" />
@@ -92,11 +97,11 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="64" />
-          <entry key="HTML" value="116" />
+          <entry key="HTML" value="118" />
           <entry key="Image" value="7" />
           <entry key="JavaScript" value="209" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="187" />
+          <entry key="Python" value="188" />
           <entry key="SVG" value="1" />
           <entry key="TypeScript" value="1" />
         </counts>
@@ -108,49 +113,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/customer/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-148">
-              <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
+            <state relative-caret-position="427">
+              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1562588256293" expanded="true" signature="1278:1281" ph="..." />
-                <marker date="1562588256293" expanded="true" signature="1708:1711" ph="..." />
-                <marker date="1562588256293" expanded="true" signature="3801:3806" ph="..." />
-                <marker date="1562588256293" expanded="true" signature="4062:4302" ph="..." />
-                <marker date="1562588256293" expanded="true" signature="4329:4334" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/customer/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="59" column="73" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-                <marker date="1562593145759" expanded="true" signature="1751:1756" ph="..." />
-                <marker date="1562593145759" expanded="true" signature="1864:1942" ph="..." />
-                <marker date="1562593145759" expanded="true" signature="2002:2007" ph="..." />
+                <marker date="1562614542515" expanded="true" signature="1278:1281" ph="..." />
+                <marker date="1562614542515" expanded="true" signature="1708:1711" ph="..." />
+                <marker date="1562614542515" expanded="true" signature="3801:3806" ph="..." />
+                <marker date="1562614542515" expanded="true" signature="4116:4356" ph="..." />
+                <marker date="1562614542515" expanded="true" signature="4383:4388" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
+        <entry file="file://$PROJECT_DIR$/customer/views/order_making.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="156" column="76" selection-start-line="156" selection-start-column="76" selection-end-line="156" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/pages/checkout/checkout.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="74" column="55" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
+            <state relative-caret-position="542">
+              <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1562614542483" expanded="true" signature="1058:2419" ph="..." />
+                <marker date="1562614542483" expanded="true" signature="2460:2465" ph="..." />
+                <marker date="1562614542483" expanded="true" signature="2460:2729" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,6 +149,20 @@
               <caret line="99" column="55" selection-start-line="99" selection-start-column="55" selection-end-line="99" selection-end-column="55" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/customer/profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="73" column="60" lean-forward="true" selection-start-line="73" selection-start-column="60" selection-end-line="73" selection-end-column="60" />
+              <folding>
+                <element signature="e#736#765#0#HTML" expanded="true" />
+                <element signature="e#1024#1050#0#HTML" expanded="true" />
+                <element signature="e#1132#1158#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,7 +185,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TempoVola/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="381">
               <caret line="148" column="20" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="20" />
             </state>
           </provider>
@@ -270,7 +271,6 @@
         <option value="$PROJECT_DIR$/customer/views/checkout.py" />
         <option value="$PROJECT_DIR$/templates/customer/shop.html" />
         <option value="$PROJECT_DIR$/customer/urls.py" />
-        <option value="$PROJECT_DIR$/templates/customer/profile.html" />
         <option value="$PROJECT_DIR$/customer/views/authentication.py" />
         <option value="$PROJECT_DIR$/static/pages/admin/sellAdmin_list.js" />
         <option value="$PROJECT_DIR$/static/pages/admin/warehouseAdmin_list.js" />
@@ -280,7 +280,6 @@
         <option value="$PROJECT_DIR$/templates/customer/receipt.html" />
         <option value="$PROJECT_DIR$/administration/urls.py" />
         <option value="$PROJECT_DIR$/templates/admin/sellAdmin_list.html" />
-        <option value="$PROJECT_DIR$/customer/models.py" />
         <option value="$PROJECT_DIR$/administration/views/order_managing.py" />
         <option value="$PROJECT_DIR$/customer/serializers.py" />
         <option value="$PROJECT_DIR$/templates/admin/warehouseAdmin_list.html" />
@@ -293,11 +292,13 @@
         <option value="$PROJECT_DIR$/static/pages/login/admin_login.js" />
         <option value="$PROJECT_DIR$/static/pages/login/login.js" />
         <option value="$PROJECT_DIR$/static/pages/profile/profile.js" />
-        <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
-        <option value="$PROJECT_DIR$/customer/views/order_making.py" />
         <option value="$PROJECT_DIR$/customer/admin.py" />
         <option value="$PROJECT_DIR$/static/pages/checkout/checkout.js" />
         <option value="$PROJECT_DIR$/administration/views/customer_managing.py" />
+        <option value="$PROJECT_DIR$/static/pages/shop/shop.js" />
+        <option value="$PROJECT_DIR$/templates/customer/profile.html" />
+        <option value="$PROJECT_DIR$/customer/views/order_making.py" />
+        <option value="$PROJECT_DIR$/customer/models.py" />
       </list>
     </option>
   </component>
@@ -369,12 +370,6 @@
               <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
               <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TempoVola" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="melodies" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TempoVola" type="b2602c69:ProjectViewProjectNode" />
@@ -493,11 +488,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562226321835</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix issue">
+      <created>1562605126270</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1562605126270</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1920" height="1034" extended-state="7" />
+    <frame x="0" y="-1" width="1920" height="1034" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -515,7 +517,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@TempoVola" order="10" sideWeight="0.4994664" weight="0.32819384" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.49893278" visible="true" weight="0.8557269" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49893278" weight="0.8557269" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5010672" side_tool="true" weight="0.32819384" />
       <window_info anchor="bottom" id="Python Console" order="14" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32819384" />
@@ -563,7 +565,8 @@
     <MESSAGE value="fixed bugs&#10;added melody management to profile maker&#10;changed shop a bit&#10;added colored melody item in shop" />
     <MESSAGE value="added promotions&#10;added sms center&#10;added carousel&#10;progress in profile making&#10;organized files" />
     <MESSAGE value="added administrative components" />
-    <option name="LAST_COMMIT_MESSAGE" value="added administrative components" />
+    <MESSAGE value="fix issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -666,24 +669,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="70" column="51" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/profile_maker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="31" column="55" lean-forward="true" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/customer/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="119" column="22" lean-forward="true" selection-start-line="91" selection-start-column="12" selection-end-line="119" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -864,12 +853,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/customer/views/order_making.py">
+    <entry file="file://$PROJECT_DIR$/static/pages/checkout/checkout.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="52" column="19" lean-forward="true" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
+        <state relative-caret-position="391">
+          <caret line="74" column="55" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="145" column="35" selection-start-line="145" selection-start-column="35" selection-end-line="145" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="59" column="73" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
+            <marker date="1562593145759" expanded="true" signature="1751:1756" ph="..." />
+            <marker date="1562593145759" expanded="true" signature="1864:1942" ph="..." />
+            <marker date="1562593145759" expanded="true" signature="2002:2007" ph="..." />
           </folding>
         </state>
       </provider>
@@ -884,23 +890,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/customer/admin.py">
+    <entry file="file://$PROJECT_DIR$/templates/customer/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="59" column="73" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
+        <state relative-caret-position="335">
+          <caret line="73" column="60" lean-forward="true" selection-start-line="73" selection-start-column="60" selection-end-line="73" selection-end-column="60" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
-            <marker date="1562593145759" expanded="true" signature="1751:1756" ph="..." />
-            <marker date="1562593145759" expanded="true" signature="1864:1942" ph="..." />
-            <marker date="1562593145759" expanded="true" signature="2002:2007" ph="..." />
+            <element signature="e#736#765#0#HTML" expanded="true" />
+            <element signature="e#1024#1050#0#HTML" expanded="true" />
+            <element signature="e#1132#1158#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/checkout/checkout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="74" column="55" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -918,30 +916,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TempoVola/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="381">
           <caret line="148" column="20" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/customer/shop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1643">
+          <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+          <folding>
+            <element signature="e#330#351#0#HTML" expanded="true" />
+            <element signature="e#466#486#0#HTML" expanded="true" />
+            <element signature="e#1114#1140#0#HTML" expanded="true" />
+            <element signature="e#1228#1254#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/customer/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-148">
-          <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
+        <state relative-caret-position="427">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1562588256293" expanded="true" signature="1278:1281" ph="..." />
-            <marker date="1562588256293" expanded="true" signature="1708:1711" ph="..." />
-            <marker date="1562588256293" expanded="true" signature="3801:3806" ph="..." />
-            <marker date="1562588256293" expanded="true" signature="4062:4302" ph="..." />
-            <marker date="1562588256293" expanded="true" signature="4329:4334" ph="..." />
+            <marker date="1562614542515" expanded="true" signature="1278:1281" ph="..." />
+            <marker date="1562614542515" expanded="true" signature="1708:1711" ph="..." />
+            <marker date="1562614542515" expanded="true" signature="3801:3806" ph="..." />
+            <marker date="1562614542515" expanded="true" signature="4116:4356" ph="..." />
+            <marker date="1562614542515" expanded="true" signature="4383:4388" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/pages/shop/shop.js">
+    <entry file="file://$PROJECT_DIR$/customer/views/order_making.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="156" column="76" selection-start-line="156" selection-start-column="76" selection-end-line="156" selection-end-column="76" />
+        <state relative-caret-position="542">
+          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1562614542483" expanded="true" signature="1058:2419" ph="..." />
+            <marker date="1562614542483" expanded="true" signature="2460:2465" ph="..." />
+            <marker date="1562614542483" expanded="true" signature="2460:2729" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -28,6 +28,54 @@ def get_new_order_id():
     return id
 
 
+def check_promotion(promotion, order, total_count):
+    for scenario in promotion.scenarios:
+        if scenario.total_count != 0:
+            if scenario.total_count <= total_count:
+                return True
+        elif scenario.items != '':
+            check_items = True
+            for item in scenario.items.split('-'):
+                if not ShopItem.objects.filter(
+                        order=order,
+                        series=item.split('.')[0],
+                        melody_name=item.split('.')[1]
+                ).exists():
+                    check_items = False
+                    break
+            return check_items
+        elif scenario.series_items != '':
+            check_items = True
+            for item in scenario.items.split('-'):
+                if not ShopItem.objects.filter(
+                        order=order,
+                        series=item
+                ).exists():
+                    check_items = False
+                    break
+            return check_items
+        elif scenario.melody_items != '':
+            check_items = True
+            for item in scenario.items.split('-'):
+                if not ShopItem.objects.filter(
+                        order=order,
+                        melody_name=item
+                ).exists():
+                    check_items = False
+                    break
+            return check_items
+        return False
+
+
+def apply_promotions(order, total_count):
+    promotions = Promotions.objects.filter(active=True).all()
+    discount_percent = 0
+    for promotion in promotions:
+        if check_promotion(promotion, order, total_count):
+            discount_percent += promotion.discount_percent
+    return discount_percent
+
+
 @api_view(['GET', 'POST'])
 @login_required(login_url='/')
 def enter_shop(request, series=''):
@@ -92,6 +140,7 @@ def checkout(request):
     cost = 0
     customer = CustomerProfile.objects.get(user=user)
     order = Order.objects.filter(customer=customer).all().last()
+    total_count = 0
     if not order or order.is_checked_out:
         order = Order(customer_id=customer.pk)
         order.save()
@@ -102,6 +151,7 @@ def checkout(request):
             price = Melody.objects.filter(name=m)[0].price
             cost += int(data[p][m]) * int(price)
             melody = ShopItem.objects.filter(melody_name=m, order=order, series=p).all().first()
+            total_count += int(data[p][m])
             if melody:
                 melody.ordered_count = int(data[p][m])
                 melody.order_admin_verified_count = int(data[p][m])
@@ -115,6 +165,9 @@ def checkout(request):
                 new_melody.save(force_insert=True)
     order.cost = cost
     order.order_id = get_new_order_id()
+    order.save()
+    discount_percent = apply_promotions(order, total_count)
+    order.discount = discount_percent
     order.save()
     return Response(status=status.HTTP_200_OK)
 

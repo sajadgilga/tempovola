@@ -88,6 +88,7 @@ class Promotions(models.Model):
     scenarios = models.ManyToManyField(to='PromotionScenario')
     img = models.FileField(storage=imageFS)
     active = models.BooleanField(default=True)
+    discount_percent = models.IntegerField(default=0)
 
 
 class PromotionScenario(models.Model):
