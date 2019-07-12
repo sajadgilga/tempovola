@@ -29,7 +29,7 @@ def get_new_order_id():
 
 
 def check_promotion(promotion, order, total_count):
-    for scenario in promotion.scenarios:
+    for scenario in promotion.scenarios.all():
         if scenario.total_count != 0:
             if scenario.total_count <= total_count:
                 return True
