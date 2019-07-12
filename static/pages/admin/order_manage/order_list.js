@@ -70,6 +70,7 @@ const vue = new Vue({
         },
 
         verify_order() {
+            this._verify();
             axios({
                 method: 'post',
                 url: this.BASE_URL + 'admin/verify_order/',
@@ -82,7 +83,7 @@ const vue = new Vue({
                 }
             }).then(response => {
                 if (response.status === 200) {
-                    this._verify();
+                    this.orders[this.current_processed_order].orderAdmin_confirmed = true;
                     this.show_alert('سفارش با موفقیت ثبت گردید');
                     this.$bvModal.hide('order_manager')
                 }
@@ -93,14 +94,12 @@ const vue = new Vue({
 
         _verify() {
             this.orders[this.current_processed_order].items = this.order_items;
-            this.orders[this.current_processed_order].orderAdmin_confirmed = true;
             cost = 0;
             this.order_items.forEach(item => {
                 cost += parseInt(item.price) * parseInt(item.order_admin_verified_count);
             });
             console.log(cost)
             this.orders[this.current_processed_order].cost = cost;
-
         },
 
         boolean_converter(value){

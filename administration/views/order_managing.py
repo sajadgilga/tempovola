@@ -100,8 +100,8 @@ def verify_order(request):
         if len(saved_items) != len(admin_verified_order['items']):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         for index, item in enumerate(admin_verified_order['items']):
-            saved_items[index].order_admin_verified_count = item['order_admin_verified_count']
-            saved_items[index].sell_admin_verified_count = item['order_admin_verified_count']
+            saved_items[index].order_admin_verified_count = int(item['order_admin_verified_count'])
+            saved_items[index].sell_admin_verified_count = int(item['order_admin_verified_count'])
             saved_items[index].save()
         order.save()
         send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از مرحله سفارش با موفقیت عبور کرد")
