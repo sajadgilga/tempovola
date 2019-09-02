@@ -67,7 +67,8 @@ def get_orders(request):
     orders = json.loads(JSONRenderer().render(orders.data))
     for order in orders:
         order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
-        order['last_change_date'] = jalali.Gregorian(order['last_change_date'].split('T')[0]).persian_string()
+        if order['last_change_date']:
+            order['last_change_date'] = jalali.Gregorian(order['last_change_date'].split('T')[0]).persian_string()
     return Response({'orders': orders})
     # except:
     #     return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
