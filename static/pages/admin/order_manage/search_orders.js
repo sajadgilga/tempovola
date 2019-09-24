@@ -7,6 +7,18 @@ const vue = new Vue({
         req_msg: '',
         alert_header: ' ورود ناموفقیت آمیز',
         data: {},
+        filter: {
+            order_id: '',
+            customer_id: '',
+            state_checks: []
+        },
+        state_options: [
+            {text: 'تایید مسئول سفارش', value: 'orderAdmin'},
+            {text: 'تایید مسئول فروش', value: 'sellAdmin'},
+            {text: 'تایید مسئول انبار', value: 'warehouseAdmin'},
+            {text: 'تایید مسئول مالی', value: 'financeAdmin'},
+            {text: 'بررسی مدیریت', value: 'administrator'}
+        ],
         fields: [
             'مشاهده',
             'وضعیت',
@@ -28,7 +40,9 @@ const vue = new Vue({
             'ردیف',
         ],
         order_items: [],
-        current_processed_order: null
+        current_processed_order: null,
+        currentPage: 1,
+        mainTablePerPage: 10
     },
     methods: {
         getCookie: function (name) {
@@ -47,16 +61,40 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        addData(data){
+        search_orders() {
+            axios({
+                method: 'post',
+                url: this.BASE_URL + 'admin/search_orders/',
+                headers: {
+                    'X-CSRFToken': this.getCookie('csrftoken'),
+                    'Accept': 'Application/json',
+                    'Content_Type': 'Application/json'
+                },
+                data: {
+                    'filter': this.filter
+                }
+            }).then(respond => {
+                if (respond.status === 200)
+                    this.addData(respond.data);
+                else
+                    this.show_alert('عدم دریافت اطلاعات از سرور');
+
+                document.querySelector('div').classList.remove('hid');
+            }).catch(respond => {
+                this.show_alert("اطلاعات از سرور دریافت نشد")
+            })
+        },
+
+        addData(data) {
             this.data = data;
             this.orders = this.data.orders.reverse()
         },
 
-        returnToPanel: function(){
+        returnToPanel: function () {
             window.location.href = this.BASE_URL + 'admin/dashboard'
         },
 
-        show_alert(msg){
+        show_alert(msg) {
             this.req_msg = msg;
             this.$bvToast.show('req');
         },
@@ -102,30 +140,16 @@ const vue = new Vue({
             this.orders[this.current_processed_order].cost = cost;
         },
 
-        boolean_converter(value){
+        boolean_converter(value) {
             if (value === true)
                 return 'تایید شده';
             else
                 return 'تایید نشده';
         }
     },
-    created(){
-        axios({
-            method: 'get',
-            url: this.BASE_URL + 'admin/fetch_orders',
-            headers: {
-                'Accept': 'Application/json',
-                'Content_Type': 'Application/json'
-            }
-        }).then(respond => {
-            if (respond.status === 200)
-                this.addData(respond.data);
-            else
-                this.show_alert('عدم دریافت اطلاعات از سرور');
-
-            document.querySelector('div').classList.remove('hid');
-        }).catch(respond => {
-            this.show_alert("اطلاعات از سرور دریافت نشد")
-        })
+    computed: {
+        table_rows() {
+            return this.orders.length
+        }
     }
 });

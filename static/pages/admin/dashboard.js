@@ -2,11 +2,23 @@ const vue = new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
     data: {
-        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        // BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        BASE_URL: 'http://localhost:8000/',
         req_msg: '',
+        new_orders: null,
+        rights: {},
+        admin_name: '',
+        dashboard_state: false
     },
     methods: {
+        toggle_dashboard: function() {
+            this.dashboard_state = !this.dashboard_state;
+            console.log('turn on')
+        },
+        turn_off_dashboard: function() {
+            this.dashboard_state = false;
+            console.log('turn off')
+        },
         getCookie: function (name) {
             if (!document.cookie) {
                 return null;
@@ -23,7 +35,7 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        logout: function() {
+        logout: function () {
             axios({
                 method: 'get',
                 url: this.BASE_URL + 'admin/logout/'
@@ -34,19 +46,47 @@ const vue = new Vue({
                 .catch(response => this.show_alert('مشکل در خروج بوجود آمده. لطفا دوباره تلاش کنید'))
         },
 
-        enter_order_list: function() {
-            window.location.href =this.BASE_URL + 'admin/order_list';
+        action: function (value) {
+            switch (value) {
+                case 1:
+                    this.enter_order_list();
+                    break;
+                case 2:
+                    this.enter_search_page();
+                    break;
+                case 3:
+                    this.get_order_excel();
+                    break;
+                case 4:
+                    this.enter_create_order();
+                    break;
+                case 5:
+                    this.enter_profile_making();
+                    break;
+                case 6:
+                    this.enter_customer_report_page();
+                    break;
+                case 7:
+                    this.enter_product_making();
+                    break;
+                case 8:
+                    this.enter_monitor_page();
+                    break;
+                case 9:
+                    this.enter_profile_editing();
+                    break;
+            }
         },
 
-        enter_profile_making: function() {
-            window.location.assign(this.BASE_URL + 'admin/profile_maker');
+        enter_order_list: function () {
+            window.location.href = this.BASE_URL + 'admin/order_list';
         },
 
-        enter_product_making: function() {
-            window.location.assign(this.BASE_URL + 'admin/product_maker');
+        enter_search_page: function () {
+            window.location.href = this.BASE_URL + 'admin/search_orders_page';
         },
 
-        get_order_excel: function() {
+        get_order_excel: function () {
             axios({
                 method: 'get',
                 url: this.BASE_URL + 'admin/order_excl',
@@ -62,9 +102,45 @@ const vue = new Vue({
                 .catch(response => this.show_alert('مشکلی در دریافت فایل بوجود آمده. دوباره تلاش کنید'));
         },
 
-        show_alert(msg){
+        enter_create_order: function () {
+            window.location.href = this.BASE_URL + 'admin/create_order_page';
+        },
+
+        enter_profile_making: function () {
+            window.location.assign(this.BASE_URL + 'admin/profile_maker');
+        },
+
+        enter_profile_editing: function () {
+            window.location.assign(this.BASE_URL + 'admin/profile_editor');
+        },
+
+        enter_customer_report_page: function () {
+            window.location.href = this.BASE_URL + 'admin/customer_report_page'
+        },
+
+        enter_product_making: function () {
+            window.location.assign(this.BASE_URL + 'admin/product_maker');
+        },
+
+        enter_monitor_page: function () {
+            window.location.href = this.BASE_URL + 'admin/search_page'
+        },
+
+        show_alert(msg) {
             this.req_msg = msg;
             this.$bvToast.show('req');
         },
+    },
+    created() {
+        axios({
+            method: 'get',
+            url: this.BASE_URL + 'admin/get_dashboard_elements'
+        }).then(response => {
+            this.new_orders = response.data.newOrders;
+            this.rights = response.data.rights;
+            this.admin_name = response.data.name;
+        }).catch(reason => {
+            this.show_alert('عدم دریافت اطلاعات از سرور');
+        })
     }
 });

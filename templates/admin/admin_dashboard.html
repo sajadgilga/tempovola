@@ -6,17 +6,17 @@
 
 {% block title %}
     <title>
-    Tempo Vola | پنل
+        Tempo Vola | پنل
     </title>
     <link rel="stylesheet" href="{% static "pages/admin/dashboard.css" %}">
 {% endblock %}
 
 {% block content %}
     <div id="app">
-    <!-- navbar component -->
+        <!-- navbar component -->
         <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
             <b-navbar-brand href="#">
-             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
                 Tempo Vola
             </b-navbar-brand>
 
@@ -26,7 +26,7 @@
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item @click="logout">خروج</b-nav-item>
                     <b-nav-item>
-                        {{ name }}
+                        [[ admin_name ]]
                     </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
@@ -36,34 +36,52 @@
             [[ req_msg ]]
         </b-toast>
 
-        <b-container fluid>
-            <b-row>
-              <b-col>
-                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
-              </b-col>
-            </b-row>
-            <b-row class="mb-5 mt-5 m-2">
-                <div class="col-md-8 m-auto">
-                    <b-button size="lg" block @click="enter_order_list" variant="primary"> آخرین سفارشات <b-badge variant="light">{{ newOrders }}</b-badge></b-button>
+        <div class="page h-100">
+            <div class="icon-container" @click="toggle_dashboard">
+                <div class="menu_icon"></div>
+                <div class="menu_icon"></div>
+                <div class="menu_icon"></div>
+            </div>
+            <transition name="fade">
+                <div class="navigation mh-100" v-if="dashboard_state">
+                    <div class="side-nav-item" v-for="(value, right) in rights" @click="action(value)">
+                        [[ right ]]
+                        <b-badge variant="light" v-if="value == 1">[[ new_orders ]]</b-badge>
+                    </div>
                 </div>
-            </b-row>
-            <b-row class="mb-5 mt-5 m-2">
-                <div class="col-md-8 m-auto">
-                    <b-button size="lg" block @click="enter_profile_making" variant="primary"> ایجاد مشتری جدید </b-button>
-                </div>
-            </b-row>
-            <b-row class="mb-5 mt-5 m-2">
-                <div class="col-md-8 m-auto">
-                    <b-button size="lg" block @click="enter_product_making" variant="primary"> ایجاد محصول جدید </b-button>
-                </div>
-            </b-row>
-            <b-row class="mb-5 mt-5 m-2">
-                <div class="col-md-8 m-auto">
-                    <b-button size="lg" block @click="get_order_excel" variant="primary"> گزارشات </b-button>
-                </div>
-            </b-row>
-        </b-container>
-    </div>
+            </transition>
+            <div class="main-dashboard h-100 mw-100 w-100" @click="turn_off_dashboard">
+            </div>
+        </div>
 
-    <script src="{% static "pages/admin/dashboard.js" %}"></script>
+        {#        <b-container fluid>#}
+        {#            <b-row>#}
+        {#              <b-col>#}
+        {#                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>#}
+        {#              </b-col>#}
+        {#            </b-row>#}
+        {#            <b-row class="mb-5 mt-5 m-2">#}
+        {#                <div class="col-md-8 m-auto">#}
+        {#                    <b-button size="lg" block @click="enter_order_list" variant="primary"> آخرین سفارشات <b-badge variant="light">{{ newOrders }}</b-badge></b-button>#}
+        {#                </div>#}
+        {#            </b-row>#}
+        {#            <b-row class="mb-5 mt-5 m-2">#}
+        {#                <div class="col-md-8 m-auto">#}
+        {#                    <b-button size="lg" block @click="enter_profile_making" variant="primary"> ایجاد مشتری جدید </b-button>#}
+        {#                </div>#}
+        {#            </b-row>#}
+        {#            <b-row class="mb-5 mt-5 m-2">#}
+        {#                <div class="col-md-8 m-auto">#}
+        {#                    <b-button size="lg" block @click="enter_product_making" variant="primary"> ایجاد محصول جدید </b-button>#}
+        {#                </div>#}
+        {#            </b-row>#}
+        {#            <b-row class="mb-5 mt-5 m-2">#}
+        {#                <div class="col-md-8 m-auto">#}
+        {#                    <b-button size="lg" block @click="get_order_excel" variant="primary"> گزارشات </b-button>#}
+        {#                </div>#}
+        {#            </b-row>#}
+        {#        </b-container>#}
+        {#    </div>#}
+
+        <script src="{% static "pages/admin/dashboard.js" %}"></script>
 {% endblock %}

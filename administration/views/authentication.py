@@ -9,6 +9,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from TempoVola.settings import admins
+from administration import logging
+from administration.logging import log_messages
 
 
 @api_view(['GET'])
@@ -29,6 +31,7 @@ def login_(request):
             return Response({'msg': 'سطح دسترسی لازم را ندارید'}, status=status.HTTP_401_UNAUTHORIZED)
 
         login(request, user)
+        logging.success(user, log_messages['login_platform_success'])
         return Response({'msg': 'login successful'}, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -36,6 +39,8 @@ def login_(request):
 
 @api_view(['GET'])
 def logout_(request):
+    user = request.user
     logout(request)
+    logging.success(user, log_messages['logout_platform_success'])
     return Response(status=status.HTTP_200_OK)
 

@@ -4,13 +4,13 @@
 
 {% block title %}
     <title>
-        Tempo Vola | ساخت پروفایل
+        Tempo Vola | تغییر پروفایل
     </title>
-    <link rel="stylesheet" href="{% static "pages/admin/customer_manage/profile_maker.css" %}">
+    <link rel="stylesheet" href="{% static "pages/admin/customer_manage/profile_editor.css" %}">
 {% endblock %}
 
 {% block content %}
-    <div id="app" class="hid">
+    <div id="app">
         <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
             <b-navbar-brand href="#">
                 <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
@@ -41,7 +41,19 @@
             </b-row>
             <b-row>
                 <div class="col-md-6 m-auto p-5" id="signUp">
-                    <b-form>
+                    <b-form-input style="text-align: right; "
+                                  id="customer_search_name"
+                                  placeholder="ایمیل مشتری را برای جستجو وارد کنید"
+                                  v-model="customer_name"
+                                  type="input"
+                                  class="m-auto mt-3"
+                    >
+
+                    </b-form-input>
+                    <b-button variant="danger" @click="delete_customer" class="mt-2 mb-3 col-md-5"> حذف مشتری</b-button>
+                    <b-button variant="primary" @click="search_customer" class="mt-2 mb-3 col-md-5">جستجو</b-button>
+
+                    <b-form @submit="submit_data">
                         <b-form-group
                                 id="naming_group"
                                 label="نام شرکت"
@@ -153,7 +165,7 @@
                         >
                             <b-form-checkbox-group
                                     v-model="form.available_series"
-                                    {#                                :options="series_options"#}
+                                    {#                                                                    :options="series_options"#}
                                     switches
                                     stacked
                             >
@@ -172,7 +184,7 @@
                             </b-form-checkbox-group>
                         </b-form-group>
 
-                        <b-button variant="success" @click="submit_data" block>ثبت مشتری</b-button>
+                        <b-button variant="success" type="submit" block>ثبت مشتری</b-button>
                     </b-form>
                 </div>
             </b-row>
@@ -181,6 +193,6 @@
         </b-container>
     </div>
 
-    <script src="{% static "pages/admin/customer_manage/profile_maker.js" %}"></script>
+    <script src="{% static "pages/admin/customer_manage/profile_editor.js" %}"></script>
 {% endblock %}
 

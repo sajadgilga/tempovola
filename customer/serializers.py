@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series
+from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopItem, Series, Report
 
 
 class MelodySerializer(serializers.ModelSerializer):
     class Meta:
         model = Melody
-        fields = ('name', 'price', 'count', 'melody_code')
+        fields = ('name', 'melody_code')
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Series
-        fields = ('name', 'description', 'melodies',
+        fields = ('name', 'description', 'melodies', 'price',
                   'total_cost', 'product_code')
 
 
@@ -28,7 +28,6 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class CustomerOrderSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = CustomerProfile
         fields = ('company_name', 'email', 'phone', 'address',
@@ -60,3 +59,8 @@ class OrderSerializer(serializers.ModelSerializer):
                   'administration_process'
                   )
 
+
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = ('date', 'description', 'answer')

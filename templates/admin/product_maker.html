@@ -4,16 +4,129 @@
 
 {% block title %}
     <title>
-    Tempo Vola | ساخت محصول
+        Tempo Vola | ساخت محصول
     </title>
-    <link rel="stylesheet" href="{% static "pages/admin/product_maker.css" %}">
+    <link rel="stylesheet" href="{% static "pages/admin/product_manage/product_maker.css" %}">
 {% endblock %}
 
 {% block content %}
     <div id="app">
-    
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="درخواست ناموفق" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
+            </b-row>
+            <b-row>
+                <div class="col-md-6 m-auto p-5" id="signUp">
+                    <b-form @submit="submit_data">
+                        <b-form-group
+                                id="naming_group"
+                                label="نام محصول"
+                        >
+                            <b-form-input
+                                    style="text-align: right; "
+                                    id="productName"
+                                    placeholder="نام را وارد کنید"
+                                    v-model="form.name"
+                                    type="input"
+                                    required
+                            >
+                            </b-form-input>
+                        </b-form-group>
+
+                        <b-form-group
+                                id="code_group"
+                                label="کد محصول"
+                        >
+                            <b-form-input
+                                    style="text-align: right; "
+                                    id="productCode"
+                                    placeholder="کد را وارد کنید"
+                                    v-model="form.code"
+                                    type="input"
+                                    required
+                            >
+                            </b-form-input>
+                        </b-form-group>
+
+                        <b-form-checkbox switch v-model="isMelody" @change="toggle_maker">
+                            <p v-if="!isMelody">
+                                ایجاد ملودی
+                            </p>
+                            <p v-if="isMelody">
+                                ایجاد استند
+                            </p>
+                        </b-form-checkbox>
+
+                        <b-form-group v-if="!isMelody" label="قیمت">
+                            <b-form-input
+                                    style="text-align: right; "
+                                    id="price"
+                                    placeholder="قیمت را وارد کنید"
+                                    v-model="form.price"
+                                    type="input"
+                            >
+                            </b-form-input>
+                        </b-form-group>
+
+                        <b-form-group v-if="!isMelody" label="توضیحات">
+                            <b-form-textarea
+                                    v-if="!isMelody"
+                                    style="text-align: right; display: inline"
+                                    id="description"
+                                    placeholder="اطلاعات اضافی را وارد کنید"
+                                    v-model="form.description"
+                                    rows="1"
+                                    max-rows="2"
+                            >
+                            </b-form-textarea>
+                        </b-form-group>
+
+                        <b-form-group
+                                v-if="isMelody"
+                                label="ملودی ها"
+                                id="series_group">
+                            <b-form-checkbox-group
+                                    v-model="form.melodies"
+                                    :options="melody_options"
+                                    switches
+                                    stacked
+                            >
+                            </b-form-checkbox-group>
+                        </b-form-group>
+
+                        <b-button variant="success" type="submit" block>ثبت محصول</b-button>
+                    </b-form>
+                </div>
+            </b-row>
+
+            <b-row v-for="i in 3" class="m-4"></b-row>
+        </b-container>
     </div>
-    
-    <script src="{% static "pages/admin/product_maker.js" %}"></script>
+
+    <script src="{% static "pages/admin/product_manage/product_maker.js" %}"></script>
 {% endblock %}
 

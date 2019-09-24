@@ -19,6 +19,7 @@ class CustomerProfile(models.Model):
     email = models.EmailField(blank=True)
     phone = PhoneField(blank=True, help_text='contact phone number')
     city = models.CharField(max_length=128, default='')
+    state = models.CharField(max_length=128, default='')
     address = models.CharField(max_length=256, default='')
     # TODO: set default available series
     available_series = models.ManyToManyField('Series')
@@ -29,6 +30,7 @@ class SchemaSeries(models.Model):
     product_code = models.CharField(db_index=True, max_length=32, default='')
     description = models.CharField(max_length=128, blank=True)
     melodies = models.ManyToManyField('Melody')
+    price = models.IntegerField(default=0)
     picture = models.FileField(storage=imageFS, null=True)
 
 
@@ -39,16 +41,13 @@ class Series(models.Model):
     total_cost = models.IntegerField(default=0)
     discount = models.IntegerField(default=0)
     melodies = models.ManyToManyField('Melody')
+    price = models.IntegerField(default=0)
     picture = models.FileField(storage=imageFS, null=True)
 
 
 class Melody(models.Model):
     name = models.CharField(max_length=32, db_index=True)
     melody_code = models.CharField(max_length=32, db_index=True, default='')
-    price = models.IntegerField(default=3000)
-    count = models.IntegerField(default=0)
-    discount = models.IntegerField(default=0)
-    # TODO: (*Phase_2) handle music properly
     music = models.FileField(storage=audioFS, null=True)
 
 
@@ -102,3 +101,4 @@ class Report(models.Model):
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True, blank=True)
     description = models.CharField(max_length=512)
+    answer = models.CharField(max_length=512, default='')

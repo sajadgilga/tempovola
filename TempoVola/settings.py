@@ -14,6 +14,8 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_ROOT = os.path.join(BASE_DIR, 'Logs')
+ADMIN_LOG_DIR = os.path.join(LOG_ROOT, 'Admins')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -129,21 +131,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
-USE_I18N = True
+# USE_I18N = True
+#
+# USE_L10N = True
+#
+# USE_TZ = True
 
-USE_L10N = True
-
-USE_TZ = True
-
-
-admins = ['admin', 'orderAdmin', 'sellAdmin', 'warehouseAdmin']
-
+admins = ['admin', 'orderAdmin', 'sellAdmin', 'warehouseAdmin', 'financeAdmin', 'customerAdmin', 'productAdmin',
+          'monitorAdmin', 'administrator']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 #
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'

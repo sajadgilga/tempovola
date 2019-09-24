@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from customer.models import CustomerProfile, Melody, Order, ShopItem, Promotions
+from customer.models import CustomerProfile, Melody, Order, ShopItem, Promotions, Series
 from customer.serializers import CustomerSerializer
 
 
@@ -115,7 +115,7 @@ def fetch_data(request):
                 m = find_melody(items, product, melody)
                 if m:
                     melody['count'] = m.ordered_count
-                    cost += melody['price'] * melody['count']
+                    cost += product['price'] * melody['count']
             product['total_cost'] = cost
 
     promotions = Promotions.objects.filter(active=True).all()
@@ -148,7 +148,7 @@ def checkout(request):
         ShopItem.objects.filter(order=order).all().delete()
     for p in data:
         for m in data[p]:
-            price = Melody.objects.filter(name=m)[0].price
+            price = Series.objects.filter(name=p)[0].price
             cost += int(data[p][m]) * int(price)
             melody = ShopItem.objects.filter(melody_name=m, order=order, series=p).all().first()
             total_count += int(data[p][m])

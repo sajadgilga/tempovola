@@ -2,6 +2,7 @@ body, html {
     height: 100%;
     margin: 0;
 }
+
 body {
     height: 100%;
     width: 100%;
@@ -15,4 +16,96 @@ body {
 
 #app {
     padding-top: 0px;
+}
+
+.page {
+    min-width: 100vw;
+    display: flex;
+    position: fixed;
+    justify-content: flex-end;
+}
+
+.navigation {
+    float: right;
+    overflow: hidden;
+    position: fixed;
+    min-height: 100vh;
+    width: 260px;
+    z-index: 4;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(#383e44, #2a2f35);
+    background-image: -moz-linear-gradient(#383e44, #2a2f35);
+    background-image: -o-linear-gradient(#383e44, #2a2f35);
+    background-image: -webkit-linear-gradient(#383e44, #2a2f35);
+    background-image: -ms-linear-gradient(#383e44, #2a2f35);
+}
+
+.side-nav-item {
+    max-width: 80%;
+    width: 80%;
+    background-color: #3d3f3f;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px auto;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.86), 0 4px 25px 0px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.5);
+}
+
+.side-nav-item:hover {
+    opacity: .8;
+    color: #000;
+    background-color: white;
+}
+
+.main-dashboard {
+    display: flex;
+    z-index: 1;
+    position: fixed;
+}
+
+@media only screen and (max-width: 260px) {
+    .navigation {
+        position: relative;
+        height: calc(100vh - 75px);
+        overflow: auto;
+        width: 100vh;
+        z-index: 4;
+        padding-bottom: 30px;
+        min-height: 100vh;
+        display: flex;
+        background-image: linear-gradient(#383E44, #010100);
+        /*background-image: -moz-linear-gradient(#010100, #595b5b);*/
+        /*background-image: -o-linear-gradient(black, white);*/
+        /*background-image: -webkit-linear-gradient(black, white);*/
+        /*background-image: -ms-linear-gradient(black, white);*/
+    }
+}
+
+.menu_icon {
+    cursor: pointer;
+    width: 35px;
+    height: 5px;
+    background-color: #383e44;
+    margin: 6px 0;
+}
+
+.icon-container {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: width .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    width: 0;
 }

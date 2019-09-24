@@ -2,14 +2,14 @@ const vue = new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
     data: {
-        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        // BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        BASE_URL: 'http://localhost:8000/',
         name: null,
         req_msg: '',
         email: 'tempovola@gmail.com',
         phone: '76983',
         report: '',
-        fields: [
+        order_fields: [
             'وضعیت',
             'تاریخ سفارش',
             'آدرس ارسال',
@@ -17,7 +17,13 @@ const vue = new Vue({
             'کد سفارش',
             'ردیف',
         ],
-        orders: []
+        report_fields: [
+            'جواب',
+            'درخواست',
+            'تاریخ ارسال'
+        ],
+        orders: [],
+        reports: []
     },
     methods: {
         getCookie: function (name) {
@@ -73,6 +79,7 @@ const vue = new Vue({
                 url: this.BASE_URL + 'customer/get_orders_report/',
             }).then(response => {
                 this.orders = response.data.orders;
+                this.reports = response.data.reports;
                 this.$bvModal.show('reports');
             }).catch(reason => {
                 this.req_msg = 'درخواست شما به مشکل برخورده';

@@ -2,8 +2,8 @@ const vue = new Vue({
     el: '#app',
     delimiters: ['[[',']]'],
     data: {
-        BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        // BASE_URL: 'http://localhost:8000/',
+        // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
+        BASE_URL: 'http://localhost:8000/',
         product_series: [],
         buy_list: {},
         name: null,
@@ -52,6 +52,8 @@ const vue = new Vue({
                 this.is_visible[product.name] = false
                     product.melodies.forEach(melody => {
                         Vue.set(this.melody_color, product.name + melody.name, "white");
+                        if (!melody.count)
+                            melody.count = 0;
                         if (melody.count !== 0) {
                             if (!Object.keys(this.buy_list).includes(product.name))
                                 this.buy_list[product.name] = {};
@@ -106,7 +108,7 @@ const vue = new Vue({
             }
             if (!isInput)
                 item.count++;
-            series.total_cost += (parseInt(item.count) - parseInt(before_item_count)) * item.price;
+            series.total_cost += (parseInt(item.count) - parseInt(before_item_count)) * series.price;
             this.transaction_num ++;
         },
 
@@ -121,14 +123,14 @@ const vue = new Vue({
                 delete product[item.name];
             } else {
                 if (item.count === 0) {
-                    series.total_cost -= item.price * (product[item.name]);
+                    series.total_cost -= series.price * (product[item.name]);
                     product[item.name] = 0;
                     Vue.set(this.melody_color, series.name + item.name, "white");
                     delete product[item.name];
                 }else {
                     product[item.name]--;
                     item.count--;
-                    series.total_cost -= item.price;
+                    series.total_cost -= series.price;
                     if (item.count === 0) {
                         Vue.set(this.melody_color, series.name + item.name, "white");
                     delete product[item.name];

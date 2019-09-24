@@ -12,7 +12,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from customer.models import CustomerProfile, Report, Order
-from customer.serializers import CustomerSerializer, OrderSerializer
+from customer.serializers import CustomerSerializer, OrderSerializer, ReportSerializer
 
 
 @api_view(['GET'])
@@ -85,7 +85,26 @@ def get_orders_report(request):
         orders = json.loads(JSONRenderer().render(orders))
         for order in orders:
             order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
-        return Response({'orders': orders})
+        reports = Report.objects.filter(owner=user).all().order_by('-date')
+        reports = ReportSerializer(reports, many=True).data
+        reports = json.loads(JSONRenderer().render(reports))
+        for report in reports:
+            report['date'] = jalali.Gregorian(report['date'].split('T')[0]).persian_string()
+        return Response({'orders': orders, 'reports': reports})
     except:
         return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def get_reports(request):
+    try:
+        user = request.user
+        reports = Report.objects.filter(owner=user).all().order_by('-date')
+        reports = ReportSerializer(reports, many=True).data
+        reports = json.loads(JSONRenderer().render(reports))
+        for report in reports:
+            report['date'] = jalali.Gregorian(report['date'].split('T')[0]).persian_string()
+        return Response({'reports': reports})
+    except:
+        return Response({'msg': 'مشکلی در سرور به وجود آمده'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

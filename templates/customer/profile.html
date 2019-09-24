@@ -13,10 +13,10 @@
 
 {% block content %}
     <div id="app" class="hid">
-    <!-- navbar component -->
+        <!-- navbar component -->
         <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity&nbsp .97">
             <b-navbar-brand href="#">
-             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
                 Tempo Vola
             </b-navbar-brand>
 
@@ -24,40 +24,44 @@
 
             <b-collapse id="navbar-collapse" is-nav style="text-align: right">
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item-dropdown dropleft >
+                    <b-nav-item-dropdown dropleft>
                         <template slot="button-content">{{ name }}</template>
-                        <b-dropdown-item class="primary" @click="redirect_to_shop" style="text-align: right;">بازگشت</b-dropdown-item>
+                        <b-dropdown-item class="primary" @click="redirect_to_shop" style="text-align: right;">بازگشت
+                        </b-dropdown-item>
                         <b-dropdown-item @click="logout" style="text-align: right;">خروج</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
 
-        <b-toast id="req" title="نتیجه"auto-hide-delay="3000">
+        <b-toast id="req" title="نتیجه" auto-hide-delay="3000">
             [[ req_msg ]]
         </b-toast>
 
         <b-container fluid>
             <b-row>
-              <b-col>
-                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
-              </b-col>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
             </b-row>
             <b-row>
                 <div class="col-md-6 m-auto p-5" id="profile_info">
-                    <small class="text-muted">نام شرکت&nbsp</small> <br>{{ context.company_name }}
+                    <small class="text-muted">نام شرکت&nbsp</small>
+                    <br>{{ context.company_name }}
                     <hr>
                     <small class="text-muted">کد شرکت&nbsp</small>
                     <br>{{ context.customer_id }}
                     <hr>
-                     <small class="text-muted"> &nbspایمیل</small>
+                    <small class="text-muted"> &nbspایمیل</small>
                     <br>{{ context.email }}
                     <hr>
-                    <small class="text-muted">شماره تلفن&nbsp</small><br> {{ context.phone }}
+                    <small class="text-muted">شماره تلفن&nbsp</small>
+                    <br> {{ context.phone }}
                     <hr>
-                    <small class="text-muted">آدرس&nbsp</small><br> {{ context.address }}
-{#                    <hr>#}
-{#                    <small class="text-muted">مسئول سفارش &nbsp</small> {{ context.orderer }}#}
+                    <small class="text-muted">آدرس&nbsp</small>
+                    <br> {{ context.address }}
+                    {#                    <hr>#}
+                    {#                    <small class="text-muted">مسئول سفارش &nbsp</small> {{ context.orderer }}#}
                     <hr>
                     <small class="text-muted">وسایل امانی</small>
                     <br>
@@ -67,30 +71,31 @@
                     <br>
                     <br>
                     <b-form-textarea
-                        id="report"
-                        style="text-align: right"
-                        v-model="report"
-                        class="mb-1"
-                        placeholder="...مشکل خود را بنویسید"
-                        rows="3"></b-form-textarea>
+                            id="report"
+                            style="text-align: right"
+                            v-model="report"
+                            class="mb-1"
+                            placeholder="...مشکل خود را بنویسید"
+                            rows="3"></b-form-textarea>
                     <b-button class="col-sm-2 mr-1 ml-1" variant="primary" @click="show_reports">گزارشات</b-button>
                     <b-button class="col-sm-2 mr-1 ml-1" variant="success" @click="send_report">ارسال</b-button>
 
                     <hr style="height:3px;border:none;color:#555;background-color:#555;">
                     <p class="text-muted" style="font-size: medium"> اطلاعات تماس با شرکت </p>
-                    <small class="text-muted"> [[ email ]] </small>
-                    <small class="text-muted col-2"> ایمیل </small>
+                    <small class="text-muted"> [[ email ]]</small>
+                    <small class="text-muted col-2"> ایمیل</small>
                     <br>
-                    <small class="text-muted"> [[ phone ]] </small>
-                    <small class="text-muted col-2"> شماره تلفن </small>
+                    <small class="text-muted"> [[ phone ]]</small>
+                    <small class="text-muted col-2"> شماره تلفن</small>
 
                 </div>
             </b-row>
 
-            <b-row class="m-4" v-for="i in 2">  </b-row>
+            <b-row class="m-4" v-for="i in 2"></b-row>
 
             <b-modal id="reports" size="xl" scrollable hide-footer title="reports" style="text-align: right">
-                <b-table striped hover responsive :fields="fields" :items="orders" style="text-align: left; background-color: white">
+                <b-table striped hover responsive :fields="order_fields" :items="orders"
+                         style="text-align: left; background-color: white">
 
                     <template slot="ردیف" slot-scope="data">
                         [[ data.index + 1 ]]
@@ -116,11 +121,24 @@
                         [[ boolean_converter(data.item.is_confirmed) ]]
                     </template>
                 </b-table>
+
+                <b-table striped hover responsive :fields="report_fields" :items="reports"
+                         style="text-align: left; background-color: white">
+                    <template slot="تاریخ" slot-scope="data">
+                        [[ data.item.date ]]
+                    </template>
+                    <template slot="درخواست" slot-scope="data">
+                        [[ data.item.description ]]
+                    </template>
+                    <template slot="جواب" slot-scope="data">
+                        [[ data.item.answer ]]
+                    </template>
+                </b-table>
                 <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('reports')">بستن</b-button>
             </b-modal>
         </b-container>
 
     </div>
 
-<script src="{% static "pages/profile/profile.js" %}"></script>
+    <script src="{% static "pages/profile/profile.js" %}"></script>
 {% endblock %}
