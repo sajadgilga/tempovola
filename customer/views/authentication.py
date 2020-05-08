@@ -64,9 +64,10 @@ def profile(request):
 def send_report(request):
     try:
         user = request.user
+        customer = CustomerProfile.objects.get(user=user)
         report = Report()
         report.description = request.data['report']
-        report.owner = user
+        report.owner = customer
         report.save()
         return Response(status=status.HTTP_200_OK)
     except:
@@ -85,7 +86,7 @@ def get_orders_report(request):
         orders = json.loads(JSONRenderer().render(orders))
         for order in orders:
             order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
-        reports = Report.objects.filter(owner=user).all().order_by('-date')
+        reports = Report.objects.filter(owner=customer).all().order_by('-date')
         reports = ReportSerializer(reports, many=True).data
         reports = json.loads(JSONRenderer().render(reports))
         for report in reports:

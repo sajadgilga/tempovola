@@ -50,17 +50,19 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('customer', 'discount', 'items',
-                  'is_confirmed', 'is_received',
+                  'is_confirmed',
                   'created_date', 'last_change_date',
                   'confirmed_date', 'sent_date',
-                  'received_date', 'cost', 'order_id',
-                  'orderAdmin_confirmed', 'sellAdmin_confirmed',
-                  'warehouseAdmin_confirmed', 'financeAdmin_confirmed',
-                  'administration_process'
+                  'cost', 'order_id',
+                  'status', 'orderAdmin_comment',
+                  'sellAdmin_comment', 'warehouseAdmin_comment',
+                  'financeAdmin_comment', 'administration_comment'
                   )
 
 
 class ReportSerializer(serializers.ModelSerializer):
+    owner = CustomerOrderSerializer()
+
     class Meta:
         model = Report
-        fields = ('date', 'description', 'answer')
+        fields = ('owner', 'date', 'description', 'answer', 'is_active')

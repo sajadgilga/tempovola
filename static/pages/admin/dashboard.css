@@ -27,7 +27,7 @@ body {
 
 .navigation {
     float: right;
-    overflow: hidden;
+    overflow: auto;
     position: fixed;
     min-height: 100vh;
     width: 260px;

@@ -29,42 +29,38 @@ def get_new_order_id():
 
 
 def check_promotion(promotion, order, total_count):
+    is_promoted = True
     for scenario in promotion.scenarios.all():
         if scenario.total_count != 0:
-            if scenario.total_count <= total_count:
-                return True
+            if not scenario.total_count <= total_count:
+                is_promoted = False
+                break
         elif scenario.items != '':
-            check_items = True
-            for item in scenario.items.split('-'):
+            for item in scenario.items.split('--'):
                 if not ShopItem.objects.filter(
                         order=order,
-                        series=item.split('.')[0],
-                        melody_name=item.split('.')[1]
+                        series=item.split('..')[0],
+                        melody_name=item.split('..')[1]
                 ).exists():
-                    check_items = False
+                    is_promoted = False
                     break
-            return check_items
         elif scenario.series_items != '':
-            check_items = True
-            for item in scenario.items.split('-'):
+            for item in scenario.items.split('--'):
                 if not ShopItem.objects.filter(
                         order=order,
                         series=item
                 ).exists():
-                    check_items = False
+                    is_promoted = False
                     break
-            return check_items
         elif scenario.melody_items != '':
-            check_items = True
-            for item in scenario.items.split('-'):
+            for item in scenario.items.split('--'):
                 if not ShopItem.objects.filter(
                         order=order,
                         melody_name=item
                 ).exists():
-                    check_items = False
+                    is_promoted = False
                     break
-            return check_items
-        return False
+        return is_promoted
 
 
 def apply_promotions(order, total_count):

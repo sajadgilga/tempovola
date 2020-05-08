@@ -11,11 +11,11 @@ const vue = new Vue({
         dashboard_state: false
     },
     methods: {
-        toggle_dashboard: function() {
+        toggle_dashboard: function () {
             this.dashboard_state = !this.dashboard_state;
             console.log('turn on')
         },
-        turn_off_dashboard: function() {
+        turn_off_dashboard: function () {
             this.dashboard_state = false;
             console.log('turn off')
         },
@@ -75,7 +75,20 @@ const vue = new Vue({
                 case 9:
                     this.enter_profile_editing();
                     break;
+                case 10:
+                    this.enter_admin_maker();
+                    break;
+                case 11:
+                    this.enter_promotion_editor();
             }
+        },
+
+        enter_promotion_editor: function () {
+            window.location.href = this.BASE_URL + 'admin/enter_promotion_editor';
+        },
+
+        enter_admin_maker: function () {
+            window.location.href = this.BASE_URL + 'admin/enter_admin_maker';
         },
 
         enter_order_list: function () {
@@ -123,7 +136,7 @@ const vue = new Vue({
         },
 
         enter_monitor_page: function () {
-            window.location.href = this.BASE_URL + 'admin/search_page'
+            window.location.href = this.BASE_URL + 'admin/monitor_page'
         },
 
         show_alert(msg) {

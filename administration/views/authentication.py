@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
@@ -44,3 +45,9 @@ def logout_(request):
     logging.success(user, log_messages['logout_platform_success'])
     return Response(status=status.HTTP_200_OK)
 
+
+# TODO: add admin maker page
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def enter_admin_maker(request):
+    pass

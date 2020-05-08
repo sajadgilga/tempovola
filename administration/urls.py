@@ -1,5 +1,6 @@
 from django.urls import path
 
+from administration.views.admin_managing import *
 from administration.views.authentication import *
 from administration.views.customer_managing import *
 from administration.views.order_managing import *
@@ -28,4 +29,11 @@ urlpatterns = [
     path('delete_customer/', delete_customer),
     path('search_orders_page/', search_orders_page),
     path('search_orders/', search_orders),
+    path('enter_promotion_editor/', enter_promotion_editor),
+    path('enter_admin_maker/', enter_admin_maker),
+    path('customer_report_page/', enter_customer_report_page),
+    path('get_customer_reports/', get_customer_reports),
+    path('send_customer_report_answer/', send_customer_report_answer),
+    path('monitor_page/', monitor_page),
+    path('get_admin_logs/', get_admin_logs)
 ]

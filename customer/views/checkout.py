@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
-from django.http import  HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -53,15 +53,21 @@ def get_checkout_data(request):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+def checkout_order(customer):
+    order = Order.objects.filter(customer=customer).all().last()
+    order.is_checked_out = True
+    order.status = Order.CHECKED_OUT
+    order.save()
+    return order
+
+
 @api_view(['GET'])
 @login_required(login_url='/')
 def confirm_checkout(request):
     # try:
     user = request.user
     customer = CustomerProfile.objects.get(user=user)
-    order = Order.objects.filter(customer=customer).all().last()
-    order.is_checked_out = True
-    order.save()
+    order = checkout_order(customer)
 
     if customer.phone is not None:
         api = KavenegarAPI('6652373751486A6D5A34584B476A466F346E616F7A313768553441726330554E')
@@ -116,4 +122,3 @@ def get_receipt(request):
         return response
     except:
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-

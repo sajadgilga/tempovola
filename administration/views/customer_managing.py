@@ -1,22 +1,29 @@
 import datetime
+import json
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.shortcuts import render
 
 # Create your views here.
+from django.template.loader import render_to_string
 from kavenegar import KavenegarAPI
 from persiandate import jalali
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
+from TempoVola.settings import admins
 from administration import logging
 from administration.logging import log_messages
-from customer.models import Order, ShopItem, SchemaSeries, CustomerProfile, Series, Melody
+from customer.models import Order, ShopItem, SchemaSeries, CustomerProfile, Series, Melody, Report
 
-admins = ['admin', 'orderAdmin', 'sellAdmin', 'warehouseAdmin', 'financeAdmin', 'customerAdmin', 'productAdmin',
-          'monitorAdmin', 'administrator']
+# admins = ['admin', 'orderAdmin', 'sellAdmin', 'warehouseAdmin', 'financeAdmin', 'customerAdmin', 'productAdmin',
+#           'monitorAdmin', 'administrator']
+from customer.serializers import ReportSerializer
+
 admin_rights = {
     admins[0]: {},
     admins[1]: {
@@ -39,7 +46,8 @@ admin_rights = {
         'جستجو': 2
     },
     admins[6]: {
-        'ایجاد محصول': 7
+        'ایجاد محصول': 7,
+        'ایجاد سناریو تخفیف': 11
     },
     admins[7]: {
         'مانیتور ادمین': 8,
@@ -53,8 +61,11 @@ admin_rights = {
     },
 }
 
+'''
+ check if logged in admin has permission to alter panel
+'''
 
-# check if logged in admin has permission to alter panel
+
 def check_access(user):
     if user.groups.filter(name__in=admins):
         return True
@@ -62,7 +73,11 @@ def check_access(user):
         return False
 
 
-# generates id according to last customer for new customer being signed up
+'''
+ generates id according to last customer for new customer being signed up
+'''
+
+
 def get_new_customer_id():
     last_customer_made = CustomerProfile.objects.all().last()
     id_num = '00001'
@@ -76,7 +91,11 @@ def get_new_customer_id():
     return id
 
 
-# creates new customer in database when signed up
+''' 
+creates new customer in database when signed up
+'''
+
+
 def create_new_customer(form, user):
     customer = CustomerProfile()
     customer.user = user
@@ -91,9 +110,13 @@ def create_new_customer(form, user):
     return customer
 
 
-## creates available series products for new customer,
-# it also limits customers possible musics for every specific series, creates new record of melodies for every customer
-# it could be beneficial if each customer did not have different melody record for himself
+''' 
+ creates available series products for new customer,
+ it also limits customers possible musics for every specific series, creates new record of melodies for every customer
+ it could be beneficial if each customer did not have different melody record for himself
+'''
+
+
 def fill_available_series(form, customer):
     for product in form['available_series']:
         schema_series = SchemaSeries.objects.filter(name=product)[0]
@@ -117,7 +140,11 @@ def fill_available_series(form, customer):
     customer.save()
 
 
-# main function for signing up new users
+'''
+ main function for signing up new users
+'''
+
+
 def create_new_user(form):
     user = User.objects.create_user(username=form[form['username_type'][0]],
                                     email=form['email'], password=form['password'])
@@ -129,19 +156,15 @@ def getAdminDashboard(user):
     new_orders = 0
     choice_list = {}
     if user.groups.filter(name__in=[admins[1], ]).exists():
-        new_orders = len(Order.objects.filter(orderAdmin_confirmed=False, is_checked_out=True,
-                                              administration_process=False).all())
+        new_orders = len(Order.objects.filter(status=Order.CHECKED_OUT).all())
     elif user.groups.filter(name__in=[admins[2], ]).exists():
-        new_orders = len(Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False,
-                                              administration_process=False).all())
-    elif user.groups.filter(name__in=[admins[3], ]).exists():
-        new_orders = len(Order.objects.filter(sellAdmin_confirmed=True, warehouseAdmin_confirmed=False,
-                                              administration_process=False).all())
+        new_orders = len(Order.objects.filter(status=Order.ORDER_ADMIN).all())
     elif user.groups.filter(name__in=[admins[4], ]).exists():
-        new_orders = len(Order.objects.filter(warehouseAdmin_confirmed=True, financeAdmin_confirmed=False,
-                                              administration_process=False).all())
+        new_orders = len(Order.objects.filter(status=Order.SELL_ADMIN).all())
+    elif user.groups.filter(name__in=[admins[3], ]).exists():
+        new_orders = len(Order.objects.filter(status=Order.FINANCE_ADMIN).all())
     elif user.groups.filter(name__in=[admins[8], ]).exists():
-        new_orders = len(Order.objects.filter(administration_process=True).all())
+        new_orders = len(Order.objects.filter(status=Order.ADMINISTRATION).all())
     for admin in user.groups.values_list('name', flat=True):
         for right, value in admin_rights[admin].items():
             choice_list[right] = value
@@ -209,7 +232,7 @@ def signup_customer(request):
     user = request.user
     logging.info(user, log_messages['signup_customer_try'])
     try:
-        if not user.groups.filter(name__in=[admins[5],]).exists():
+        if not user.groups.filter(name__in=[admins[5], ]).exists():
             logging.access_deny(user, log_messages['signup_customer_access_deny'])
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         form = request.data['form']
@@ -233,9 +256,9 @@ def signup_customer(request):
             # try:
             response = api.sms_send(params)
             # except:
-                # print("شماره کاربر مشکل دارد")
-                # return Response({"msg": "شماره تلفن کاربر ایراد دارد: " + form['phone']},
-                #                 status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            # print("شماره کاربر مشکل دارد")
+            # return Response({"msg": "شماره تلفن کاربر ایراد دارد: " + form['phone']},
+            #                 status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         logging.success(user, log_messages['signup_customer_success'])
         return Response(status=status.HTTP_200_OK)
     except:
@@ -329,3 +352,50 @@ def delete_customer(request):
     except:
         logging.error(user, log_messages['delete_customer_failure'])
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def enter_customer_report_page(request):
+    return render(request, 'admin/customer_report_monitor_page.html')
+
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def get_customer_reports(request):
+    user = request.user
+    logging.info(user, log_messages['get_customer_report_try'])
+    # try:
+    if not user.groups.filter(name__in=[admins[5], ]).exists():
+        logging.access_deny(user, log_messages['get_customer_report_access_deny'])
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    reports = Report.objects.all()
+    reports = ReportSerializer(reports, many=True)
+    reports = json.loads(JSONRenderer().render(reports.data))
+    logging.success(user, log_messages['get_customer_report_success'])
+    return Response({'reports': reports}, status=status.HTTP_200_OK)
+    # except Exception as err:
+    #     logging.error(user, log_messages['get_customer_report_failure'])
+    #     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+@login_required(login_url='/admin/')
+def send_customer_report_answer(request):
+    user = request.user
+    logging.info(user, log_messages['send_customer_report_answer_try'])
+    # try:
+    if not user.groups.filter(name__in=[admins[5], ]).exists():
+        logging.access_deny(user, log_messages['send_customer_report_answer_access_deny'])
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    data = request.data['report']
+    report = Report.objects.filter(owner__email=data['owner']['email'], description=data['description'],
+                                   is_active=True).all().first()
+    report.answer = data['answer']
+    report.is_active = False
+    report.save()
+    logging.success(user, log_messages['send_customer_report_answer_success'])
+    return Response(status=status.HTTP_200_OK)
+    # except Exception as err:
+    #     logging.error(user, log_messages['send_customer_report_answer_failure'])
+    #     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)

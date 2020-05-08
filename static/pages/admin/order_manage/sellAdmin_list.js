@@ -30,7 +30,8 @@ const vue = new Vue({
             'ردیف',
         ],
         order_items: [],
-        current_processed_order: null
+        current_processed_order: null,
+        current_order: {}
     },
     methods: {
         getCookie: function (name) {
@@ -68,6 +69,7 @@ const vue = new Vue({
             // this.order_items = [...this.orders[idx].items];
             this.order_items = JSON.parse(JSON.stringify(this.orders[idx].items));
             this.current_processed_order = idx;
+            this.current_order = this.orders[idx];
             this.$bvModal.show('order_manager');
         },
 
@@ -106,7 +108,7 @@ const vue = new Vue({
                 }
             }).then(response => {
                 if (response.status === 200) {
-                    this.orders[this.current_processed_order].administration_process = true;
+                    this.orders[this.current_processed_order].status = 5;
                     this.show_alert('سفارش با موفقیت رد گردید');
                     this.$bvModal.hide('order_manager')
                 }
@@ -117,7 +119,7 @@ const vue = new Vue({
 
         _verify() {
             this.orders[this.current_processed_order].items = this.order_items;
-            this.orders[this.current_processed_order].sellAdmin_confirmed = true;
+            this.orders[this.current_processed_order].status = 2;
             cost = 0;
             this.order_items.forEach(item => {
                 cost += parseInt(item.price) * parseInt(item.sell_admin_verified_count);

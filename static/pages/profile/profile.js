@@ -87,6 +87,39 @@ const vue = new Vue({
             });
         },
 
+        show_orders: function () {
+            axios({
+                method: 'get',
+                url: this.BASE_URL + 'customer/get_orders_report/',
+            }).then(response => {
+                this.orders = response.data.orders;
+                this.reports = response.data.reports;
+                this.$bvModal.show('orders');
+            }).catch(reason => {
+                this.req_msg = 'درخواست شما به مشکل برخورده';
+                this.$bvToast.show('req');
+            });
+        },
+
+        order_status_text: function(status) {
+            switch (status) {
+                case 0:
+                    return 'بررسی سفارش';
+                case 1:
+                    return 'بررسی سفارش';
+                case 2:
+                    return 'بررسی مالی';
+                case 3:
+                    return 'نیاز به پرداخت';
+                case 4:
+                    return 'آماده ارسال';
+                case 5:
+                    return 'در دست مدیریت';
+                case 7:
+                    return 'تحویل شده';
+            }
+        },
+
         boolean_converter(value) {
             if (value === true)
                 return 'تایید شده'

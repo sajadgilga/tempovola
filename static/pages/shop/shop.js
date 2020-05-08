@@ -163,6 +163,10 @@ const vue = new Vue({
             })
         },
 
+        show_melody_image: function(item) {
+
+        },
+
         confirm_buy: function() {
             axios({
                 method: 'post',

@@ -29,7 +29,8 @@ const vue = new Vue({
             'ردیف',
         ],
         order_items: [],
-        current_processed_order: null
+        current_processed_order: null,
+        current_order: {}
     },
     methods: {
         getCookie: function (name) {
@@ -67,6 +68,7 @@ const vue = new Vue({
             // this.order_items = [...this.orders[idx].items];
             this.order_items = JSON.parse(JSON.stringify(this.orders[idx].items));
             this.current_processed_order = idx;
+            this.current_order = this.orders[idx];
             this.$bvModal.show('order_manager');
         },
 
@@ -93,7 +95,7 @@ const vue = new Vue({
         },
 
         _verify() {
-            this.orders[this.current_processed_order].warehouseAdmin_confirmed = true;
+            this.orders[this.current_processed_order].status = 3;
         },
 
         boolean_converter(value){

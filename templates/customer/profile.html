@@ -66,6 +66,9 @@
                     <small class="text-muted">وسایل امانی</small>
                     <br>
                     {{ context.lent_products }}
+                    {#                    <hr>#}
+                    {#                    <div style="max-width: 60vw; max-height: 10vh" class="google-map" ref="locationMap">#}
+                    {#                    </div>#}
                     <hr>
                     <small class="text-muted">گزارشات</small>
                     <br>
@@ -77,6 +80,8 @@
                             class="mb-1"
                             placeholder="...مشکل خود را بنویسید"
                             rows="3"></b-form-textarea>
+                    <b-button class="col-sm-2 mr-1 ml-1" variant="warning" @click="show_orders"> سفارشات قبلی
+                    </b-button>
                     <b-button class="col-sm-2 mr-1 ml-1" variant="primary" @click="show_reports">گزارشات</b-button>
                     <b-button class="col-sm-2 mr-1 ml-1" variant="success" @click="send_report">ارسال</b-button>
 
@@ -93,9 +98,9 @@
 
             <b-row class="m-4" v-for="i in 2"></b-row>
 
-            <b-modal id="reports" size="xl" scrollable hide-footer title="reports" style="text-align: right">
+            <b-modal id="orders" size="xl" scrollable hide-footer title="orders" style="text-align: right">
                 <b-table striped hover responsive :fields="order_fields" :items="orders"
-                         style="text-align: left; background-color: white">
+                         style="text-align: right; background-color: white">
 
                     <template slot="ردیف" slot-scope="data">
                         [[ data.index + 1 ]]
@@ -118,23 +123,45 @@
                     </template>
 
                     <template slot="وضعیت" slot-scope="data">
-                        [[ boolean_converter(data.item.is_confirmed) ]]
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 0" src="{% static "images/page_decoration/status/SelladminStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 1" src="{% static "images/page_decoration/status/SelladminStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 2" src="{% static "images/page_decoration/status/financialStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 3" src="{% static "images/page_decoration/status/sendStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 4" src="{% static "images/page_decoration/status/paymentStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 5" src="{% static "images/page_decoration/status/administrationStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 6" src="{% static "images/page_decoration/status/approvedStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 7" src="{% static "images/page_decoration/status/approvedStatus.png" %}" alt=""/>
+                        [[ order_status_text(data.item.status) ]]
+{#                        [[ data.item.status ]]#}
                     </template>
                 </b-table>
 
+                <b-button class="col-sm-2 ml-auto mr-auto mt-2 mb-2" @click="$bvModal.hide('orders')">بستن</b-button>
+            </b-modal>
+            <b-modal id="reports" size="xl" scrollable hide-footer title="reports" style="text-align: right">
+
                 <b-table striped hover responsive :fields="report_fields" :items="reports"
-                         style="text-align: left; background-color: white">
-                    <template slot="تاریخ" slot-scope="data">
+                         style="text-align: right; background-color: white">
+                    <template slot="تاریخ ارسال" slot-scope="data">
                         [[ data.item.date ]]
                     </template>
                     <template slot="درخواست" slot-scope="data">
                         [[ data.item.description ]]
                     </template>
                     <template slot="جواب" slot-scope="data">
+                        <b-button @click="data.toggleDetails" v-if="data.item.answer != ''" variant="primary">
+                            [[ data.detailsShowing ? 'بستن' : 'مشاهده' ]]
+                        </b-button>
+                        <p v-if="data.item.answer == ''" style="font-size: small; color: #797b7b;">
+                            جوابی ارسال نشده
+                        </p>
+                    </template>
+                    <template v-slot:row-details="data">
                         [[ data.item.answer ]]
                     </template>
                 </b-table>
-                <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('reports')">بستن</b-button>
+
+                <b-button class="col-sm-2 ml-auto mr-auto mt-2 mb-2" @click="$bvModal.hide('reports')">بستن</b-button>
             </b-modal>
         </b-container>
 

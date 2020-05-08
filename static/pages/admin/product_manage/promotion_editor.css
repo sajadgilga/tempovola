@@ -1,0 +1,37 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: url(/static/images/page_decoration/plainbg.png) no-repeat center fixed;
+    -webkit-background-size: inherit; /* For WebKit*/
+    -moz-background-size: inherit; /* Mozilla*/
+    -o-background-size: inherit; /* Opera*/
+    background-size: inherit;
+    /*margin-top: 60px;*/
+}
+
+#signUp {
+    text-align: right;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: .8;
+}
+
+.hid {
+    visibility: hidden;
+}
+
+#signUp:hover {
+    opacity: 1;
+}
+
+#app {
+    padding-top: 0px;
+}

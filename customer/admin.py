@@ -36,10 +36,10 @@ class MelodyAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('customer', 'cost', 'is_checked_out',
-                    'is_confirmed', 'is_received', 'order_id',
+                    'is_confirmed', 'order_id',
                     'created_date', 'last_change_date',
-                    'confirmed_date', 'sent_date', 'received_date',
-                    'administration_process')
+                    'confirmed_date', 'sent_date',
+                    'status')
 
 
 @admin.register(ShopItem)
@@ -52,12 +52,13 @@ class ItemAdmin(admin.ModelAdmin):
 
 @admin.register(Promotions)
 class PromotionAdmin(admin.ModelAdmin):
-    list_display = ('description', )
+    list_display = ('description',)
 
 
 @admin.register(PromotionScenario)
 class ScenarioAdmin(admin.ModelAdmin):
     list_display = ('total_count', 'items', 'series_items', 'melody_items')
+
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):

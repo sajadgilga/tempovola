@@ -69,6 +69,7 @@
                         <b-card-text v-for="i in card.melodies">
                             <b-container fluid>
                                 <b-row class="p-0">
+                                    <img src="{% static "images/page_decoration/play.png" %}" @click="show_melody_image(i)"/>
                                     <img src="{% static "images/page_decoration/play.png" %}" @click="play_audio(i)"/>
                                     <div class="col-sm-2 ml-0 mr-auto p-0" align="center" :style="{background: melody_color[card.name + i.name] }">
                                         [[ i.name ]]

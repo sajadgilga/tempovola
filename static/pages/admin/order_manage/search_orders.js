@@ -10,14 +10,17 @@ const vue = new Vue({
         filter: {
             order_id: '',
             customer_id: '',
-            state_checks: []
+            customer_name: '',
+            city: '',
+            state_checks: [],
+            page: 0
         },
         state_options: [
-            {text: 'تایید مسئول سفارش', value: 'orderAdmin'},
-            {text: 'تایید مسئول فروش', value: 'sellAdmin'},
-            {text: 'تایید مسئول انبار', value: 'warehouseAdmin'},
-            {text: 'تایید مسئول مالی', value: 'financeAdmin'},
-            {text: 'بررسی مدیریت', value: 'administrator'}
+            {text: 'منتظر تایید مسئول سفارش', value: 0},
+            {text: 'منتظر تایید مسئول فروش', value: 1},
+            {text: 'منتظر تایید مسئول انبار', value: 2},
+            {text: 'منتظر تایید مسئول مالی', value: 3},
+            {text: 'بررسی مدیریت', value: 5}
         ],
         fields: [
             'مشاهده',
@@ -30,7 +33,6 @@ const vue = new Vue({
             'ردیف',
         ],
         orders: [],
-
         order_fields: [
             'تعداد مورد تایید',
             'تعداد سفارش شده',
@@ -39,6 +41,7 @@ const vue = new Vue({
             'ملودی',
             'ردیف',
         ],
+        page_isSearched: [false, false, false],
         order_items: [],
         current_processed_order: null,
         currentPage: 1,
@@ -61,7 +64,15 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        search_orders() {
+        search_orders(search_type) {
+            if (search_type === 'search')
+                this.page_isSearched = [false, false, false];
+            if (this.page_isSearched.length < this.currentPage || !this.page_isSearched[this.currentPage - 1]) {
+                if (this.page_isSearched.length < this.currentPage)
+                    this.page_isSearched.push(true);
+                this.page_isSearched[this.currentPage - 1] = true;
+                this.filter.page = this.currentPage - 1;
+            }
             axios({
                 method: 'post',
                 url: this.BASE_URL + 'admin/search_orders/',
@@ -75,7 +86,7 @@ const vue = new Vue({
                 }
             }).then(respond => {
                 if (respond.status === 200)
-                    this.addData(respond.data);
+                    this.addData(respond.data, search_type);
                 else
                     this.show_alert('عدم دریافت اطلاعات از سرور');
 
@@ -85,9 +96,12 @@ const vue = new Vue({
             })
         },
 
-        addData(data) {
-            this.data = data;
-            this.orders = this.data.orders.reverse()
+        addData(data, search_type) {
+            // this.data = this.data.orders.concat(data.orders);
+            if (search_type === 'search')
+                this.orders = data.orders;
+            else
+                this.orders = this.orders.concat(data.orders);
         },
 
         returnToPanel: function () {
@@ -145,6 +159,11 @@ const vue = new Vue({
                 return 'تایید شده';
             else
                 return 'تایید نشده';
+        }
+    },
+    watch: {
+        currentPage: function (newVal, oldVal) {
+            this.search_orders('page')
         }
     },
     computed: {

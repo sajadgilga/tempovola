@@ -68,8 +68,8 @@
                     </template>
 
                     <template slot="وضعیت" slot-scope="data">
-                        <img v-if="!data.item.orderAdmin_confirmed" src="{% static "images/page_decoration/cancel.svg" %}"/>
-                        <img v-if="data.item.orderAdmin_confirmed" src="{% static "images/page_decoration/check.svg" %}"/>
+                        <img v-if="data.item.status != 1" src="{% static "images/page_decoration/cancel.svg" %}"/>
+                        <img v-if="data.item.status == 1" src="{% static "images/page_decoration/check.svg" %}"/>
 {#                        [[ boolean_converter(data.item.orderAdmin_confirmed) ]]#}
                     </template>
 
@@ -108,7 +108,34 @@
                     </template>
 
                 </b-table>
-                <b-button class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="success" @click="verify_order">تایید و ثبت سفارش</b-button>
+
+                <!-- recent admins comment section -->
+                <p style="text-align: right;">
+                    نظر مدیریت
+                </p>
+
+                <p v-if="current_order.administration_comment===''" class="text-muted" style="text-align: right">
+                    نظری داده نشده
+                </p>
+                <p v-if="current_order.administration_comment!==''" class="text-muted" style="text-align: right">
+                    [[ current_order.administration_comment]]
+                </p>
+                <hr>
+
+                <!-- write comment section -->
+
+                <b-form-textarea
+                        class="mb-2 mt-3"
+                        style="text-align: right"
+                        id="comment"
+                        v-model="current_order.orderAdmin_comment"
+                        placeholder="...اگر نکته‌ای درباره سفارش مد نظرتان است بنویسید"
+                        rows="3"
+                        max-rows="6"
+                ></b-form-textarea>
+
+
+                <b-button v-if="current_order.status != 1" class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="success" @click="verify_order">تایید و ثبت سفارش</b-button>
                 <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('order_manager')">بستن</b-button>
             </b-modal>
         </b-container>

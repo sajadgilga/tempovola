@@ -1,0 +1,57 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+        Tempo Vola | مانیتور ادمین
+    </title>
+    <link rel="stylesheet" href="{% static "pages/admin/monitor/admin_monitor.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="نتیجه" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
+            </b-row>
+
+            <div class="m-auto col-12">
+                {% for foo in admin_list %}
+                    <b-button class="col-sm-2 m-sm-3 mb-2" variant="secondary" @click="showLogs('{{ foo.username }}')">
+                        {{ foo.username }}
+                    </b-button>
+                {% endfor %}
+
+            </div>
+
+        </b-container>
+    </div>
+
+    <script src="{% static "pages/admin/monitor/admin_monitor.js" %}"></script>
+{% endblock %}
+

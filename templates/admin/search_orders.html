@@ -4,7 +4,7 @@
 
 {% block title %}
     <title>
-        Tempo Vola | سفارشات
+        Tempo Vola | جستجوی سفارشات
     </title>
     <link rel="stylesheet" href="{% static "pages/admin/order_manage/order_list.css" %}">
 {% endblock %}
@@ -42,7 +42,7 @@
 
             <b-row class="mb-3 p-3">
                 <b-col class="signUp col-sm-9 m-auto p-3">
-                    <b-button variant="primary" class="m-auto col-sm-4" @click="search_orders" block>جستجو</b-button>
+                    <b-button variant="primary" class="m-auto col-sm-4" @click="search_orders('search')" block>جستجو</b-button>
                     <b-form-input class="col-sm-5 mr-auto ml-auto mb-2 mt-3"
                                   style="text-align: right; display: inline;"
                                   id="order_id"
@@ -50,11 +50,26 @@
                                   v-model="filter.order_id"
                                   type="input">
                     </b-form-input>
-                    <b-form-input class="col-sm-5 ml-auto mr-auto mb-2 mt-3"
+                    <b-form-input class="col-sm-5 m-2 mb-2 mt-3"
                                   style="text-align: right; display: inline; "
                                   id="customer_id"
                                   placeholder="ایمیل مشتری"
                                   v-model="filter.customer_id"
+                                  type="input">
+                    </b-form-input>
+
+                    <b-form-input class="col-sm-5 mr-auto ml-auto mb-2 mt-3"
+                                  style="text-align: right; display: inline;"
+                                  id="customer_name"
+                                  placeholder="نام مشتری"
+                                  v-model="filter.customer_name"
+                                  type="input">
+                    </b-form-input>
+                    <b-form-input class="col-sm-5 m-2 mb-2 mt-3"
+                                  style="text-align: right; display: inline; "
+                                  id="customer_city"
+                                  placeholder="شهر"
+                                  v-model="filter.customer_city"
                                   type="input">
                     </b-form-input>
 
@@ -99,11 +114,7 @@
                     </template>
 
                     <template slot="وضعیت" slot-scope="data">
-                        <img v-if="!data.item.orderAdmin_confirmed"
-                             src="{% static "images/page_decoration/cancel.svg" %}"/>
-                        <img v-if="data.item.orderAdmin_confirmed"
-                             src="{% static "images/page_decoration/check.svg" %}"/>
-                        {#                        [[ boolean_converter(data.item.orderAdmin_confirmed) ]]#}
+                        [[ data.item.status ]]
                     </template>
 
                     <template slot="مشاهده" slot-scope="data">

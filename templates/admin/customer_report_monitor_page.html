@@ -1,0 +1,89 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+        Tempo Vola | مانیتور گزارشات
+    </title>
+    <link rel="stylesheet" href="{% static "pages/admin/customer_manage/customer_report.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="نتیجه" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
+            </b-row>
+
+            <div class="m-auto">
+                <b-table striped hover responsive :fields="fields" :items="data"
+                         style="text-align: right; background-color: white">
+
+                    <template slot="ردیف" slot-scope="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template slot="تاریخ ارسال" slot-scope="data">
+                        [[ data.item.date ]]
+                    </template>
+
+                    <template slot="نام مشتری" slot-scope="data">
+                        [[ data.item.owner.company_name ]]
+                    </template>
+
+                    <template slot="ایمیل مشتری" slot-scope="data">
+                        [[ data.item.owner.email ]]
+                    </template>
+
+                    <template slot="درخواست" slot-scope="data">
+                        <p style="font-size: small">
+                            [[ data.item.description ]]
+                        </p>
+                    </template>
+
+                    <template slot="پاسخ" slot-scope="data">
+                        <b-form-textarea v-if="data.item.is_active" v-model="data.item.answer" placeholder="پاسخ"
+                                         rows="3"></b-form-textarea>
+                        <p v-if="!data.item.is_active" style="color: #50575d; font-size: small">
+                            [[ data.item.answer ]]
+                        </p>
+                    </template>
+
+                    <template slot="ارسال پاسخ" slot-scope="data">
+                        <b-button v-if="data.item.is_active" variant="primary" @click="sendAnswer(data.index)">ارسال
+                        </b-button>
+                    </template>
+                </b-table>
+            </div>
+
+        </b-container>
+    </div>
+
+    <script src="{% static "pages/admin/customer_manage/customer_report.js" %}"></script>
+{% endblock %}
+

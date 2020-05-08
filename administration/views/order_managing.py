@@ -41,6 +41,10 @@ def get_order_list(request):
             return render(request, 'admin/sellAdmin_list.html', {'name': user.username})
         elif user.groups.filter(name__in=[admins[3], ]).exists():
             return render(request, 'admin/warehouseAdmin_list.html', {'name': user.username})
+        elif user.groups.filter(name__in=[admins[4], ]).exists():
+            return render(request, 'admin/financeAdmin_list.html', {'name': user.username})
+        elif user.groups.filter(name__in=[admins[8], ]).exists():
+            return render(request, 'admin/admin_list.html', {'name': user.username})
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
     except:
@@ -53,16 +57,19 @@ def get_orders(request):
     # try:
     user = request.user
     if user.groups.filter(name__in=[admins[1], ]).exists():
-        orders = Order.objects.filter(orderAdmin_confirmed=False, is_checked_out=True,
-                                      administration_process=False) \
+        orders = Order.objects.filter(status=Order.CHECKED_OUT) \
             .all().order_by('-created_date')
     elif user.groups.filter(name__in=[admins[2], ]).exists():
-        orders = Order.objects.filter(orderAdmin_confirmed=True, sellAdmin_confirmed=False,
-                                      administration_process=False) \
+        orders = Order.objects.filter(status=Order.ORDER_ADMIN) \
+            .all().order_by('-created_date')
+    elif user.groups.filter(name__in=[admins[4], ]).exists():
+        orders = Order.objects.filter(status=Order.SELL_ADMIN) \
             .all().order_by('-created_date')
     elif user.groups.filter(name__in=[admins[3], ]).exists():
-        orders = Order.objects.filter(sellAdmin_confirmed=True, warehouseAdmin_confirmed=False,
-                                      administration_process=False) \
+        orders = Order.objects.filter(status=Order.FINANCE_ADMIN) \
+            .all().order_by('-created_date')
+    elif user.groups.filter(name__in=[admins[8], ]).exists():
+        orders = Order.objects.filter(status=Order.ADMINISTRATION) \
             .all().order_by('-created_date')
     else:
         logging.access_deny(user, log_messages['fetch_order_data_access_deny'])
@@ -101,9 +108,11 @@ def verify_order(request):
         if user.groups.filter(name__in=[admins[1], ]).exists():
             admin_verified_order = request.data['order']
             order = Order.objects.filter(order_id=admin_verified_order['order_id'],
-                                         orderAdmin_confirmed=False).all().first()
+                                         status=Order.CHECKED_OUT).all().first()
             order.last_change_date = timezone.now()
-            order.orderAdmin_confirmed = True
+            # order.orderAdmin_confirmed = True
+            order.status = Order.ORDER_ADMIN
+            order.orderAdmin_comment = admin_verified_order['orderAdmin_comment']
             order.cost = admin_verified_order['cost']
             saved_items = ShopItem.objects.filter(order=order).all()
             if len(saved_items) != len(admin_verified_order['items']):
@@ -117,9 +126,11 @@ def verify_order(request):
         elif user.groups.filter(name__in=[admins[2], ]).exists():
             admin_verified_order = request.data['order']
             order = Order.objects.filter(order_id=admin_verified_order['order_id'],
-                                         sellAdmin_confirmed=False).all().first()
+                                         status=Order.ORDER_ADMIN).all().first()
             order.last_change_date = timezone.now()
-            order.sellAdmin_confirmed = True
+            # order.sellAdmin_confirmed = True
+            order.status = Order.SELL_ADMIN
+            order.sellAdmin_comment = admin_verified_order['sellAdmin_comment']
             order.cost = admin_verified_order['cost']
             saved_items = ShopItem.objects.filter(order=order).all()
             if len(saved_items) != len(admin_verified_order['items']):
@@ -132,10 +143,11 @@ def verify_order(request):
             send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از مرحله فروش با موفقیت عبور کرد")
         elif user.groups.filter(name__in=[admins[3], ]).exists():
             admin_verified_order = request.data['order']
-            order = Order.objects.filter(order_id=admin_verified_order['order_id'], administration_process=False,
-                                         warehouseAdmin_confirmed=False).all().first()
+            order = Order.objects.filter(order_id=admin_verified_order['order_id'], status=Order.FINANCE_ADMIN).all().first()
             order.sent_date = timezone.now()
-            order.warehouseAdmin_confirmed = True
+            # order.warehouseAdmin_confirmed = True
+            order.status = Order.WAREHOUSE_ADMIN
+            order.warehouseAdmin_comment = admin_verified_order['warehouseAdmin_comment']
             order.save()
             send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از از انبار خارج شد")
         else:
@@ -156,8 +168,8 @@ def reject_order(request):
         if user.groups.filter(name__in=[admins[2], ]).exists():
             admin_verified_order = request.data['order']
             order = Order.objects.filter(order_id=admin_verified_order['order_id'],
-                                         sellAdmin_confirmed=False).all().first()
-            order.administration_process = True
+                                         status=Order.ORDER_ADMIN).all().first()
+            order.status = Order.ADMINISTRATION
             order.save()
         else:
             logging.access_deny(user, log_messages['reject_order_access_deny'])
@@ -229,15 +241,8 @@ def get_order_excel(request):
             if order.received_date:
                 ws.write(row_name, 10, jalali.Gregorian(order.received_date.strftime('%Y-%m-%d')).persian_string(),
                          font_style)
-            if order.is_received:
-                ws.write(row_name, 11, 'تحویل شده',
-                         font_style)
-            elif order.is_confirmed:
-                ws.write(row_name, 11, 'تایید شده',
-                         font_style)
-            else:
-                ws.write(row_name, 11, 'تایید نشده',
-                         font_style)
+            ws.write(row_name, 11, order.status,
+                     font_style)
 
         wb.save(response)
         logging.success(user, log_messages['get_excel_success'])
@@ -266,21 +271,27 @@ def search_orders(request):
 
         orders = Order.objects.filter()
         if sent_filter['order_id'] != '':
-            orders = orders.filter(order_id=sent_filter['order_id'])
+            orders = orders.filter(order_id__contains=sent_filter['order_id'])
         if sent_filter['customer_id'] != '':
-            orders = orders.filter(customer__email=sent_filter['customer_id'])
-        for state in sent_filter['state_checks']:
-            if state == admins[1]:
-                orders = orders.filter(orderAdmin_confirmed=True)
-            elif state == admins[2]:
-                orders = orders.filter(sellAdmin_confirmed=True)
-            elif state == admins[3]:
-                orders = orders.filter(warehouseAdmin_confirmed=True)
-            elif state == admins[4]:
-                orders = orders.filter(financeAdmin_confirmed=True)
-            elif state == admins[8]:
-                orders = orders.filter(administration_process=True)
-        orders = OrderSerializer(orders.all(), many=True)
+            orders = orders.filter(customer__email__contains=sent_filter['customer_id'])
+        if sent_filter['customer_name'] != '':
+            orders = orders.filter(customer__company_name__contains=sent_filter['customer_name'])
+        if sent_filter['city'] != '':
+            orders = orders.filter(customer__city__contains=sent_filter['city'])
+        if len(sent_filter['state_checks']) > 0:
+            orders = orders.filter(status=sent_filter['state_checks'][0])
+        # for state in sent_filter['state_checks']:
+        #     if state == admins[1]:
+        #         orders = orders.filter(orderAdmin_confirmed=True)
+        #     elif state == admins[2]:
+        #         orders = orders.filter(sellAdmin_confirmed=True)
+        #     elif state == admins[3]:
+        #         orders = orders.filter(warehouseAdmin_confirmed=True)
+        #     elif state == admins[4]:
+        #         orders = orders.filter(financeAdmin_confirmed=True)
+        #     elif state == admins[8]:
+        #         orders = orders.filter(administration_process=True)
+        orders = OrderSerializer(orders.all()[sent_filter['page'] * 30: sent_filter['page'] * 30 + 30], many=True)
         orders = json.loads(JSONRenderer().render(orders.data))
         for order in orders:
             order['created_date'] = jalali.Gregorian(order['created_date'].split('T')[0]).persian_string()
@@ -288,5 +299,6 @@ def search_orders(request):
                 order['last_change_date'] = jalali.Gregorian(order['last_change_date'].split('T')[0]).persian_string()
         logging.success(user, log_messages['search_order_success'])
         return Response({'orders': orders})
-    except:
+    except Exception as e:
         logging.error(user, log_messages['search_order_failure'])
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
