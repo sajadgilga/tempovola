@@ -12,12 +12,12 @@
 
 
 {% block content %}
-    <div id="app" class="hid">
-    <b-form-input id="vis_series" value="{{ vis_series }}" style="display: none"></b-form-input>
-    <!-- navbar component -->
+    <div id="app" class="hid position-relative">
+        <b-form-input id="vis_series" value="{{ vis_series }}" style="display: none"></b-form-input>
+        <!-- navbar component -->
         <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
             <b-navbar-brand href="#">
-             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
                 Tempo Vola
             </b-navbar-brand>
 
@@ -25,9 +25,11 @@
 
             <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right;">
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item-dropdown dropleft >
+                    <b-nav-item-dropdown dropleft>
                         <template slot="button-content">{{ name }}</template>
-                        <b-dropdown-item class="primary" @click="redirect_to_profile" style="text-align: right;">صفحه کاربری</b-dropdown-item>
+                        <b-dropdown-item class="primary" @click="redirect_to_profile" style="text-align: right;">صفحه
+                            کاربری
+                        </b-dropdown-item>
                         <b-dropdown-item @click="logout" style="text-align: right;">خروج</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
@@ -38,47 +40,82 @@
             [[ req_msg ]]
         </b-toast>
 
-        <b-container fluid>
+        <b-overlay :show="show" no-wrap>
+            <template v-slot:overlay>
+                <div class="text-center">
+                    <b-img :src="img_source" fluid-grow alt="melody image"></b-img>
+                    <b-button
+                            block
+                            class="mt-3"
+                            variant="outline-danger"
+                            aria-describedby="cancel-label"
+                            @click="show = false"
+                    >
+                        بستن
+                    </b-button>
+                </div>
+            </template>
+
+        </b-overlay>
+
+        <b-container fluid style="min-height: 100vh">
             <b-row>
-              <b-col>
-                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
-              </b-col>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
             </b-row>
 
-<!-- product collapse cards -->
+            <!-- product collapse cards -->
             <b-card text-variant="dark" no-body
                     class="ml-auto mr-auto mb-5 p-0 shop-card" v-for="card in product_series"
-                    :key="'a'+card.name">
+                    :key="'a'+card.name"
+            >
                 <b-card-header v-b-toggle="card.name">
-                    <h2>
-                        [[card.name]]
-                    </h2>
-                    <h4>
-                        <small class="text-muted">
-                            [[card.description]]
-                        </small>
-                    </h4>
-                    <b-card-text class="m-1" style="text-align: right;" v-if="card.total_cost != 0">قیمت: [[card.total_cost]] ریال</b-card-text>
-                     <b-card-text>
-{#                    <b-button block variant="outline-dark" v-b-toggle="card.name">toggle</b-button>#}
-                    </b-card-text>
+                    <b-row>
+                        <b-col>
+                            <h2>
+                                [[card.name]]
+                            </h2>
+                            <h4>
+                                <small class="text-muted">
+                                    [[card.description]]
+                                </small>
+                            </h4>
+                            <b-card-text class="m-1" style="text-align: right;" v-if="card.total_cost != 0">قیمت:
+                                [[card.total_cost]] ریال
+                            </b-card-text>
+                            <b-card-text>
+                                {#                    <b-button block variant="outline-dark" v-b-toggle="card.name">toggle</b-button>#}
+                            </b-card-text>
+                        </b-col>
+
+                        <b-card-img :src="BASE_URL + card.picture" alt="" class="rounded-0 col-sm-3"></b-card-img>
+
+                    </b-row>
+
                 </b-card-header>
 
-                <b-collapse :id="card.name" :visible="is_visible[card.name]" accordion="acc" style="background-color: white; color: black; opacity: 1;">
+                <b-collapse :id="card.name" :visible="is_visible[card.name]" accordion="acc"
+                            style="background-color: white; color: black; opacity: 1;">
                     <b-card-body bg-variant="white">
                         <b-card-text v-for="i in card.melodies">
                             <b-container fluid>
                                 <b-row class="p-0">
-                                    <img src="{% static "images/page_decoration/play.png" %}" @click="show_melody_image(i)"/>
-                                    <img src="{% static "images/page_decoration/play.png" %}" @click="play_audio(i)"/>
-                                    <div class="col-sm-2 ml-0 mr-auto p-0" align="center" :style="{background: melody_color[card.name + i.name] }">
+                                    <img style="max-width: 40px; min-width: 40px; cursor:pointer; margin-left: 5px; margin-right: 5px"
+                                         src="{% static "images/page_decoration/showImage.png" %}"
+                                         @click="show_melody_image(i)"/>
+                                    <img style="max-width: 40px; min-width: 40px; cursor:pointer; margin-left: 5px; margin-right: 5px"
+                                         src="{% static "images/page_decoration/play.png" %}" @click="play_audio(i)"/>
+                                    <div class="col-sm-2 ml-0 mr-auto p-0" align="center"
+                                         :style="{background: melody_color[card.name + i.name] }">
                                         [[ i.name ]]
                                     </div>
                                     <div class="col-xl-2 col-md-4 col-sm-4 ml-auto mr-0">
                                         <b-input-group class="ml-auto mr-0">
-                                        <b-button @click="remove_item(i, card)">-</b-button>
-                                        <b-form-input type="input" size="small" v-model="i.count" @change="add_item(i, card, true)"></b-form-input>
-                                        <b-button @click="add_item(i, card)">+</b-button>
+                                            <b-button @click="remove_item(i, card)">-</b-button>
+                                            <b-form-input type="input" size="small" v-model="i.count"
+                                                          @change="add_item(i, card, true)"></b-form-input>
+                                            <b-button @click="add_item(i, card)">+</b-button>
                                         </b-input-group>
                                     </div>
                                 </b-row>
@@ -90,21 +127,21 @@
 
             <b-row class="m-2"></b-row>
             <div>
-              <b-carousel
-                      class="mr-auto ml-auto"
-                      id="carousel-fade"
-                      style="text-shadow: 0px 0px 2px #000; max-width: 60%"
-                      interval="3000"
-                      fade
-                      indicators
-                      label-prev="promotions"
-              >
-                <b-carousel-slide
-                        v-for="promotion in promotions"
-                        :caption="promotion.description"
-                        :img-src="BASE_URL + promotion.url"
-                ></b-carousel-slide>
-              </b-carousel>
+                <b-carousel
+                        class="mr-auto ml-auto"
+                        id="carousel-fade"
+                        style="text-shadow: 0px 0px 2px #000; max-width: 60%"
+                        interval="3000"
+                        fade
+                        indicators
+                        label-prev="promotions"
+                >
+                    <b-carousel-slide
+                            v-for="promotion in promotions"
+                            :caption="promotion.description"
+                            :img-src="BASE_URL + promotion.url"
+                    ></b-carousel-slide>
+                </b-carousel>
             </div>
 
             <b-row class="m-5"></b-row>
@@ -120,13 +157,13 @@
 
             <b-navbar-nav class="ml-auto">
                 <strong style="text-align: right;">
-                    فیمت کل: [[total_cost]]  ریال
+                    فیمت کل: [[total_cost]] ریال
                 </strong>
             </b-navbar-nav>
         </b-navbar>
 
     </div>
 
-<script src="{% static "pages/shop/shop.js" %}"></script>
-{#    <script src="{% static "howler.js/dist/howler.js" %}"></script>#}
+    <script src="{% static "pages/shop/shop.js" %}"></script>
+    {#    <script src="{% static "howler.js/dist/howler.js" %}"></script>#}
 {% endblock %}

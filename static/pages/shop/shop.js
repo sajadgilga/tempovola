@@ -1,6 +1,6 @@
 const vue = new Vue({
     el: '#app',
-    delimiters: ['[[',']]'],
+    delimiters: ['[[', ']]'],
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
         BASE_URL: 'http://localhost:8000/',
@@ -12,9 +12,19 @@ const vue = new Vue({
         melody_color: {},
         audio: null,
         is_visible: {},
-        promotions: {}
+        promotions: {},
+        show: false,
+        img_source: ''
     },
     methods: {
+        onShown() {
+            // Focus the cancel button when the overlay is showing
+            this.$refs.cancel.focus()
+        },
+        onHidden() {
+            // Focus the show button when the overlay is removed
+            this.$refs.show.focus()
+        },
         fetch_data: function () {
             axios({
                 method: 'get',
@@ -47,29 +57,29 @@ const vue = new Vue({
                 // if (product.total_cost !== 0){
                 var vis = document.getElementById("vis_series").value
                 if (vis === product.name)
-                this.is_visible[product.name] = true
+                    this.is_visible[product.name] = true
                 else
-                this.is_visible[product.name] = false
-                    product.melodies.forEach(melody => {
-                        Vue.set(this.melody_color, product.name + melody.name, "white");
-                        if (!melody.count)
-                            melody.count = 0;
-                        if (melody.count !== 0) {
-                            if (!Object.keys(this.buy_list).includes(product.name))
-                                this.buy_list[product.name] = {};
-                            this.buy_list[product.name][melody.name] = melody.count;
-                            Vue.set(this.melody_color, product.name + melody.name, "#fe444134");
-                            product.hasBeenBought = true
-                        }
-                    })
+                    this.is_visible[product.name] = false
+                product.melodies.forEach(melody => {
+                    Vue.set(this.melody_color, product.name + melody.name, "white");
+                    if (!melody.count)
+                        melody.count = 0;
+                    if (melody.count !== 0) {
+                        if (!Object.keys(this.buy_list).includes(product.name))
+                            this.buy_list[product.name] = {};
+                        this.buy_list[product.name][melody.name] = melody.count;
+                        Vue.set(this.melody_color, product.name + melody.name, "#fe444134");
+                        product.hasBeenBought = true
+                    }
+                })
                 // }
             });
             document.querySelector('div').classList.remove('hid');
         },
 
-        add_item: function (item, series, isInput=false) {
+        add_item: function (item, series, isInput = false) {
             console.log(this.melody_color)
-            if (isInput){
+            if (isInput) {
                 if (item.count === "") {
                     item.count = 0;
                     this.remove_item(item, series);
@@ -81,7 +91,7 @@ const vue = new Vue({
                     return
                 }
             }
-            if (item.count < 0){
+            if (item.count < 0) {
                 item.count = 0;
                 this.remove_item(item, series);
                 return;
@@ -90,8 +100,7 @@ const vue = new Vue({
             var product;
             if (Object.keys(this.buy_list).includes(series.name)) {
                 product = this.buy_list[series.name];
-            }
-            else {
+            } else {
                 this.buy_list[series.name] = {};
                 product = this.buy_list[series.name];
                 series.hasBeenBought = true;
@@ -101,15 +110,14 @@ const vue = new Vue({
             if (Object.keys(product).includes(item.name)) {
                 before_item_count = parseInt(product[item.name]);
                 product[item.name] = isInput ? parseInt(item.count) : parseInt(item.count) + 1;
-            }
-            else {
-                product[item.name] = (item.count !== 0)? parseInt(item.count): 1;
+            } else {
+                product[item.name] = (item.count !== 0) ? parseInt(item.count) : 1;
                 Vue.set(this.melody_color, series.name + item.name, "#fe444134")
             }
             if (!isInput)
                 item.count++;
             series.total_cost += (parseInt(item.count) - parseInt(before_item_count)) * series.price;
-            this.transaction_num ++;
+            this.transaction_num++;
         },
 
         remove_item: function (item, series) {
@@ -127,23 +135,23 @@ const vue = new Vue({
                     product[item.name] = 0;
                     Vue.set(this.melody_color, series.name + item.name, "white");
                     delete product[item.name];
-                }else {
+                } else {
                     product[item.name]--;
                     item.count--;
                     series.total_cost -= series.price;
                     if (item.count === 0) {
                         Vue.set(this.melody_color, series.name + item.name, "white");
-                    delete product[item.name];
+                        delete product[item.name];
                     }
                 }
             }
             if (product === {})
                 delete this.buy_list[series.name];
-            this.transaction_num ++;
+            this.transaction_num++;
         },
 
 
-        play_audio: function(item) {
+        play_audio: function (item) {
             if (this.audio !== null) {
                 this.audio.pause();
                 this.audio = null
@@ -163,11 +171,12 @@ const vue = new Vue({
             })
         },
 
-        show_melody_image: function(item) {
-
+        show_melody_image: function (item) {
+            this.show = true;
+            this.img_source = this.BASE_URL + item.img + '/'
         },
 
-        confirm_buy: function() {
+        confirm_buy: function () {
             axios({
                 method: 'post',
                 url: this.BASE_URL + 'customer/checkout/',
@@ -183,28 +192,27 @@ const vue = new Vue({
                 .catch(response => this.verify_buy(response))
         },
 
-        verify_buy: function(response) {
+        verify_buy: function (response) {
             if (response.status === 200) {
                 window.location.assign(this.BASE_URL + 'customer/enter_checkout/')
-            }
-            else{
+            } else {
                 this.$bvToast.show('req');
                 this.req_msg = 'درخواست شما به مشکل برخورده. لطفا به پشتیبانی اطلاع دهید'
             }
         },
 
-        redirect_to_profile: function() {
+        redirect_to_profile: function () {
             window.location.assign(this.BASE_URL + 'customer/profile');
         },
 
-        logout: function() {
+        logout: function () {
             axios({
                 method: 'get',
                 url: this.BASE_URL + 'customer/logout/',
-            }).then(response =>{
+            }).then(response => {
                 if (response.status === 200) {
                     window.location.replace(this.BASE_URL)
-                }else {
+                } else {
                     this.$bvToast.show('req');
                     this.req_msg = 'خروج در حال حاضر ممکن نیست.'
                 }

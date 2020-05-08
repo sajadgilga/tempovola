@@ -102,37 +102,51 @@
                 <b-table striped hover responsive :fields="order_fields" :items="orders"
                          style="text-align: right; background-color: white">
 
-                    <template slot="ردیف" slot-scope="data">
+                    {#                    <template slot="ردیف" slot-scope="data">#}
+                    <template v-slot:cell(index)="data">
                         [[ data.index + 1 ]]
                     </template>
 
-                    <template slot="کد سفارش" slot-scope="data">
+                    {#                    <template slot="کد سفارش" slot-scope="data">#}
+                    <template v-slot:cell(code)="data">
                         [[ data.item.order_id ]]
                     </template>
 
-                    <template slot="هزینه سفارش" slot-scope="data">
+                    {#                    <template slot="هزینه سفارش" slot-scope="data">#}
+                    <template v-slot:cell(cost)="data">
                         [[ data.item.cost ]]
                     </template>
 
-                    <template slot="آدرس ارسال" slot-scope="data">
+                    {#                    <template slot="آدرس ارسال" slot-scope="data">#}
+                    <template v-slot:cell(address)="data">
                         [[ data.item.customer.address ]]
                     </template>
 
-                    <template slot="تاریخ سفارش" slot-scope="data">
+                    {#                    <template slot="تاریخ سفارش" slot-scope="data">#}
+                    <template v-slot:cell(date)="data">
                         [[ data.item.created_date ]]
                     </template>
 
-                    <template slot="وضعیت" slot-scope="data">
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 0" src="{% static "images/page_decoration/status/SelladminStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 1" src="{% static "images/page_decoration/status/SelladminStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 2" src="{% static "images/page_decoration/status/financialStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 3" src="{% static "images/page_decoration/status/sendStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 4" src="{% static "images/page_decoration/status/paymentStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 5" src="{% static "images/page_decoration/status/administrationStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 6" src="{% static "images/page_decoration/status/approvedStatus.png" %}" alt=""/>
-                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 7" src="{% static "images/page_decoration/status/approvedStatus.png" %}" alt=""/>
+                    {#                    <template slot="وضعیت" slot-scope="data">#}
+                    <template v-slot:cell(status)="data">
                         [[ order_status_text(data.item.status) ]]
-{#                        [[ data.item.status ]]#}
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 0"
+                             src="{% static "images/page_decoration/status/SelladminStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 1"
+                             src="{% static "images/page_decoration/status/SelladminStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 2"
+                             src="{% static "images/page_decoration/status/financialStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 3"
+                             src="{% static "images/page_decoration/status/sendStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 4"
+                             src="{% static "images/page_decoration/status/paymentStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 5"
+                             src="{% static "images/page_decoration/status/administrationStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 6"
+                             src="{% static "images/page_decoration/status/approvedStatus.png" %}" alt=""/>
+                        <img style="min-width: 40px; max-width: 40px" v-if="data.item.status == 7"
+                             src="{% static "images/page_decoration/status/approvedStatus.png" %}" alt=""/>
+                        {#                        [[ data.item.status ]]#}
                     </template>
                 </b-table>
 
@@ -142,13 +156,16 @@
 
                 <b-table striped hover responsive :fields="report_fields" :items="reports"
                          style="text-align: right; background-color: white">
-                    <template slot="تاریخ ارسال" slot-scope="data">
+{#                    <template slot="تاریخ ارسال" slot-scope="data">#}
+                    <template v-slot:cell(date)="data">
                         [[ data.item.date ]]
                     </template>
-                    <template slot="درخواست" slot-scope="data">
+{#                    <template slot="درخواست" slot-scope="data">#}
+                    <template v-slot:cell(request)="data">
                         [[ data.item.description ]]
                     </template>
-                    <template slot="جواب" slot-scope="data">
+{#                    <template slot="جواب" slot-scope="data">#}
+                    <template v-slot:cell(reply)="data">
                         <b-button @click="data.toggleDetails" v-if="data.item.answer != ''" variant="primary">
                             [[ data.detailsShowing ? 'بستن' : 'مشاهده' ]]
                         </b-button>

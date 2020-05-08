@@ -10,17 +10,17 @@ const vue = new Vue({
         phone: '76983',
         report: '',
         order_fields: [
-            'وضعیت',
-            'تاریخ سفارش',
-            'آدرس ارسال',
-            'هزینه سفارش',
-            'کد سفارش',
-            'ردیف',
+              { key: 'status', label: 'وضعیت' },
+              { key: 'date', label: 'تاریخ سفارش' },
+              { key: 'address', label: 'آدرس ارسال' },
+              { key: 'cost', label: 'هزینه سفارش' },
+              { key: 'code', label: 'کد سفارش' },
+              { key: 'index', label: 'ردیف' },
         ],
         report_fields: [
-            'جواب',
-            'درخواست',
-            'تاریخ ارسال'
+              { key: 'reply', label: 'جواب' },
+              { key: 'request', label: 'درخواست' },
+              { key: 'date', label:  'تاریخ ارسال' },
         ],
         orders: [],
         reports: []

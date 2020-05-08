@@ -8,25 +8,25 @@ const vue = new Vue({
         alert_header: ' ورود ناموفقیت آمیز',
         data: {},
         fields: [
-            'مشاهده',
-            'وضعیت',
-            'تاریخ سفارش',
-            'آدرس ارسال',
-            'شهر',
-            'نام خریدار',
-            'هزینه سفارش',
-            'کد سفارش',
-            'ردیف',
+            {key: 'show', label: 'مشاهده'},
+            {key: 'status', label: 'وضعیت'},
+            {key: 'date', label: 'تاریخ سفارش'},
+            {key: 'address', label: 'آدرس ارسال'},
+            {key: 'city', label: 'شهر'},
+            {key: 'name', label: 'نام خریدار'},
+            {key: 'cost', label: 'هزینه سفارش'},
+            {key: 'code', label: 'کد سفارش'},
+            {key: 'index', label: 'ردیف'},
         ],
         orders: [],
 
         order_fields: [
-            'تعداد مورد تایید',
-            'تعداد سفارش شده',
-            'هزینه',
-            'کد ملودی',
-            'ملودی',
-            'ردیف',
+            {key: 'verified', label: 'تعداد مورد تایید'},
+            {key: 'ordered', label: 'تعداد سفارش شده'},
+            {key: 'cost', label: 'هزینه'},
+            {key: 'code', label: 'کد ملودی'},
+            {key: 'melody', label: 'ملودی'},
+            {key: 'index', label: 'ردیف'},
         ],
         order_items: [],
         current_processed_order: null,
@@ -49,16 +49,16 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        addData(data){
+        addData(data) {
             this.data = data;
-            this.orders = this.data.orders.reverse()
+            this.orders = this.data.orders
         },
 
-        returnToPanel: function(){
+        returnToPanel: function () {
             window.location.href = this.BASE_URL + 'admin/dashboard'
         },
 
-        show_alert(msg){
+        show_alert(msg) {
             this.req_msg = msg;
             this.$bvToast.show('req');
         },
@@ -89,8 +89,7 @@ const vue = new Vue({
                     this.orders[this.current_processed_order].status = 1;
                     this.show_alert('سفارش با موفقیت ثبت گردید');
                     this.$bvModal.hide('order_manager')
-                }
-                else
+                } else
                     this.show_alert(response.data.msg);
             }).catch(reason => this.show_alert('مشکل در ثبت سفارش'));
         },
@@ -104,14 +103,14 @@ const vue = new Vue({
             this.orders[this.current_processed_order].cost = cost;
         },
 
-        boolean_converter(value){
+        boolean_converter(value) {
             if (value === true)
                 return 'تایید شده';
             else
                 return 'تایید نشده';
         }
     },
-    created(){
+    created() {
         axios({
             method: 'get',
             url: this.BASE_URL + 'admin/fetch_orders',

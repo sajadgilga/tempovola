@@ -7,13 +7,13 @@ const vue = new Vue({
         req_msg: '',
         data: [],
         fields: [
-            'ارسال پاسخ',
-            'پاسخ',
-            'درخواست',
-            'ایمیل مشتری',
-            'نام مشتری',
-            'تاریخ ارسال',
-            'ردیف',
+            {key: 'send', label: 'ارسال پاسخ'},
+            {key: 'reply', label: 'پاسخ'},
+            {key: 'request', label: 'درخواست'},
+            {key: 'email', label: 'ایمیل مشتری'},
+            {key: 'name', label: 'نام مشتری'},
+            {key: 'date', label: 'تاریخ ارسال'},
+            {key: 'index', label: 'ردیف'},
         ],
     },
     methods: {
@@ -55,7 +55,7 @@ const vue = new Vue({
             console.log('d')
         },
 
-        sendAnswer(idx){
+        sendAnswer(idx) {
             axios({
                 method: 'post',
                 url: this.BASE_URL + 'admin/send_customer_report_answer/',
@@ -69,8 +69,7 @@ const vue = new Vue({
             }).then(response => {
                 if (response.status === 200) {
                     this.data[idx].is_active = false
-                }
-                else
+                } else
                     this.show_alert('پاسخ ارسال نشد')
             }).catch(reason => this.show_alert('پاسخ ارسال نشد'))
         }

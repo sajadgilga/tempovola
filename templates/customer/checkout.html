@@ -60,31 +60,31 @@
             <div class="m-auto">
         <b-table striped hover responsive :fields="fields" :items="items" style="text-align: left; background-color: white">
 
-            <template slot="شماره" slot-scope="data">
+            <template v-slot:cell(index)="data">
                 [[ data.index + 1 ]]
             </template>
 
-            <template slot="سری" slot-scope="data">
+            <template v-slot:cell(series)="data">
                 [[ data.item.series ]]
             </template>
 
-            <template slot="ملودی" slot-scope="data">
+            <template v-slot:cell(melody)="data">
                 [[ data.item.melody_name ]]
             </template>
 
-            <template slot="فی" slot-scope="data">
+            <template v-slot:cell(price)="data">
                 [[ data.item.price ]]
             </template>
 
-            <template slot="تعداد" slot-scope="data">
+            <template v-slot:cell(count)="data">
                 [[ data.item.ordered_count ]]
             </template>
 
-            <template slot="قیمت" slot-scope="data">
+            <template v-slot:cell(cost)="data">
                 [[ data.item.ordered_count * data.item.price ]]
             </template>
 
-            <template slot="تصحیح" slot-scope="data">
+            <template v-slot:cell(edit)="data">
                 <b-button variant="danger" @click="edit(data.item.series)">تصحیح</b-button>
             </template>
         </b-table>

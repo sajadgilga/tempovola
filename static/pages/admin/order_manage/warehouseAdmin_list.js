@@ -51,7 +51,7 @@ const vue = new Vue({
 
         addData(data){
             this.data = data;
-            this.orders = this.data.orders.reverse()
+            this.orders = this.data.orders
         },
 
         returnToPanel: function(){

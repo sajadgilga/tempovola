@@ -8,26 +8,27 @@ const vue = new Vue({
         alert_header: ' ورود ناموفقیت آمیز',
         data: {},
         fields: [
-            'مشاهده',
-            'وضعیت',
-            'تاریخ تایید',
-            'تاریخ سفارش',
-            'آدرس ارسال',
-            'نام خریدار',
-            'هزینه سفارش',
-            'کد سفارش',
-            'ردیف',
+                {key: 'show', label: 'مشاهده'},
+            {key: 'status', label: 'وضعیت'},
+            {key: 'date', label: 'تاریخ سفارش'},
+            {key: 'modified_date', label: 'تاریخ تایید'},
+            {key: 'address', label: 'آدرس ارسال'},
+            {key: 'city', label: 'شهر'},
+            {key: 'name', label: 'نام خریدار'},
+            {key: 'cost', label: 'هزینه سفارش'},
+            {key: 'code', label: 'کد سفارش'},
+            {key: 'index', label: 'ردیف'},
         ],
         orders: [],
 
         order_fields: [
-            'تعداد مورد تایید',
-            'تعداد تایید شده مسئول سفارش',
-            'تعداد سفارش شده',
-            'هزینه',
-            'کد ملودی',
-            'ملودی',
-            'ردیف',
+            {key: 'verified', label: 'تعداد مورد تایید'},
+            {key: 'verified_order_admin', label: 'تعداد تایید شده مسئول سفارش'},
+            {key: 'ordered', label: 'تعداد سفارش شده'},
+            {key: 'cost', label: 'هزینه'},
+            {key: 'code', label: 'کد ملودی'},
+            {key: 'melody', label: 'ملودی'},
+            {key: 'index', label: 'ردیف'},
         ],
         order_items: [],
         current_processed_order: null,
@@ -52,7 +53,7 @@ const vue = new Vue({
 
         addData(data){
             this.data = data;
-            this.orders = this.data.orders.reverse()
+            this.orders = this.data.orders
         },
 
         returnToPanel: function(){

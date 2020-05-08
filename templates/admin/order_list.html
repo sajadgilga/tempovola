@@ -3,17 +3,17 @@
 {% load static %}
 
 {% block title %}
-    <title>
-    Tempo Vola | سفارشات
+    <title xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+        Tempo Vola | سفارشات
     </title>
     <link rel="stylesheet" href="{% static "pages/admin/order_manage/order_list.css" %}">
 {% endblock %}
 
 {% block content %}
     <div id="app" class="hid">
-    <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
             <b-navbar-brand href="#">
-             <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
                 Tempo Vola
             </b-navbar-brand>
 
@@ -35,76 +35,83 @@
 
         <b-container fluid>
             <b-row>
-              <b-col>
-                <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
-              </b-col>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
             </b-row>
 
             <div class="m-auto">
-                <b-table striped hover responsive :fields="fields" :items="orders" style="text-align: left; background-color: white">
+                <b-table striped hover responsive :fields="fields" :items="orders"
+                         style="text-align: left; background-color: white">
 
-                    <template slot="ردیف" slot-scope="data">
+                    <template v-slot:cell(index)="data">
                         [[ data.index + 1 ]]
                     </template>
 
-                    <template slot="کد سفارش" slot-scope="data">
+                    <template v-slot:cell(index)="data">
                         [[ data.item.order_id ]]
                     </template>
 
-                    <template slot="هزینه سفارش" slot-scope="data">
+                    <template v-slot:cell(cost)="data">
                         [[ data.item.cost ]]
                     </template>
 
-                    <template slot="نام خریدار" slot-scope="data">
+                    <template v-slot:cell(name)="data">
                         [[ data.item.customer.company_name ]]
                     </template>
 
-                    <template slot="آدرس ارسال" slot-scope="data">
+                    <template v-slot:cell(city)="data">
+                        [[ data.item.customer.city ]]
+                    </template>
+
+                    <template v-slot:cell(address)="data">
                         [[ data.item.customer.address ]]
                     </template>
 
-                    <template slot="تاریخ سفارش" slot-scope="data">
+                    <template v-slot:cell(date)="data">
                         [[ data.item.created_date ]]
                     </template>
 
-                    <template slot="وضعیت" slot-scope="data">
+                    <template v-slot:cell(status)="data">
                         <img v-if="data.item.status != 1" src="{% static "images/page_decoration/cancel.svg" %}"/>
                         <img v-if="data.item.status == 1" src="{% static "images/page_decoration/check.svg" %}"/>
-{#                        [[ boolean_converter(data.item.orderAdmin_confirmed) ]]#}
+                        {#                        [[ boolean_converter(data.item.orderAdmin_confirmed) ]]#}
                     </template>
 
-                    <template slot="مشاهده" slot-scope="data">
+                    <template v-slot:cell(show)="data">
                         <b-button variant="primary" @click="see_order(data.index)">مشاهده</b-button>
                     </template>
                 </b-table>
             </div>
 
             <b-modal id="order_manager" size="xl" scrollable hide-footer title="order" style="text-align: right">
-                <b-table striped hover responsive :fields="order_fields" :items="order_items" style="text-align: left; background-color: white">
+                <b-table striped hover responsive :fields="order_fields" :items="order_items"
+                         style="text-align: left; background-color: white">
 
-                    <template slot="ردیف" slot-scope="data">
+                    <template v-slot:cell(index)="data">
                         [[ data.index + 1 ]]
                     </template>
 
-                    <template slot="ملودی" slot-scope="data">
+                    <template v-slot:cell(melody)="data">
                         [[ data.item.melody_name ]]
                     </template>
 
-                    <template slot="کد ملودی" slot-scope="data">
+                    <template v-slot:cell(code)="data">
                         [[ data.item.order_id ]]
                     </template>
 
-                    <template slot="هزینه" slot-scope="data">
+                    <template v-slot:cell(cost)="data">
                         [[ data.item.price ]]
                     </template>
 
-                    <template slot="تعداد سفارش شده" slot-scope="data">
+                    <template v-slot:cell(ordered)="data">
                         [[ data.item.ordered_count ]]
                     </template>
 
-                    <template slot="تعداد مورد تایید" slot-scope="data">
-                        <b-form-input type="number" class="col-2" style="min-width: 100px" v-model:value="data.item.order_admin_verified_count"></b-form-input>
-{#                        [[ data.item.order_admin_verified_count ]]#}
+                    <template v-slot:cell(verified)="data">
+                        <b-form-input type="number" class="col-2" style="min-width: 100px"
+                                      v-model:value="data.item.order_admin_verified_count"></b-form-input>
+                        {#                        [[ data.item.order_admin_verified_count ]]#}
                     </template>
 
                 </b-table>
@@ -135,7 +142,9 @@
                 ></b-form-textarea>
 
 
-                <b-button v-if="current_order.status != 1" class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="success" @click="verify_order">تایید و ثبت سفارش</b-button>
+                <b-button v-if="current_order.status != 1" class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2"
+                          variant="success" @click="verify_order">تایید و ثبت سفارش
+                </b-button>
                 <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('order_manager')">بستن</b-button>
             </b-modal>
         </b-container>

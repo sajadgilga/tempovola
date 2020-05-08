@@ -23,23 +23,23 @@ const vue = new Vue({
             {text: 'بررسی مدیریت', value: 5}
         ],
         fields: [
-            'مشاهده',
-            'وضعیت',
-            'تاریخ سفارش',
-            'آدرس ارسال',
-            'نام خریدار',
-            'هزینه سفارش',
-            'کد سفارش',
-            'ردیف',
+            {key: 'show', label: 'مشاهده'},
+            {key: 'status', label: 'وضعیت'},
+            {key: 'date', label: 'تاریخ سفارش'},
+            {key: 'address', label: 'آدرس ارسال'},
+            {key: 'city', label: 'شهر'},
+            {key: 'name', label: 'نام خریدار'},
+            {key: 'cost', label: 'هزینه سفارش'},
+            {key: 'code', label: 'کد سفارش'},
+            {key: 'index', label: 'ردیف'},
         ],
         orders: [],
         order_fields: [
-            'تعداد مورد تایید',
-            'تعداد سفارش شده',
-            'هزینه',
-            'کد ملودی',
-            'ملودی',
-            'ردیف',
+            {key: 'ordered', label: 'تعداد سفارش شده'},
+            {key: 'cost', label: 'هزینه'},
+            {key: 'code', label: 'کد ملودی'},
+            {key: 'melody', label: 'ملودی'},
+            {key: 'index', label: 'ردیف'},
         ],
         page_isSearched: [false, false, false],
         order_items: [],
@@ -62,6 +62,25 @@ const vue = new Vue({
             }
 
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+        },
+
+        order_status_text: function (status) {
+            switch (status) {
+                case 0:
+                    return 'بررسی سفارش';
+                case 1:
+                    return 'بررسی سفارش';
+                case 2:
+                    return 'بررسی مالی';
+                case 3:
+                    return 'نیاز به پرداخت';
+                case 4:
+                    return 'آماده ارسال';
+                case 5:
+                    return 'در دست مدیریت';
+                case 7:
+                    return 'تحویل شده';
+            }
         },
 
         search_orders(search_type) {
@@ -138,8 +157,7 @@ const vue = new Vue({
                     this.orders[this.current_processed_order].orderAdmin_confirmed = true;
                     this.show_alert('سفارش با موفقیت ثبت گردید');
                     this.$bvModal.hide('order_manager')
-                }
-                else
+                } else
                     this.show_alert(response.data.msg);
             }).catch(reason => this.show_alert('مشکل در ثبت سفارش'));
         },

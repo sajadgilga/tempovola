@@ -4,18 +4,31 @@ from customer.models import CustomerProfile, SchemaSeries, Melody, Order, ShopIt
 
 
 class MelodySerializer(serializers.ModelSerializer):
+    img = serializers.SerializerMethodField()
+
     class Meta:
         model = Melody
-        fields = ('name', 'melody_code')
+        fields = ('name', 'melody_code', 'img')
+
+    def get_img(self, obj):
+        if not obj.picture:
+            return ''
+        return obj.picture.storage.base_location + '/' + obj.picture.name
 
 
 class ProductSerializer(serializers.ModelSerializer):
     melodies = MelodySerializer(many=True)
+    picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Series
         fields = ('name', 'description', 'melodies', 'price',
-                  'total_cost', 'product_code')
+                  'total_cost', 'product_code', 'picture')
+
+    def get_picture(self, obj):
+        if not obj.picture:
+            return ''
+        return obj.picture.storage.base_location + '/' + obj.picture.name
 
 
 class CustomerSerializer(serializers.ModelSerializer):
