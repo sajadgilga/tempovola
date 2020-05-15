@@ -67,34 +67,47 @@
                                     placeholder="کد را وارد کنید"
                                     v-model="form.code"
                                     type="input"
+                                    :state="code_state"
                                     required
                             >
                             </b-form-input>
                         </b-form-group>
 
-                        <b-form-checkbox switch v-model="isMelody" @change="toggle_maker">
-                            <p v-if="!isMelody">
-                                ایجاد ملودی
-                            </p>
-                            <p v-if="isMelody">
-                                ایجاد استند
-                            </p>
-                        </b-form-checkbox>
+                        <b-form-group>
+                            <b-form-radio-group id="productormelody" v-model="isMelody" name="toggler">
+                                <b-form-radio value="true">
+                                    ایجاد ملودی
+                                </b-form-radio>
+                                <b-form-radio value="false">
+                                    ایجاد محصول
+                                </b-form-radio>
+                            </b-form-radio-group>
+                        </b-form-group>
 
-                        <b-form-group v-if="!isMelody" label="قیمت">
+                        {#                        <b-form-checkbox switch v-model="isMelody" @change="toggle_maker">#}
+                        {#                            <p v-if="!isMelody">#}
+                        {#                                ایجاد ملودی#}
+                        {#                            </p>#}
+                        {#                            <p v-if="isMelody">#}
+                        {#                                ایجاد استند#}
+                        {#                            </p>#}
+                        {#                        </b-form-checkbox>#}
+
+                        <b-form-group v-if="isMelody === 'false'" label="قیمت">
                             <b-form-input
                                     style="text-align: right; "
                                     id="price"
                                     placeholder="قیمت را وارد کنید"
                                     v-model="form.price"
                                     type="input"
+                                    :state="form.price !== 0"
                             >
                             </b-form-input>
                         </b-form-group>
 
-                        <b-form-group v-if="!isMelody" label="توضیحات">
+                        <b-form-group v-if="isMelody === 'false'" label="توضیحات">
                             <b-form-textarea
-                                    v-if="!isMelody"
+                                    v-if="isMelody === 'false'"
                                     style="text-align: right; display: inline"
                                     id="description"
                                     placeholder="اطلاعات اضافی را وارد کنید"
@@ -105,17 +118,36 @@
                             </b-form-textarea>
                         </b-form-group>
 
+                        <b-form-group v-if="isMelody === 'true'" label="عکس ملودی">
+                            <b-form-file v-model="image" style="text-align: left" placeholder="فایل را انتخاب کرده و یا به اینجا بکشید"
+                                         drop-placeholder="فایل را اینجا رها کنید">
+                            </b-form-file>
+                        </b-form-group>
+
+                        <b-form-group v-if="isMelody === 'true'" label="آهنگ ملوی">
+                            <b-form-file v-model="music" style="text-align: left" :state="music!==null" placeholder="فایل را انتخاب کرده و یا به اینجا بکشید"
+                                         drop-placeholder="فایل را اینجا رها کنید">
+                            </b-form-file>
+                        </b-form-group>
+
+
                         <b-form-group
-                                v-if="isMelody"
+                                v-if="isMelody === 'false'"
                                 label="ملودی ها"
                                 id="series_group">
                             <b-form-checkbox-group
                                     v-model="form.melodies"
                                     :options="melody_options"
-                                    switches
+                                    switch
                                     stacked
                             >
                             </b-form-checkbox-group>
+                        </b-form-group>
+
+                        <b-form-group v-if="isMelody === 'false'" label="عکس محصول">
+                            <b-form-file v-model="image" style="text-align: left" placeholder="فایل را انتخاب کرده و یا به اینجا بکشید"
+                                         drop-placeholder="فایل را اینجا رها کنید">
+                            </b-form-file>
                         </b-form-group>
 
                         <b-button variant="success" type="submit" block>ثبت محصول</b-button>

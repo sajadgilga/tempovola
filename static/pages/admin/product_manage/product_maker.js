@@ -4,15 +4,19 @@ const vue = new Vue({
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
         BASE_URL: 'http://localhost:8000/',
-        isMelody: false,
+        isMelody: 'true',
         form: {
             name: '',
-            isMelody: '',
+            isMelody: true,
             code: null,
             description: '',
             price: 0,
-            melodies: {}
+            melodies: [],
+            image: null,
+            music: null
         },
+        image: null,
+        music: null,
         melody_options: {},
         req_msg: 'اطلاعات وارد شده غلط می‌باشد. دوباره تلاش کنید',
         alert_header: ' ورود ناموفقیت آمیز',
@@ -71,7 +75,17 @@ const vue = new Vue({
             }).catch(response => this.show_alert('صفحه به درستی بارگزاری نشد'))
 
         },
-
+        base64: function (file, isImage = true) {
+            var reader = new FileReader();
+            let _this = this
+            reader.onloadend = function(){
+                if (isImage)
+                    _this.form.image = reader.result
+                else
+                    _this.form.music = reader.result
+            }
+            reader.readAsDataURL(file);
+        },
         submit_data(e) {
             // if (!this.check_form_validation()) {
             //     this.show_alert("فیلد های لازم را پر کنید");
@@ -90,12 +104,30 @@ const vue = new Vue({
                     'form': this.form
                 }
             }).then(response => {
-                if (response.status === 200) this.show_alert('ثبت نام با موفقیت انجام شد');
+                if (response.status === 200) this.show_alert('ثبت محصول با موفقیت انجام شد');
                 else this.show_alert(response.data.msg)
-            }).catch(response => this.show_alert("مشکلی به وجود آمده"))
+            }).catch(response => this.show_alert("مشکلی به وجود آمده است"))
+        }
+    },
+    watch: {
+        isMelody: function (val) {
+            this.get_melodies()
+            this.form.isMelody = val === 'true'
+        },
+        image: function(val) {
+            this.base64(val)
+        },
+        music: function(val) {
+            this.base64(val, false)
+        }
+    },
+    computed: {
+        code_state() {
+            return this.form.code !== null && this.form.code !== '';
         }
     },
     created() {
         document.querySelector('div').classList.remove('hid');
+        this.get_melodies()
     }
 });
