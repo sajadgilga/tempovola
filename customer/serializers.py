@@ -31,6 +31,21 @@ class ProductSerializer(serializers.ModelSerializer):
         return obj.picture.storage.base_location + '/' + obj.picture.name
 
 
+class SchemaProductSerializer(serializers.ModelSerializer):
+    melodies = MelodySerializer(many=True)
+    picture = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SchemaSeries
+        fields = ('name', 'description', 'melodies', 'price',
+                  'product_code', 'picture')
+
+    def get_picture(self, obj):
+        if not obj.picture:
+            return ''
+        return obj.picture.storage.base_location + '/' + obj.picture.name
+
+
 class CustomerSerializer(serializers.ModelSerializer):
     available_series = ProductSerializer(many=True, read_only=True)
 
@@ -38,6 +53,12 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = CustomerProfile
         fields = ('company_name', 'email', 'phone', 'address',
                   'available_series', 'city', 'customer_id')
+
+
+class OrderAdminCustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomerProfile
+        fields = ('company_name', 'email', 'phone', 'customer_id')
 
 
 class CustomerOrderSerializer(serializers.ModelSerializer):

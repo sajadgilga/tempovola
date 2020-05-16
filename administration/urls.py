@@ -35,5 +35,9 @@ urlpatterns = [
     path('get_customer_reports/', get_customer_reports),
     path('send_customer_report_answer/', send_customer_report_answer),
     path('monitor_page/', monitor_page),
-    path('get_admin_logs/', get_admin_logs)
+    path('get_admin_logs/', get_admin_logs),
+    path('create_order_page/', create_order_page),
+    path('create_order/', create_order),
+    path('get_series/', get_series),
+    path('get_customers/', get_customers),
 ]

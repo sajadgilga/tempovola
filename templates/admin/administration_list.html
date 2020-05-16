@@ -1,0 +1,189 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>
+        Tempo Vola | سفارشات
+    </title>
+    <link rel="stylesheet" href="{% static "pages/admin/order_manage/order_list.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app" class="hid">
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="نتیجه" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
+            </b-row>
+
+            <div class="m-auto">
+                <b-table striped hover responsive :fields="fields" :items="orders"
+                         style="text-align: left; background-color: white">
+
+                    <template v-slot:cell(index)="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template v-slot:cell(index)="data">
+                        [[ data.item.order_id ]]
+                    </template>
+
+                    <template v-slot:cell(cost)="data">
+                        [[ data.item.cost ]]
+                    </template>
+
+                    <template v-slot:cell(name)="data">
+                        [[ data.item.customer.company_name ]]
+                    </template>
+
+                    <template v-slot:cell(city)="data">
+                        [[ data.item.customer.city ]]
+                    </template>
+
+                    <template v-slot:cell(address)="data">
+                        [[ data.item.customer.address ]]
+                    </template>
+
+                    <template v-slot:cell(date)="data">
+                        [[ data.item.created_date ]]
+                    </template>
+
+                    <template v-slot:cell(modified_date)="data">
+                        [[ data.item.last_change_date ]]
+                    </template>
+
+                    <template v-slot:cell(status)="data">
+                        <img v-if="(data.item.status != 2 && data.item.status != 5)"
+                             src="{% static "images/page_decoration/cancel.svg" %}"
+                             style="max-width: 50px; max-height: 50px;"
+                        />
+                        <img v-if="data.item.status == 2"
+                             src="{% static "images/page_decoration/check.svg" %}"
+                             style="max-width: 50px; max-height: 50px;"
+                        />
+                        <img v-if="data.item.status == 5"
+                             src="{% static "images/page_decoration/reject.svg" %}"
+                             style="max-width: 50px; max-height: 50px;"
+                        />
+                        {#                        [[ boolean_converter(data.item.orderAdmin_confirmed) ]]#}
+                    </template>
+
+                    <template v-slot:cell(show)="data">
+                        <b-button variant="primary" @click="see_order(data.index)">مشاهده</b-button>
+                    </template>
+                </b-table>
+            </div>
+
+            <b-modal id="order_manager" size="xl" scrollable hide-footer title="order" style="text-align: right">
+                <b-table striped hover responsive :fields="order_fields" :items="order_items"
+                         style="text-align: left; background-color: white">
+
+
+                    <template v-slot:cell(index)="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template v-slot:cell(melody)="data">
+                        [[ data.item.melody_name ]]
+                    </template>
+
+                    <template v-slot:cell(code)="data">
+                        [[ data.item.order_id ]]
+                    </template>
+
+                    <template v-slot:cell(cost)="data">
+                        [[ data.item.price ]]
+                    </template>
+
+                    <template v-slot:cell(ordered)="data">
+                        [[ data.item.ordered_count ]]
+                    </template>
+
+                    <template v-slot:cell(verified_order_admin)="data">
+                        [[ data.item.order_admin_verified_count ]]
+                    </template>
+
+                    <template v-slot:cell(verified)="data">
+                        <b-form-input type="number" class="col-2" style="min-width: 100px"
+                                      v-model:value="data.item.sell_admin_verified_count"></b-form-input>
+                        {#                        [[ data.item.order_admin_verified_count ]]#}
+                    </template>
+
+                </b-table>
+
+                <!-- recent admins comment section -->
+                <p style="text-align: right;">
+                    نظر مسئول سفارش
+                </p>
+
+                <p v-if="current_order.orderAdmin_comment===''" class="text-muted" style="text-align: right">
+                    نظری داده نشده
+                </p>
+                <p v-if="current_order.orderAdmin_comment!==''" class="text-muted" style="text-align: right">
+                    [[ current_order.orderAdmin_comment]]
+                </p>
+                <hr>
+                <p style="text-align: right;">
+                    نظر مدیریت
+                </p>
+
+                <p v-if="current_order.administration_comment===''" class="text-muted" style="text-align: right">
+                    نظری داده نشده
+                </p>
+                <p v-if="current_order.administration_comment!==''" class="text-muted" style="text-align: right">
+                    [[ current_order.administration_comment]]
+                </p>
+                <hr>
+
+                <!-- write comment section -->
+
+                <b-form-textarea
+                        class="mb-2 mt-3"
+                        style="text-align: right"
+                        id="comment"
+                        v-model="current_order.sellAdmin_comment"
+                        placeholder="...اگر نکته‌ای درباره سفارش مد نظرتان است بنویسید"
+                        rows="3"
+                        max-rows="6"
+                ></b-form-textarea>
+
+
+                <b-button v-if="(current_order.status != 2 && current_order.status != 5)"
+                          class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="success" @click="verify_order">تایید و
+                    ثبت سفارش
+                </b-button>
+                <b-button v-if="(current_order.status != 2 && current_order.status != 5)"
+                          class="col-lg-2 col-sm-4 ml-auto mr-auto mt-2" variant="danger" @click="reject_order">رد سفارش
+                </b-button>
+                <b-button class="col-sm-2 ml-auto mr-auto mt-2" @click="$bvModal.hide('order_manager')">بستن</b-button>
+            </b-modal>
+        </b-container>
+    </div>
+
+    <script src="{% static "pages/admin/order_manage/administration_list.js" %}"></script>
+{% endblock %}
+

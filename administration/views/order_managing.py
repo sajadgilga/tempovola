@@ -2,6 +2,7 @@ import json
 
 import xlwt
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -13,14 +14,14 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from TempoVola.settings import admins
 from administration import logging
 from administration.logging import log_messages
-from customer.models import Order, ShopItem
-from customer.serializers import OrderSerializer
-
-
+from customer.models import Order, ShopItem, SchemaSeries, CustomerProfile, Series
+from customer.serializers import OrderSerializer, SchemaProductSerializer, OrderAdminCustomerSerializer
+from customer.views.order_making import get_new_order_id
 
 
 def check_access(user):
@@ -143,7 +144,8 @@ def verify_order(request):
             send_verification_sms(order.customer.phone, "کاربر گرامی، سفارش شما از مرحله فروش با موفقیت عبور کرد")
         elif user.groups.filter(name__in=[admins[3], ]).exists():
             admin_verified_order = request.data['order']
-            order = Order.objects.filter(order_id=admin_verified_order['order_id'], status=Order.FINANCE_ADMIN).all().first()
+            order = Order.objects.filter(order_id=admin_verified_order['order_id'],
+                                         status=Order.FINANCE_ADMIN).all().first()
             order.sent_date = timezone.now()
             # order.warehouseAdmin_confirmed = True
             order.status = Order.WAREHOUSE_ADMIN
@@ -302,3 +304,66 @@ def search_orders(request):
     except Exception as e:
         logging.error(user, log_messages['search_order_failure'])
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def create_order_page(request):
+    return render(request, 'admin/create_order.html')
+
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def get_series(request):
+    # try:
+    if not request.user.groups.filter(name__in=[admins[0]]).exists():
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    series = SchemaProductSerializer(SchemaSeries.objects.all(), many=True)
+    series = json.loads(JSONRenderer().render(series.data))
+    data = {}
+    for s in series:
+        data[s['name']] = s
+    data = json.loads(JSONRenderer().render(data))
+    return Response({'series': data})
+
+@api_view(['GET'])
+@login_required(login_url='/admin/')
+def get_customers(request):
+    # try:
+    if not request.user.groups.filter(name__in=[admins[0], admins[1]]).exists():
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    customers = OrderAdminCustomerSerializer(CustomerProfile.objects.all(), many=True)
+    # customers = json.loads(JSONRenderer().render(customers.data))
+    return Response({'customers': customers.data})
+
+
+@api_view(['POST'])
+@login_required(login_url='/admin')
+def create_order(request):
+    customer = request.data['customer']
+    data = request.data['list']
+    cost = 0
+    customer = CustomerProfile.objects.filter(Q(customer_id=customer['customer_id']))[0]
+    total_count = 0
+    order = Order(customer_id=customer.pk)
+    order.save()
+    for p in data:
+        for m in data[p]:
+            price = SchemaSeries.objects.filter(name=p)[0].price
+            cost += int(data[p][m]) * int(price)
+            total_count += int(data[p][m])
+            new_melody = ShopItem(melody_name=m, order=order,
+                                  series=p, price=int(price),
+                                  ordered_count=int(data[p][m]),
+                                  order_admin_verified_count=int(data[p][m]),
+                                  sell_admin_verified_count=int(data[p][m])
+                                  )
+            new_melody.save(force_insert=True)
+    order.status = Order.ORDER_ADMIN
+    order.cost = cost
+    order.last_change_date = timezone.now()
+    order.order_id = get_new_order_id()
+    order.save()
+    return Response()

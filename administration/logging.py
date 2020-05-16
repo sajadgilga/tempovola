@@ -99,4 +99,6 @@ log_messages = {
     'send_customer_report_answer_success': 'پاسخ موفق به مشتری',
     'send_customer_report_answer_access_deny': 'عدم دسترسی به ارسال پاسخ به مشتری',
     'send_customer_report_answer_failure': 'عدم ارسال پاسخ به مشتری به علت رخداد ارور',
+
+    'order_create_try': 'اقدام به ایجاد سفارش',
 }

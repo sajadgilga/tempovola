@@ -1,0 +1,92 @@
+{% extends "customer/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+        Tempo Vola | ایجاد سفارش
+    </title>
+    <link rel="stylesheet" href="{% static "pages/admin/order_manage/create_order.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="app" class="hid">
+        <b-navbar toggleable="md" type="dark" variant="dark" sticky style="opacity: .97">
+            <b-navbar-brand href="#">
+                <b-img src="{% static "images/page_decoration/logo-white.png" %}" width="30"></b-img>
+                Tempo Vola
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="navbar-collapse"></b-navbar-toggle>
+
+            <b-collapse id="navbar-collapse" is-nav style="text-align: right; float: right">
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click="returnToPanel">بازگشت به پنل</b-nav-item>
+                    <b-nav-item>
+                        {{ name }}
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <b-toast id="req" title="نتیجه" auto-hide-delay="3000">
+            [[ req_msg ]]
+        </b-toast>
+
+        <b-container fluid>
+            <b-row>
+                <b-col>
+                    <b-img src="{% static "images/page_decoration/logo-white.png" %}" center width="150"></b-img>
+                </b-col>
+            </b-row>
+
+            <b-row class="mb-3 p-3">
+                <b-row class="signUp col-sm-9 m-auto p-3">
+                    <b-button variant="primary" class="mr-auto" @click="addItem">اضافه کردن</b-button>
+                    <b-form-input class="col-sm-3  ml-auto mr-3 mb-3" type="number" placeholder="تعداد"
+                                  v-model="count"></b-form-input>
+                    <b-form-select class="col-sm-3 ml-auto mr-3 mb-3" v-model="item_selected"
+                                   :options="melody_names"></b-form-select>
+                    <b-form-select class="col-sm-3 mb-3" v-model="series_selected"
+                                   :options="series_names"></b-form-select>
+
+                    <b-form-input list="my-list-id" class="mt-3 mb-5" style="text-align: right" v-model="customer_selected"></b-form-input>
+                    <datalist id="my-list-id" >
+                        <option v-for="customer in customers">[[ customer.company_name ]]</option>
+                    </datalist>
+                    <b-button block class="col-sm-4 m-auto" variant="success" @click="submit_order">ثبت</b-button>
+                </b-row>
+            </b-row>
+
+            <div class="m-auto">
+                <b-table striped hover responsive :fields="fields" :items="shop_item_list"
+                         style="text-align: left; background-color: white">
+
+                    <template v-slot:cell(index)="data">
+                        [[ data.index + 1 ]]
+                    </template>
+
+                    <template v-slot:cell(melody)="data">
+                        [[ data.item.melody_name ]]
+                    </template>
+
+                    <template v-slot:cell(series)="data">
+                        [[ data.item.series_name ]]
+                    </template>
+
+                    <template v-slot:cell(cost)="data">
+                        [[ data.item.price ]]
+                    </template>
+
+                    <template v-slot:cell(ordered)="data">
+                        [[ data.item.ordered_count ]]
+                    </template>
+                </b-table>
+            </div>
+
+        </b-container>
+    </div>
+
+    <script src="{% static "pages/admin/order_manage/create_order.js" %}"></script>
+{% endblock %}
+
