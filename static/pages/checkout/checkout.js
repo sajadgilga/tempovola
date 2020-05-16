@@ -3,16 +3,17 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         order_data: {},
         fields: [
-              { key: 'index', label: 'شماره' },
-              { key: 'series', label: 'سری' },
-              { key: 'melody', label: 'ملودی' },
-              { key: 'price', label: 'فی' },
-              { key: 'count', label: 'تعداد' },
-              { key: 'cost', label: 'قیمت' },
-              { key: 'edit', label: 'تصحیح' },
+            {key: 'index', label: 'شماره'},
+            {key: 'series', label: 'سری'},
+            {key: 'melody', label: 'ملودی'},
+            {key: 'price', label: 'فی'},
+            {key: 'count', label: 'تعداد'},
+            {key: 'cost', label: 'قیمت'},
+            {key: 'edit', label: 'تصحیح'},
         ],
         items: [],
         seller: 'Tempo Vola',
@@ -63,7 +64,7 @@ const vue = new Vue({
             }).then(response => {
                 if (response.status === 200)
                     window.location.replace(this.BASE_URL + 'customer/confirmed_checkout/')
-                else{
+                else {
                     this.show_alert('درخواست شما به مشکل برخورد. لطفا دوباره تلاش کنید')
                 }
             }).catch(response => this.show_alert('مشکلی در سرور بوجود آمده. لطفا بعدا تلاش کنید'))

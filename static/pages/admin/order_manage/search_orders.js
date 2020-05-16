@@ -3,7 +3,8 @@ const vue = new Vue({
     el: '#app',
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         req_msg: '',
         alert_header: ' ورود ناموفقیت آمیز',
         data: {},

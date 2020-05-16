@@ -3,7 +3,8 @@ var vue = new Vue({
     el: '#app',
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         show: false,
         is_username_valid: null,
         is_pass_valid: null,
@@ -24,7 +25,7 @@ var vue = new Vue({
     },
     methods: {
         show_alert: function () {
-             this.$bvToast.show('req');
+            this.$bvToast.show('req');
         },
 
         getCookie: function (name) {
@@ -83,20 +84,19 @@ var vue = new Vue({
                 this.alert_header = 'ورود موفقیت آمیز';
                 this.show_alert();
                 setInterval(() => window.location.assign(this.BASE_URL + 'customer/shop/'), 1000)
-            }
-             else {
-                 if (response.data != null) {
-                     this.alert_msg = response.data.msg;
-                 } else if (response.response.status === 403){
-                     axios({
-                         method: 'get',
-                         url: this.BASE_URL + 'customer/logout/'
-                     }).then(response => this.login()).catch(response => (console.log('problem in logging out of last session')))
-                 } else if (response.response.status === 401){
-                     this.alert_msg = response.response.data.msg;
-                 } else {
-                     this.alert_msg = 'مشکلی در سرور به وجود آمده'
-                 }
+            } else {
+                if (response.data != null) {
+                    this.alert_msg = response.data.msg;
+                } else if (response.response.status === 403) {
+                    axios({
+                        method: 'get',
+                        url: this.BASE_URL + 'customer/logout/'
+                    }).then(response => this.login()).catch(response => (console.log('problem in logging out of last session')))
+                } else if (response.response.status === 401) {
+                    this.alert_msg = response.response.data.msg;
+                } else {
+                    this.alert_msg = 'مشکلی در سرور به وجود آمده'
+                }
                 this.login_result = 'danger';
                 this.alert_header = ' ورود ناموفقیت آمیز';
                 this.show_alert()

@@ -3,7 +3,8 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         product_series: [],
         buy_list: {},
         name: null,

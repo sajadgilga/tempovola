@@ -3,7 +3,8 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         req_msg: '',
     },
     methods: {
@@ -54,7 +55,7 @@ const vue = new Vue({
             }).then(response => {
                 if (response.status === 200) {
 
-                }else this.show_alert('درخواست شما به مشکل برخورد')
+                } else this.show_alert('درخواست شما به مشکل برخورد')
             }).catch(reason => {
                 this.show_alert('درخواست شما به مشکل برخورد')
             })

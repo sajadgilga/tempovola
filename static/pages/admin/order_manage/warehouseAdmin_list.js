@@ -3,7 +3,8 @@ const vue = new Vue({
     el: '#app',
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         req_msg: '',
         alert_header: ' ورود ناموفقیت آمیز',
         data: {},
@@ -49,16 +50,16 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        addData(data){
+        addData(data) {
             this.data = data;
             this.orders = this.data.orders
         },
 
-        returnToPanel: function(){
+        returnToPanel: function () {
             window.location.href = this.BASE_URL + 'admin/dashboard'
         },
 
-        show_alert(msg){
+        show_alert(msg) {
             this.req_msg = msg;
             this.$bvToast.show('req');
         },
@@ -88,8 +89,7 @@ const vue = new Vue({
                     this._verify();
                     this.show_alert('سفارش با موفقیت بایگانی شد');
                     this.$bvModal.hide('order_manager')
-                }
-                else
+                } else
                     this.show_alert(response.data.msg);
             }).catch(reason => this.show_alert('مشکل در بایگانی سفارش'));
         },
@@ -98,14 +98,14 @@ const vue = new Vue({
             this.orders[this.current_processed_order].status = 3;
         },
 
-        boolean_converter(value){
+        boolean_converter(value) {
             if (value === true)
                 return 'تایید شده';
             else
                 return 'تایید نشده';
         }
     },
-    created(){
+    created() {
         axios({
             method: 'get',
             url: this.BASE_URL + 'admin/fetch_orders',

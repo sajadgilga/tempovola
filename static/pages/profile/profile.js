@@ -3,24 +3,25 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         name: null,
         req_msg: '',
         email: 'tempovola@gmail.com',
         phone: '76983',
         report: '',
         order_fields: [
-              { key: 'status', label: 'وضعیت' },
-              { key: 'date', label: 'تاریخ سفارش' },
-              { key: 'address', label: 'آدرس ارسال' },
-              { key: 'cost', label: 'هزینه سفارش' },
-              { key: 'code', label: 'کد سفارش' },
-              { key: 'index', label: 'ردیف' },
+            {key: 'status', label: 'وضعیت'},
+            {key: 'date', label: 'تاریخ سفارش'},
+            {key: 'address', label: 'آدرس ارسال'},
+            {key: 'cost', label: 'هزینه سفارش'},
+            {key: 'code', label: 'کد سفارش'},
+            {key: 'index', label: 'ردیف'},
         ],
         report_fields: [
-              { key: 'reply', label: 'جواب' },
-              { key: 'request', label: 'درخواست' },
-              { key: 'date', label:  'تاریخ ارسال' },
+            {key: 'reply', label: 'جواب'},
+            {key: 'request', label: 'درخواست'},
+            {key: 'date', label: 'تاریخ ارسال'},
         ],
         orders: [],
         reports: []
@@ -101,7 +102,7 @@ const vue = new Vue({
             });
         },
 
-        order_status_text: function(status) {
+        order_status_text: function (status) {
             switch (status) {
                 case 0:
                     return 'بررسی سفارش';

@@ -3,7 +3,8 @@ const vue = new Vue({
     el: '#app',
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         form: {
             company_name: '',
             email: '',
@@ -42,11 +43,11 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
 
-        returnToPanel: function(){
+        returnToPanel: function () {
             window.location.href = this.BASE_URL + 'admin/dashboard'
         },
 
-        show_alert(msg){
+        show_alert(msg) {
             this.req_msg = msg;
             this.$bvToast.show('req');
         },
@@ -55,7 +56,7 @@ const vue = new Vue({
             if (this.form.company_name !== '' && this.form.password.length >= 8
                 && this.form.address !== '' && (this.form.phone !== '' || this.form.email !== '')
                 && this.form.username_type.length >= 1 && this.form.available_series.length >= 1
-                && Object.keys(this.form.melodies).length >= 1){
+                && Object.keys(this.form.melodies).length >= 1) {
                 return true
             }
             return false
@@ -84,27 +85,27 @@ const vue = new Vue({
         }
     },
     computed: {
-      state() {
-        return this.form.username_type.length > 0
-      }
+        state() {
+            return this.form.username_type.length > 0
+        }
     },
-    created(){
+    created() {
         axios({
             method: 'get',
             url: this.BASE_URL + 'admin/product_series/'
         }).then(response => {
-            if (response.status === 200){
+            if (response.status === 200) {
                 response.data.products.forEach(item => {
-                    if(Object.keys(this.melody_options).includes(item[0])){
+                    if (Object.keys(this.melody_options).includes(item[0])) {
                         this.melody_options[item[0]].push(item[1]);
-                    }else {
+                    } else {
                         this.melody_options[item[0]] = [item[1]];
                     }
                 });
                 this.series_options = Object.keys(this.melody_options);
                 this.form.available_series = this.series_options;
                 this.form.melodies = Object.assign({}, this.melody_options);
-            } else{
+            } else {
                 this.show_alert('صفحه به درستی بارگزاری نشد')
             }
 

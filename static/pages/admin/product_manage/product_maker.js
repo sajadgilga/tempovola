@@ -3,7 +3,8 @@ const vue = new Vue({
     el: '#app',
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         isMelody: 'true',
         form: {
             name: '',
@@ -78,7 +79,7 @@ const vue = new Vue({
         base64: function (file, isImage = true) {
             var reader = new FileReader();
             let _this = this
-            reader.onloadend = function(){
+            reader.onloadend = function () {
                 if (isImage)
                     _this.form.image = reader.result
                 else
@@ -114,10 +115,10 @@ const vue = new Vue({
             this.get_melodies()
             this.form.isMelody = val === 'true'
         },
-        image: function(val) {
+        image: function (val) {
             this.base64(val)
         },
-        music: function(val) {
+        music: function (val) {
             this.base64(val, false)
         }
     },

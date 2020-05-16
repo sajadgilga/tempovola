@@ -3,7 +3,8 @@ const vue = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         // BASE_URL: ' https://tempovolaapp.herokuapp.com/',
-        BASE_URL: 'http://localhost:8000/',
+        BASE_URL: 'http://130.185.74.195/',
+        // BASE_URL: 'http://localhost:8000/',
         order_data: null,
         req_msg: '',
     },
@@ -25,11 +26,11 @@ const vue = new Vue({
             link.click();
         },
 
-        return_shop: function() {
+        return_shop: function () {
             window.location.replace(this.BASE_URL + 'customer/shop/')
         },
 
-        exit: function() {
+        exit: function () {
             axios({
                 method: 'get',
                 url: this.BASE_URL + 'customer/logout/',
@@ -52,7 +53,7 @@ const vue = new Vue({
             return decodeURIComponent(xsrfCookies[0].split('=')[1]);
         },
     },
-    created(){
-            document.querySelector('div').classList.remove('hid');
+    created() {
+        document.querySelector('div').classList.remove('hid');
     }
 });
