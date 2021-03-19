@@ -17,7 +17,7 @@ django-phone-field==1.7.0
 django-rest-framework==0.1.0
 django-sendsms==0.3.1
 django-webpack-loader==0.6.0
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 ez-setup==0.9
 gunicorn==19.9.0
 html5lib==1.0.1
